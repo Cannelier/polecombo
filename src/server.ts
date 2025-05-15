@@ -1,8 +1,6 @@
 import { clerkMiddleware, getAuth } from '@hono/clerk-auth';
-import { serve } from '@hono/node-server';
-import { Hono } from 'hono';
 
-const app = new Hono();
+import app from './app';
 
 app.use('*', clerkMiddleware())
 app.get('/', (c) => {
@@ -21,7 +19,7 @@ app.get('/', (c) => {
 })
 
 
-serve({ fetch: app.fetch, port: 3000 });
+Bun.serve({ fetch: app.fetch, port: 3000 });
 console.log('🚀 API running at http://localhost:3000');
 
 export default app
