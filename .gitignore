@@ -39,3 +39,34 @@ yarn-error.*
 app-example
 # SpecStory explanation file
 .specstory/.what-is-this.md
+
+# Node or Bun build artifacts
+node_modules/
+dist/
+build/
+bun.lockb
+
+package-lock.json
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+prisma/migrations/dev/
+src/generated/
+
+# Env files
+.env
+.env.*
+
+# Logs and temp
+*.log
+npm-debug.log*
+bun.lock
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode settings (optional)
+.vscode/

@@ -16,6 +16,7 @@
     "@expo/vector-icons": "^14.1.0",
     "@hono/clerk-auth": "^2.0.0",
     "@hono/node-server": "^1.14.1",
+    "@prisma/client": "^6.8.1",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
@@ -34,6 +35,8 @@
     "expo-system-ui": "~5.0.7",
     "expo-web-browser": "~14.1.6",
     "hono": "^4.7.9",
+    "pg": "^8.16.0",
+    "prisma": "^6.8.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.2",
@@ -47,9 +50,13 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
-    "typescript": "~5.8.3",
     "eslint": "^9.25.0",
-    "eslint-config-expo": "~9.2.0"
+    "eslint-config-expo": "~9.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.8.3"
   },
-  "private": true
+  "private": true,
+  "prisma": {
+    "seed": "bun prisma/seed.ts"
+  }
 }

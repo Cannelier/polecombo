@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  createdAt DateTime @default(now())
+}
+
+model Move {
+  id         Int         @id @default(autoincrement())
+  code_no    String
+  name       String
+  element    String?
+  tech_value Float
+  combos     ComboMove[]
+}
+
+model Combo {
+  id           Int         @id @default(autoincrement())
+  name         String
+  movesInCombo ComboMove[]
+}
+
+model ComboMove {
+  comboId Int
+  moveId  Int
+  rank    Int
+  move    Move  @relation(fields: [moveId], references: [id])
+  combo   Combo @relation(fields: [comboId], references: [id])
+
+  @@id([comboId, moveId])
+}

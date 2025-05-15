@@ -1,0 +1,239 @@
+[
+    {
+      "code_no": "F1",
+      "name": "Inside Leg Hang 1",
+      "element": "../images/moves/F1.png",
+      "tech_value": 0.1,
+      "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "inside leg, foot of inside leg (optional), side of torso, back of the inside arm (optional), shoulder blade (optional)",
+        "Arm position/grip": "arms in fixed position of choice, no hands have contact with the pole",
+        "Leg position": "stag position",
+        "Body position": "inverted",
+        "Angle of split": "a minimum of 160° with 20° tolerance"
+      }
+    },
+    {
+      "code_no": "F2",
+      "name": "Side Pole Straddle Base 1",
+      "element": "../images/moves/F2.png",
+      "tech_value": 0.1,
+      "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "both hands, the arch of upper foot, bottom foot, calves (optional)",
+        "Arm position/grip": "basic or cup grip",
+        "Leg position": "both legs are fully extended in middle split position with lower foot floor based and the arch of the upper foot is in contact with the pole",
+        "Body position": "torso is extended away from the pole",
+        "Angle of split": "a minimum of 160°"
+      }
+    },
+    {
+      "code_no": "F3",
+      "name": "Ballerina Sit",
+      "element": "../images/moves/F3.png",
+      "tech_value": 0.2,
+      "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "back of inside underarm, side of torso, inside leg, foot (optional)",
+        "Arm position/grip": "hand of inside arm holds outside foot, outside arm is in fixed position of choice with no contact with the pole",
+        "Leg position": "stag position",
+        "Body position": "upright",
+        "Angle of split": "a minimum of 160°"
+      }
+    },
+    {
+      "code_no": "F4",
+      "name": "Front Split 1",
+      "element": "../images/moves/F4.png",
+      "tech_value": 0.2,
+      "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "legs, hands, forearms (optional), feet (optional)",
+        "Arm position/grip": "grip of choice",
+        "Leg position": "both legs are extended in front split position",
+        "Body position": "upright",
+        "Angle of split": "a minimum of 160°"
+      }
+    },
+    {
+      "code_no": "F5",
+      "name": "Inside Leg Hang 2",
+      "element": "../images/moves/F5.png",
+      "tech_value": 0.2,
+      "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "inside leg, foot of inside leg (optional), side of torso, back of the inside arm (optional), shoulder blade (optional)",
+        "Arm position/grip": "arms in fixed position of choice, no hands have contact with the pole",
+        "Leg position": "stag position",
+        "Body position": "inverted",
+        "Angle of split": "a minimum of 160°"
+      }
+    },
+    {
+      "code_no": "F6",
+      "name": "Side Pole Straddle Base 2",
+      "element": "../images/moves/F6.png",
+      "tech_value": 0.2,
+      "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "both hands, both legs, arch of the upper foot, bottom foot",
+        "Arm position/grip": "basic or cup grip",
+        "Leg position": "both legs are fully extended in middle split position with lower foot floor based and the arch of the upper foot is in contact with the pole",
+        "Body position": "torso is extended away from the pole",
+        "Angle of split": "a minimum of 180°"
+      }
+    },
+    {
+      "code_no": "F7",
+      "name": "Twisted Allegra",
+      "element": "../images/moves/F7.png",
+      "tech_value": 0.2,
+      "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "inside leg, side of torso, inside arm, underarm / shoulder blade (optional), outside forearm/wrist (optional)",
+        "Arm position/grip": "outside hand wraps around the inside leg at the crook of the knee/thigh, inside arm is fully extended and hand is holding the outside foot",
+        "Leg position": "inside leg is in contact with the pole and in position of choice, but is not wrapped around the pole; outside leg is bent backwards",
+        "Body position": "inverted",
+        "Angle of split": "a minimum of 160°"
+      }
+    },
+    {
+      "code_no": "F8",
+      "name": "Allegra Split 1",
+      "element": "../images/moves/F8.png",
+      "tech_value": 0.3,
+      "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "hand of inside arm, thigh of inside leg, side of torso / lower back",
+        "Arm position/grip": "inside hand grips pole, above the inside leg, outside arm is extended in a fixed position of choice",
+        "Leg position": "frontal split position with both legs fully extended",
+        "Body position": "back arch, facing away from the pole",
+        "Angle of split": "a minimum of 160°"
+      }
+    },
+    {
+        "code_no": "F9",
+        "name": "Front Split 2",
+        "element": "../images/moves/F9.png",
+        "tech_value": 0.3,
+        "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "legs, hands, forearms (optional), feet (optional)",
+        "Arm position/grip": "grip of choice",
+        "Leg position": "both legs are fully extended in front split position",
+        "Body position": "upright",
+        "Angle of split": "a minimum of 180°"
+        }
+    },
+    {
+        "code_no": "F10",
+        "name": "Hip Hold Split 1",
+        "element": "../images/moves/F10.png",
+        "tech_value": 0.3,
+        "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "thigh of inside leg, side of torso, back of inside arm",
+        "Arm position/grip": "inside arm has contact with the pole. Hand of outside arm is holding opposite leg/foot. No hands have contact with the pole",
+        "Leg position": "both legs are fully extended in front split position and the front leg is parallel to the floor",
+        "Body position": "upper body is horizontal, facing upwards",
+        "Angle of split": "a minimum of 160°"
+        }
+    },
+    {
+        "code_no": "F11",
+        "name": "Inside Leg Hang 3",
+        "element": "../images/moves/F11.png",
+        "tech_value": 0.3,
+        "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "inside leg, side of torso, back of the arm (optional), shoulder blade (optional)",
+        "Arm position/grip": "arms in fixed position of choice, no hands have contact with the pole",
+        "Leg position": "stag position",
+        "Body position": "inverted",
+        "Angle of split": "a minimum of 180°"
+        }
+    },
+    {
+        "code_no": "F12",
+        "name": "Pole Straddle 1",
+        "element": "../images/moves/F12.png",
+        "tech_value": 0.3,
+        "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "hands, legs, ankles (not the arch of the foot)",
+        "Arm position/grip": "basic or cup grip",
+        "Leg position": "both legs are fully extended in middle split position",
+        "Body position": "upper body must be at a 90° angle to the pole",
+        "Angle of split": "a minimum of 160°"
+        }
+    },
+    {
+        "code_no": "F13",
+        "name": "Allegra Half Split 1",
+        "element": "../images/moves/F13.png",
+        "tech_value": 0.4,
+        "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "inside arm hand, thigh of inside leg, outside arm, underarm (optional), side/ lower back",
+        "Arm position/grip": "inside hand grips pole, above the inside leg, outside arm is extended and hand is holding the ankle/shin of the outside leg",
+        "Leg position": "split position with inside leg fully extended, outside leg bent backwards",
+        "Body position": "back arch",
+        "Angle of split": "a minimum of 160°"
+        }
+    },
+    {
+        "code_no": "F14",
+        "name": "Allegra Split 2",
+        "element": "../images/moves/F14.png",
+        "tech_value": 0.4,
+        "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "inside arm hand, thigh of inside leg, side of torso / lower back",
+        "Arm position/grip": "inside hand grips pole, above the inside leg, outside arm is extended in a fixed position of choice",
+        "Leg position": "frontal split position with both legs fully extended",
+        "Body position": "back arch",
+        "Angle of split": "a minimum of 180°"
+        }
+    },
+    {
+        "code_no": "F15",
+        "name": "Bridge",
+        "element": "../images/moves/F15.png",
+        "tech_value": 0.4,
+        "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "both hands, inner thighs",
+        "Arm position/grip": "grip of choice, arms are fully extended",
+        "Leg position": "both legs are extended and closed",
+        "Body position": "inverted, back arched with hips and both legs parallel to the floor"
+        }
+    },
+    {
+        "code_no": "F16",
+        "name": "Capezio 1",
+        "element": "../images/moves/F16.png",
+        "tech_value": 0.4,
+        "criteria": {
+            "Hold the position": "a minimum of 2 seconds",
+            "Points of contact": "underarm of back arm, bicep (optional), back, thigh of inside leg",
+            "Arm position/grip": "no hands have contact with the pole, the same hand holds the ankle/shin of back leg and is fully extended, the opposite arm holds front leg",
+            "Leg position": "split position with front leg fully extended, back leg bent",
+            "Body position": "upright",
+            "Angle of split": "a minimum of 160°"
+        }
+    },
+    {
+        "code_no": "F17",
+        "name": "Cross Bow Elbow Hold",
+        "element": "../images/moves/F17.png",
+        "tech_value": 0.4,
+        "criteria": {
+        "Hold the position": "a minimum of 2 seconds",
+        "Points of contact": "ankles (not the arch of the foot), calves (optional), elbows, torso (optional), biceps/forearms (optional)",
+        "Arm position/grip": "elbow grip",
+        "Leg position": "both legs fully extended in straddle position with the ankles on the pole",
+        "Body position": "upper body must be at a 90° angle to the pole"
+        }
+    }      
+  ]
+  
