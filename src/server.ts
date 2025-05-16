@@ -19,7 +19,7 @@ app.get('/', (c) => {
 })
 
 
-Bun.serve({ fetch: app.fetch, port: 3000 });
-console.log('🚀 API running at http://localhost:3000');
+Bun.serve({ fetch: app.fetch, port: 4000 });
+console.log('🚀 API running at http://localhost:4000');
 
 export default app
