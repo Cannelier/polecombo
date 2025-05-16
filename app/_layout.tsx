@@ -8,6 +8,10 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import {
+  QueryClientProvider
+} from '@tanstack/react-query';
+import { getQueryClient } from './hooks/useQueryClient';
 
 const tokenCache = {
   async getToken(key: string) {
@@ -31,18 +35,21 @@ export default function RootLayout() {
 
   
   const clerkPublishableKey = Constants?.expoConfig?.extra?.clerkPublishableKey;
-  
+  const queryClient = getQueryClient();
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <ClerkProvider
         publishableKey={clerkPublishableKey}
         tokenCache={tokenCache}
       >
-        <Stack>
-          <Stack.Screen name="(home))" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" />
+        <QueryClientProvider client={queryClient}>
+          <Stack>
+            <Stack.Screen name="(home))" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </QueryClientProvider>
       </ClerkProvider>
     </ThemeProvider>
   );
