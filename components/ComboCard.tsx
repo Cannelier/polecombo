@@ -1,8 +1,8 @@
 
 import { Combo } from '@/app/queries/useCombosQuery';
 
-import { ThemedText } from '@/components/ThemedText';
 import { StyleSheet, View } from 'react-native';
+import { ThemedText } from '@/components/typography/ThemedText';
 
 export function ComboCard({combo}: {combo: Combo}) {
     return (
