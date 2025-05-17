@@ -56,7 +56,8 @@ export default function RootLayout() {
       >
         <QueryClientProvider client={queryClient}>
           <Stack>
-            <Stack.Screen name="(combos)" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>
           <StatusBar style="auto" />

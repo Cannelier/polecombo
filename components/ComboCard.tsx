@@ -2,10 +2,11 @@
 import { Combo } from '@/src/queries/useCombosQuery';
 
 import { ThemedText } from '@/components/typography/ThemedText';
+import { router } from 'expo-router';
 import { StyleSheet, TouchableHighlight, View } from 'react-native';
 
 export function ComboCard({combo}: {combo: Combo}) {
-const handlePress = () => {};
+const handlePress = () => {router.navigate(`/combo/${combo.id}`)};
 
     return (
         <TouchableHighlight onPress={handlePress}>
