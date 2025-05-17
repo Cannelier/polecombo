@@ -22,7 +22,6 @@ export default function HomeScreen() {
   if (!combos || areCombosLoading) {
     return
   }
-  console.log(combos)
   return (
     <>
       <SignedIn>

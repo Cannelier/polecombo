@@ -6,7 +6,11 @@ import { router } from 'expo-router';
 import { StyleSheet, TouchableHighlight, View } from 'react-native';
 
 export function ComboCard({combo}: {combo: Combo}) {
-const handlePress = () => {router.navigate(`/combo/${combo.id}`)};
+const handlePress = () => {
+  router.push({
+    pathname: `/combo/${combo.id}`
+  });
+}
 
     return (
         <TouchableHighlight onPress={handlePress}>

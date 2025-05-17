@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import { BASE_URL } from "../config/constants";
 
-export const BASE_URL = "http://localhost:4000"
 
 export const useCombosQuery = () => {
     return useQuery<Combo[]>({
