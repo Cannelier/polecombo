@@ -1,17 +1,20 @@
+import { useColorScheme } from '@/hooks/useColorScheme';
 import { ClerkProvider } from '@clerk/clerk-expo';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  QueryClientProvider
+} from '@tanstack/react-query';
 import Constants from "expo-constants";
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/useColorScheme';
-import {
-  QueryClientProvider
-} from '@tanstack/react-query';
 import { getQueryClient } from '../src/hooks/useQueryClient';
+
+SplashScreen.preventAutoHideAsync();
 
 const tokenCache = {
   async getToken(key: string) {
@@ -22,11 +25,19 @@ const tokenCache = {
   },
 };
 
+SplashScreen.preventAutoHideAsync();
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
+  
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
   
   if (!loaded) {
     // Async font loading only occurs in development.
