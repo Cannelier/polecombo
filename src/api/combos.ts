@@ -11,17 +11,17 @@ combos.get("/", async (c) => {
 })
 
 
-export interface Move {
+export interface MoveFromComboQueryResponse {
     moveId: number,
     rank: number,
     name: string,
-    element: string,
+    image_url: string,
 }
 
 export interface ComboQueryResponse {
     comboId: number,
     name: string,
-    moves: Move[]
+    moves: MoveFromComboQueryResponse[]
 }
 
 combos.get("/:comboId", async (c) => {
@@ -35,7 +35,7 @@ combos.get("/:comboId", async (c) => {
                 moveId: mic.moveId,
                 rank: mic.rank,
                 name: mic.move.name,
-                element: mic.move.element,
+                image_url: mic.move.image_url,
         }))}
     }
 
@@ -47,7 +47,7 @@ combos.get("/:comboId", async (c) => {
             movesInCombo: { include: {
                 move: { select: {
                     name: true,
-                    element: true,
+                    image_url: true,
                 }},
             },
             orderBy: { rank: "asc" }}

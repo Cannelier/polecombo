@@ -27,8 +27,7 @@ const handlePress = () => {
 const styles = StyleSheet.create({
   card: {
     height: 50,
-    flex: 1,
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "pink",
     justifyContent: "center"
   },
   cardContent: {

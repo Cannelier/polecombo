@@ -19,7 +19,7 @@ model Move {
   id         Int         @id @default(autoincrement())
   code_no    String
   name       String
-  element    String?
+  image_url  String?
   tech_value Float
   combos     ComboMove[]
 }
@@ -34,8 +34,8 @@ model ComboMove {
   comboId Int
   moveId  Int
   rank    Int
-  move    Move  @relation(fields: [moveId], references: [id])
   combo   Combo @relation(fields: [comboId], references: [id])
+  move    Move  @relation(fields: [moveId], references: [id])
 
   @@id([comboId, moveId])
 }

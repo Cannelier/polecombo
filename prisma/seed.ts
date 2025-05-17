@@ -11,7 +11,7 @@ async function seedMoves() {
             data: {
                 code_no: move.code_no,
                 name: move.name,
-                element: move.element,
+                image_url: move.image_url,
                 tech_value: move.tech_value
             }
         })

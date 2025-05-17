@@ -1,14 +1,15 @@
-import ParallaxScrollView from '@/components/ParallaxScrollView';
+import { Header } from '@/components/grid/Header';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
-import { Header } from '@/components/typography/Header';
 import { ThemedText } from '@/components/typography/ThemedText';
 import { useComboQuery } from '@/src/queries/useComboQuery';
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo';
-import { Image } from 'expo-image';
 import { Link, useLocalSearchParams } from 'expo-router';
-import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import DraggableFlatList, {
+  RenderItemParams,
+} from "react-native-draggable-flatlist";
 
 
 
@@ -18,31 +19,68 @@ export default function EditCombo() {
   const { user } = useUser()
   const { data: combo, isLoading: isComboLoading } = useComboQuery(Number(comboId));
 
-  if (!combo || isComboLoading) {
+  type Item = {
+    key: string;
+    label: string;
+    imageUrl: string;
+  };
+
+  const [moves, setMoves] = useState<Item[] | undefined>([])
+
+  // Set moves once loaded
+  useEffect(() => {
+    if (combo?.moves) {
+      setMoves(
+        combo.moves.map((move) => {
+          return {
+            key: String(move.moveId),
+            label: move.name,
+            imageUrl: move.image_url
+          }
+        }))
+      }
+  },[combo])
+  
+  const renderItem = useCallback(
+    ({ item, index, drag, isActive}: RenderItemParams<Item>) => {
+      console.log(item.imageUrl)
+      return (
+
+        <TouchableOpacity onLongPress={drag}>
+            <View style={styles.cardContent}>
+                <View style={styles.cardImage}>
+                    <Image
+                        source={{ uri: "../../../assets/images/moves/F1.png" }}
+                        style={{ width: 100, height: 100 }}
+                    />
+                </View>
+                <View style={styles.cardName}>
+                    <ThemedText>{item.label}</ThemedText>
+                </View>
+            </View>
+          </TouchableOpacity>
+      )
+    }
+    ,[]
+  )
+
+  if (!combo || isComboLoading || !moves) {
     return
   }
   
   return (
     <>
       <SignedIn>
-        <ParallaxScrollView
-          headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-          headerImage={
-            <Image
-              source={require('@/assets/images/partial-react-logo.png')}
-              style={styles.reactLogo}
-            />
-          }>
           <ThemedView style={styles.titleContainer}>
             <Header>Mes combos</Header>
-            {combo.moves.map((move) => (
-              <ThemedText>
-                {move.name}
-              </ThemedText>
-            ))}
+            <DraggableFlatList
+              data={moves}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => `draggableItem-${item.key}`}
+              onDragEnd={({ data }) => { setMoves(data) }}
+            />
             <Spacer/>
           </ThemedView>
-        </ParallaxScrollView>
       </SignedIn>
 
 
@@ -70,4 +108,18 @@ const styles = StyleSheet.create({
     left: 0,
     position: 'absolute',
   },
+  card: {
+    backgroundColor: "pink",
+    height: 100
+  },
+  cardContent: {
+    padding: 5,
+    flexDirection: "row"
+  },
+  cardImage: {
+    flex: 1
+  },
+  cardName: {
+    flex: 2
+  }
 });
