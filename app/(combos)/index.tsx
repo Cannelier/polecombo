@@ -8,7 +8,7 @@ import { Image } from 'expo-image';
 import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { useCombosQuery } from '../queries/useCombosQuery';
+import { useCombosQuery } from '../../src/queries/useCombosQuery';
 
 
 

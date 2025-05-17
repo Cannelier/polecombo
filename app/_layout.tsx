@@ -11,7 +11,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import {
   QueryClientProvider
 } from '@tanstack/react-query';
-import { getQueryClient } from './hooks/useQueryClient';
+import { getQueryClient } from '../src/hooks/useQueryClient';
 
 const tokenCache = {
   async getToken(key: string) {

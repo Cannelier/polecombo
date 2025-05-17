@@ -1,5 +1,5 @@
 
-import { Combo } from '@/app/queries/useCombosQuery';
+import { Combo } from '@/src/queries/useCombosQuery';
 
 import { ThemedText } from '@/components/typography/ThemedText';
 import { StyleSheet, TouchableHighlight, View } from 'react-native';
