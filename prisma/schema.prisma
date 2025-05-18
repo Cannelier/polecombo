@@ -38,10 +38,10 @@ model User {
 
 model Move {
   id         Int         @id @default(autoincrement())
-  code_no    String
+  codeNo     String
   name       String
-  image_url  String?
-  tech_value Float
+  imageUrl   String?
+  techValue  Float
   combos     ComboMove[]
 }
 

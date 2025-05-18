@@ -9,10 +9,10 @@ async function seedMoves() {
     for (const move of moves) {
         await prisma.move.create({
             data: {
-                code_no: move.code_no,
+                codeNo: move.codeNo,
                 name: move.name,
-                image_url: move.image_url,
-                tech_value: move.tech_value
+                imageUrl: move.imageUrl,
+                techValue: move.techValue
             }
         })
     }

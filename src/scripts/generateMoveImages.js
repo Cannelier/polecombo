@@ -8,7 +8,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputFile = path.join(__dirname, '../../assets/datasets', 'movesImageDataset.ts');
 const movesImagesRequires= movesJson.map((move) =>
-    `'${move.code_no}': require('${move.image_url}'),`
+    `'${move.codeNo}': require('${move.imageUrl}'),`
 );
 
 const output = `

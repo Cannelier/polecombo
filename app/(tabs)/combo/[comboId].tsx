@@ -7,7 +7,7 @@ import { ComboQueryResponse, MoveFromComboQueryResponse } from '@/src/api/combos
 import { useComboQuery } from '@/src/hooks/useComboQuery';
 import { useComboUpdateMutation } from '@/src/hooks/useComboUpdateMutation';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
-import { Link, useLocalSearchParams } from 'expo-router';
+import { Link, router, useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, StyleSheet, Text } from 'react-native';
 import DraggableFlatList, {
@@ -77,6 +77,10 @@ export default function EditCombo() {
     }
   }
 
+  const handleNewMove = () => {
+    router.navigate('/combo/newMove')
+  }
+
   if (!combo || isComboLoading || !initialMoves) {
     return
   }
@@ -99,7 +103,7 @@ export default function EditCombo() {
                 setUpdatedCombo(updatedCombo);
               }}
             />
-            <PlusButton onPress={()=>{}} style={styles.plusButton}/>
+            <PlusButton onPress={handleNewMove} style={styles.plusButton}/>
           </ThemedView>
       </SignedIn>
 

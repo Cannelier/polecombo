@@ -1,9 +1,9 @@
 [
     {
-      "code_no": "F1",
+      "codeNo": "F1",
       "name": "Inside Leg Hang 1",
-      "image_url": "@/assets/images/moves/F1.png",
-      "tech_value": 0.1,
+      "imageUrl": "@/assets/images/moves/F1.png",
+      "techValue": 0.1,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "inside leg, foot of inside leg (optional), side of torso, back of the inside arm (optional), shoulder blade (optional)",
@@ -14,10 +14,10 @@
       }
     },
     {
-      "code_no": "F2",
+      "codeNo": "F2",
       "name": "Side Pole Straddle Base 1",
-      "image_url": "@/assets/images/moves/F2.png",
-      "tech_value": 0.1,
+      "imageUrl": "@/assets/images/moves/F2.png",
+      "techValue": 0.1,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "both hands, the arch of upper foot, bottom foot, calves (optional)",
@@ -28,10 +28,10 @@
       }
     },
     {
-      "code_no": "F3",
+      "codeNo": "F3",
       "name": "Ballerina Sit",
-      "image_url": "@/assets/images/moves/F3.png",
-      "tech_value": 0.2,
+      "imageUrl": "@/assets/images/moves/F3.png",
+      "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "back of inside underarm, side of torso, inside leg, foot (optional)",
@@ -42,10 +42,10 @@
       }
     },
     {
-      "code_no": "F4",
+      "codeNo": "F4",
       "name": "Front Split 1",
-      "image_url": "@/assets/images/moves/F4.png",
-      "tech_value": 0.2,
+      "imageUrl": "@/assets/images/moves/F4.png",
+      "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "legs, hands, forearms (optional), feet (optional)",
@@ -56,10 +56,10 @@
       }
     },
     {
-      "code_no": "F5",
+      "codeNo": "F5",
       "name": "Inside Leg Hang 2",
-      "image_url": "@/assets/images/moves/F5.png",
-      "tech_value": 0.2,
+      "imageUrl": "@/assets/images/moves/F5.png",
+      "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "inside leg, foot of inside leg (optional), side of torso, back of the inside arm (optional), shoulder blade (optional)",
@@ -70,10 +70,10 @@
       }
     },
     {
-      "code_no": "F6",
+      "codeNo": "F6",
       "name": "Side Pole Straddle Base 2",
-      "image_url": "@/assets/images/moves/F6.png",
-      "tech_value": 0.2,
+      "imageUrl": "@/assets/images/moves/F6.png",
+      "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "both hands, both legs, arch of the upper foot, bottom foot",
@@ -84,10 +84,10 @@
       }
     },
     {
-      "code_no": "F7",
+      "codeNo": "F7",
       "name": "Twisted Allegra",
-      "image_url": "@/assets/images/moves/F7.png",
-      "tech_value": 0.2,
+      "imageUrl": "@/assets/images/moves/F7.png",
+      "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "inside leg, side of torso, inside arm, underarm / shoulder blade (optional), outside forearm/wrist (optional)",
@@ -98,10 +98,10 @@
       }
     },
     {
-      "code_no": "F8",
+      "codeNo": "F8",
       "name": "Allegra Split 1",
-      "image_url": "@/assets/images/moves/F8.png",
-      "tech_value": 0.3,
+      "imageUrl": "@/assets/images/moves/F8.png",
+      "techValue": 0.3,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "hand of inside arm, thigh of inside leg, side of torso / lower back",
@@ -112,10 +112,10 @@
       }
     },
     {
-        "code_no": "F9",
+        "codeNo": "F9",
         "name": "Front Split 2",
-        "image_url": "@/assets/images/moves/F9.png",
-        "tech_value": 0.3,
+        "imageUrl": "@/assets/images/moves/F9.png",
+        "techValue": 0.3,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "legs, hands, forearms (optional), feet (optional)",
@@ -126,10 +126,10 @@
         }
     },
     {
-        "code_no": "F10",
+        "codeNo": "F10",
         "name": "Hip Hold Split 1",
-        "image_url": "@/assets/images/moves/F10.png",
-        "tech_value": 0.3,
+        "imageUrl": "@/assets/images/moves/F10.png",
+        "techValue": 0.3,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "thigh of inside leg, side of torso, back of inside arm",
@@ -140,10 +140,10 @@
         }
     },
     {
-        "code_no": "F11",
+        "codeNo": "F11",
         "name": "Inside Leg Hang 3",
-        "image_url": "@/assets/images/moves/F11.png",
-        "tech_value": 0.3,
+        "imageUrl": "@/assets/images/moves/F11.png",
+        "techValue": 0.3,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "inside leg, side of torso, back of the arm (optional), shoulder blade (optional)",
@@ -154,10 +154,10 @@
         }
     },
     {
-        "code_no": "F12",
+        "codeNo": "F12",
         "name": "Pole Straddle 1",
-        "image_url": "@/assets/images/moves/F12.png",
-        "tech_value": 0.3,
+        "imageUrl": "@/assets/images/moves/F12.png",
+        "techValue": 0.3,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "hands, legs, ankles (not the arch of the foot)",
@@ -168,10 +168,10 @@
         }
     },
     {
-        "code_no": "F13",
+        "codeNo": "F13",
         "name": "Allegra Half Split 1",
-        "image_url": "@/assets/images/moves/F13.png",
-        "tech_value": 0.4,
+        "imageUrl": "@/assets/images/moves/F13.png",
+        "techValue": 0.4,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "inside arm hand, thigh of inside leg, outside arm, underarm (optional), side/ lower back",
@@ -182,10 +182,10 @@
         }
     },
     {
-        "code_no": "F14",
+        "codeNo": "F14",
         "name": "Allegra Split 2",
-        "image_url": "@/assets/images/moves/F14.png",
-        "tech_value": 0.4,
+        "imageUrl": "@/assets/images/moves/F14.png",
+        "techValue": 0.4,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "inside arm hand, thigh of inside leg, side of torso / lower back",
@@ -196,10 +196,10 @@
         }
     },
     {
-        "code_no": "F15",
+        "codeNo": "F15",
         "name": "Bridge",
-        "image_url": "@/assets/images/moves/F15.png",
-        "tech_value": 0.4,
+        "imageUrl": "@/assets/images/moves/F15.png",
+        "techValue": 0.4,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "both hands, inner thighs",
@@ -209,10 +209,10 @@
         }
     },
     {
-        "code_no": "F16",
+        "codeNo": "F16",
         "name": "Capezio 1",
-        "image_url": "@/assets/images/moves/F16.png",
-        "tech_value": 0.4,
+        "imageUrl": "@/assets/images/moves/F16.png",
+        "techValue": 0.4,
         "criteria": {
             "Hold the position": "a minimum of 2 seconds",
             "Points of contact": "underarm of back arm, bicep (optional), back, thigh of inside leg",
@@ -223,10 +223,10 @@
         }
     },
     {
-        "code_no": "F17",
+        "codeNo": "F17",
         "name": "Cross Bow Elbow Hold",
-        "image_url": "@/assets/images/moves/F17.png",
-        "tech_value": 0.4,
+        "imageUrl": "@/assets/images/moves/F17.png",
+        "techValue": 0.4,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
         "Points of contact": "ankles (not the arch of the foot), calves (optional), elbows, torso (optional), biceps/forearms (optional)",

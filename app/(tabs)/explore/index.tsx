@@ -13,9 +13,9 @@ export interface MoveToDisplay {
 
 export default function ExploreScreen() {
   const moves: MoveToDisplay[] = movesData.map((moveData) => ({
-    codeNo: moveData.code_no,
+    codeNo: moveData.codeNo,
     name: moveData.name,
-    imageUrl: moveData.image_url
+    imageUrl: moveData.imageUrl
   }));
 
   const renderItem = ({ item }: {item : MoveToDisplay}) => (

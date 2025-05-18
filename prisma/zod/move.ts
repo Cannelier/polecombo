@@ -3,10 +3,10 @@ import { CompleteComboMove, RelatedComboMoveModel } from "./index"
 
 export const MoveModel = z.object({
   id: z.number().int(),
-  code_no: z.string(),
+  codeNo: z.string(),
   name: z.string(),
-  image_url: z.string().nullish(),
-  tech_value: z.number(),
+  imageUrl: z.string().nullish(),
+  techValue: z.number(),
 })
 
 export interface CompleteMove extends z.infer<typeof MoveModel> {
@@ -21,5 +21,3 @@ export interface CompleteMove extends z.infer<typeof MoveModel> {
 export const RelatedMoveModel: z.ZodSchema<CompleteMove> = z.lazy(() => MoveModel.extend({
   combos: RelatedComboMoveModel.array(),
 }))
-
-export const MoveArrayModel = z.array(MoveModel);

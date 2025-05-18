@@ -36,8 +36,8 @@ combos.get("/:comboId", async (c) => {
                 moveId: mic.moveId,
                 rank: mic.rank,
                 name: mic.move.name,
-                imageUrl: mic.move.image_url,
-                codeNo: mic.move.code_no
+                imageUrl: mic.move.imageUrl,
+                codeNo: mic.move.codeNo
         }))}
     }
 
@@ -49,8 +49,8 @@ combos.get("/:comboId", async (c) => {
             movesInCombo: { include: {
                 move: { select: {
                     name: true,
-                    image_url: true,
-                    code_no: true,
+                    imageUrl: true,
+                    codeNo: true,
                 }},
             },
             orderBy: { rank: "asc" }}
