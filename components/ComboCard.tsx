@@ -1,5 +1,5 @@
 
-import { Combo } from '@/src/queries/useCombosQuery';
+import { Combo } from '@/src/hooks/useCombosQuery';
 
 import { ThemedText } from '@/components/typography/ThemedText';
 import { router } from 'expo-router';

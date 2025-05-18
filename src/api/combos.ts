@@ -22,7 +22,7 @@ export interface MoveFromComboQueryResponse {
 export interface ComboQueryResponse {
     comboId: number,
     name: string,
-    moves: MoveFromComboQueryResponse[]
+    movesInCombo: MoveFromComboQueryResponse[]
 }
 
 combos.get("/:comboId", async (c) => {
@@ -32,7 +32,7 @@ combos.get("/:comboId", async (c) => {
         return { 
             comboId: combo.id,
             name: combo.name,
-            moves: combo.movesInCombo.map((mic) => ({
+            movesInCombo: combo.movesInCombo.map((mic) => ({
                 moveId: mic.moveId,
                 rank: mic.rank,
                 name: mic.move.name,
@@ -62,6 +62,37 @@ combos.get("/:comboId", async (c) => {
     }
     const comboWithMoves = toComboWithMoves(data);
     return c.json(comboWithMoves);
+})
+
+combos.put("/:comboId", async (c) => {
+    const comboId = Number(c.req.param("comboId"));
+    const updatedCombo = await c.req.json();
+    const movesInCombo = updatedCombo.movesInCombo.map((moveFromComboResponse: MoveFromComboQueryResponse) => (
+        { comboId: comboId,
+          moveId: moveFromComboResponse.moveId,
+          rank: moveFromComboResponse.rank,
+        }
+    ))
+
+    movesInCombo.forEach(async (moveInCombo: { comboId: number, moveId: number, rank: number}) => {
+        await prisma.comboMove.update({
+            where: {
+                comboId_moveId: {
+                    comboId: moveInCombo.comboId,
+                    moveId: moveInCombo.moveId
+                },
+            },
+            data: {
+                rank: moveInCombo.rank,
+            }
+        })
+    })
+    const combo = await prisma.combo.findUnique({
+        where: {
+            id: comboId,
+        }
+    })
+    return c.json({ combo }, 200)
 })
 
 export default combos

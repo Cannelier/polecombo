@@ -4,10 +4,11 @@ import { ThemedText } from "./typography/ThemedText";
 
  
 export type MoveItem = {
-    key: string;
-    label: string;
+    key: string; // Combo ID
+    label: string; // Combo name
     imageUrl: string;
     codeNo: string;
+    rank: number;
 };
 
 export function DraggableMoveCard({ item, drag, movesImagesDataset }: { item: MoveItem, drag: (event: GestureResponderEvent) => void, movesImagesDataset: any}) {

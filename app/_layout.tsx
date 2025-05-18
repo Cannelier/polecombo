@@ -1,4 +1,5 @@
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { getQueryClient } from '@/src/hooks/useQueryClient';
 import { ClerkProvider } from '@clerk/clerk-expo';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import {
@@ -13,7 +14,6 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
-import { getQueryClient } from '../src/hooks/useQueryClient';
 
 SplashScreen.preventAutoHideAsync();
 
