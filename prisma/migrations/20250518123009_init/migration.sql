@@ -29,8 +29,8 @@ CREATE TABLE "ComboMove" (
     "rank" INTEGER NOT NULL,
 
     PRIMARY KEY ("comboId", "moveId"),
-    CONSTRAINT "ComboMove_moveId_fkey" FOREIGN KEY ("moveId") REFERENCES "Move" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "ComboMove_comboId_fkey" FOREIGN KEY ("comboId") REFERENCES "Combo" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "ComboMove_comboId_fkey" FOREIGN KEY ("comboId") REFERENCES "Combo" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "ComboMove_moveId_fkey" FOREIGN KEY ("moveId") REFERENCES "Move" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateIndex

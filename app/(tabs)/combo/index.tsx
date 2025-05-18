@@ -1,6 +1,5 @@
 import { ComboCard } from '@/components/ComboCard';
 import { Body } from '@/components/grid/Body';
-import { Header } from '@/components/grid/Header';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
 import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo';
@@ -24,7 +23,6 @@ export default function HomeScreen() {
   return (
     <>
       <SignedIn>
-          <Header>Mes combos</Header>
           <Spacer/>
           <Body>
             <ThemedView style={styles.columnContainer}>

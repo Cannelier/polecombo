@@ -1,12 +1,13 @@
+import { movesImagesDataset } from '@/assets/datasets/movesImageDataset';
+import { DraggableMoveCard, MoveItem } from '@/components/DraggableMoveCard';
 import { Header } from '@/components/grid/Header';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
-import { ThemedText } from '@/components/typography/ThemedText';
 import { useComboQuery } from '@/src/queries/useComboQuery';
-import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo';
+import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link, useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import DraggableFlatList, {
   RenderItemParams,
 } from "react-native-draggable-flatlist";
@@ -16,16 +17,9 @@ import DraggableFlatList, {
 
 export default function EditCombo() {
   const { comboId } = useLocalSearchParams<{comboId: string}>();
-  const { user } = useUser()
   const { data: combo, isLoading: isComboLoading } = useComboQuery(Number(comboId));
 
-  type Item = {
-    key: string;
-    label: string;
-    imageUrl: string;
-  };
-
-  const [moves, setMoves] = useState<Item[] | undefined>([])
+  const [moves, setMoves] = useState<MoveItem[] | undefined>([])
 
   // Set moves once loaded
   useEffect(() => {
@@ -35,30 +29,17 @@ export default function EditCombo() {
           return {
             key: String(move.moveId),
             label: move.name,
-            imageUrl: move.image_url
+            imageUrl: move.imageUrl,
+            codeNo: move.codeNo
           }
         }))
       }
   },[combo])
   
   const renderItem = useCallback(
-    ({ item, index, drag, isActive}: RenderItemParams<Item>) => {
-      console.log(item.imageUrl)
+    ({ item, index, drag, isActive}: RenderItemParams<MoveItem>) => {
       return (
-
-        <TouchableOpacity onLongPress={drag}>
-            <View style={styles.cardContent}>
-                <View style={styles.cardImage}>
-                    <Image
-                        source={{ uri: "../../../assets/images/moves/F1.png" }}
-                        style={{ width: 100, height: 100 }}
-                    />
-                </View>
-                <View style={styles.cardName}>
-                    <ThemedText>{item.label}</ThemedText>
-                </View>
-            </View>
-          </TouchableOpacity>
+        <DraggableMoveCard item={item} drag={drag} movesImagesDataset={movesImagesDataset} />
       )
     }
     ,[]
@@ -72,7 +53,7 @@ export default function EditCombo() {
     <>
       <SignedIn>
           <ThemedView style={styles.titleContainer}>
-            <Header>Mes combos</Header>
+            <Header>{combo.name}</Header>
             <DraggableFlatList
               data={moves}
               renderItem={renderItem}
@@ -101,25 +82,4 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-  card: {
-    backgroundColor: "pink",
-    height: 100
-  },
-  cardContent: {
-    padding: 5,
-    flexDirection: "row"
-  },
-  cardImage: {
-    flex: 1
-  },
-  cardName: {
-    flex: 2
-  }
 });

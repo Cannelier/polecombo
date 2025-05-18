@@ -1,34 +1,36 @@
-import { MoveFromComboQueryResponse } from "@/src/api/combos";
-import { StyleSheet, TouchableOpacity, View, } from "react-native";
-import { ThemedText } from "./typography/ThemedText";
 import React from "react";
-import { Image } from 'react-native';
+import { GestureResponderEvent, Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ThemedText } from "./typography/ThemedText";
 
-export function DraggableMoveCard({ move, drag }: { move: MoveFromComboQueryResponse, drag: }) {
+ 
+export type MoveItem = {
+    key: string;
+    label: string;
+    imageUrl: string;
+    codeNo: string;
+};
+
+export function DraggableMoveCard({ item, drag, movesImagesDataset }: { item: MoveItem, drag: (event: GestureResponderEvent) => void, movesImagesDataset: any}) {
     return (
-      <TouchableOpacity>
-        <View style={styles.card}>
+        <TouchableOpacity onLongPress={drag}>
             <View style={styles.cardContent}>
                 <View style={styles.cardImage}>
                     <Image
-                        source={{ uri: move.image_url }}
-                        style={{ width: 100, height: 100 }}
+                        source={movesImagesDataset[item.codeNo]}
+                        style={{ width: 75, height: 75 }}
                     />
                 </View>
                 <View style={styles.cardName}>
-                    <ThemedText>{move.name}</ThemedText>
+                    <ThemedText>{item.label}</ThemedText>
                 </View>
             </View>
-        </View>
-      </TouchableOpacity>
+          </TouchableOpacity>
     )
 }
 
+
+
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "pink",
-    height: 100
-  },
   cardContent: {
     padding: 5,
     flexDirection: "row"
@@ -37,6 +39,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   cardName: {
-    flex: 2
+    flex: 3
   }
 })

@@ -34,8 +34,8 @@ model ComboMove {
   comboId Int
   moveId  Int
   rank    Int
-  combo   Combo @relation(fields: [comboId], references: [id])
   move    Move  @relation(fields: [moveId], references: [id])
+  combo   Combo @relation(fields: [comboId], references: [id])
 
   @@id([comboId, moveId])
 }

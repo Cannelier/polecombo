@@ -15,8 +15,7 @@ export const Header = ({children}: {children: ReactNode }) => (
 const styles = StyleSheet.create({
   header: {
     width: "100%",
-    marginTop: 40,
-    height: 100,
+    height: 50,
     justifyContent: "center",
     padding: 10,
   },

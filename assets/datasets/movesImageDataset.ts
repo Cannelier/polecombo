@@ -1,0 +1,20 @@
+
+export const movesImagesDataset = {
+    'F1': require('@/assets/images/moves/F1.png'),
+    'F2': require('@/assets/images/moves/F2.png'),
+    'F3': require('@/assets/images/moves/F3.png'),
+    'F4': require('@/assets/images/moves/F4.png'),
+    'F5': require('@/assets/images/moves/F5.png'),
+    'F6': require('@/assets/images/moves/F6.png'),
+    'F7': require('@/assets/images/moves/F7.png'),
+    'F8': require('@/assets/images/moves/F8.png'),
+    'F9': require('@/assets/images/moves/F9.png'),
+    'F10': require('@/assets/images/moves/F10.png'),
+    'F11': require('@/assets/images/moves/F11.png'),
+    'F12': require('@/assets/images/moves/F12.png'),
+    'F13': require('@/assets/images/moves/F13.png'),
+    'F14': require('@/assets/images/moves/F14.png'),
+    'F15': require('@/assets/images/moves/F15.png'),
+    'F16': require('@/assets/images/moves/F16.png'),
+    'F17': require('@/assets/images/moves/F17.png'),
+};
