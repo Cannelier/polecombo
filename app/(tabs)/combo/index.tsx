@@ -3,7 +3,7 @@ import { Body } from '@/components/grid/Body';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
 import { useCombosQuery } from '@/src/hooks/useCombosQuery';
-import { SignedIn, SignedOut, useUser } from '@clerk/clerk-expo';
+import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
@@ -12,10 +12,7 @@ import { StyleSheet, Text } from 'react-native';
 
 
 export default function HomeScreen() {
-
-  const { user } = useUser()
   const { data: combos, isLoading: areCombosLoading } = useCombosQuery();
-
 
   if (!combos || areCombosLoading) {
     return
