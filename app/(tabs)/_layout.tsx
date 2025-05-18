@@ -31,7 +31,7 @@ export default function TabLayout() {
         options={{
           title: 'Mes Combos',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-          headerShow: false
+          headerShown: false
         }}
       />
       <Tabs.Screen
@@ -39,6 +39,7 @@ export default function TabLayout() {
         options={{
           title: 'Explore',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          headerShown: false
         }}
       />
     </Tabs>
