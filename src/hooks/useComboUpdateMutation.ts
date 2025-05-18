@@ -8,13 +8,14 @@ export interface ComboUpdateMutationParams {
     updatedCombo: ComboQueryResponse
 }
 
-export function useComboUpdateMutation() {
+export function useComboUpdateMutation(onSuccess: () => void) {
     return useMutation({
         mutationFn: ({
             comboId,
             updatedCombo,
         } : ComboUpdateMutationParams) => {
             return axios.put(`${BASE_URL}/api/combos/${comboId}`, updatedCombo)
-        }
+        },
+        onSuccess: onSuccess
     })
 }

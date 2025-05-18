@@ -73,20 +73,22 @@ combos.put("/:comboId", async (c) => {
           rank: moveFromComboResponse.rank,
         }
     ))
-
-    movesInCombo.forEach(async (moveInCombo: { comboId: number, moveId: number, rank: number}) => {
-        await prisma.comboMove.update({
-            where: {
-                comboId_moveId: {
-                    comboId: moveInCombo.comboId,
-                    moveId: moveInCombo.moveId
+    await Promise.all(
+    movesInCombo.map(
+        async (moveInCombo: { comboId: number, moveId: number, rank: number}) => {
+            prisma.comboMove.update({
+                where: {
+                    comboId_moveId: {
+                        comboId: moveInCombo.comboId,
+                        moveId: moveInCombo.moveId
+                    },
                 },
-            },
-            data: {
-                rank: moveInCombo.rank,
-            }
+                data: {
+                    rank: moveInCombo.rank,
+                }
+            })
         })
-    })
+    )
     const combo = await prisma.combo.findUnique({
         where: {
             id: comboId,

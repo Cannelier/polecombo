@@ -13,6 +13,7 @@ import { Button, StyleSheet, Text } from 'react-native';
 import DraggableFlatList, {
   RenderItemParams,
 } from "react-native-draggable-flatlist";
+import Toast from 'react-native-toast-message';
 
 
 const fromMoveToItem =(move: MoveFromComboQueryResponse): MoveItem => (
@@ -38,7 +39,15 @@ const fromItemToMove =(item: MoveItem): MoveFromComboQueryResponse => (
 export default function EditCombo() {
   const { comboId } = useLocalSearchParams<{comboId: string}>();
   const { data: combo, isLoading: isComboLoading } = useComboQuery(Number(comboId));
-  const { mutate: editCombo } = useComboUpdateMutation()
+
+  const showToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: '✅ Enregistré',
+    });
+  }
+
+  const { mutate: editCombo } = useComboUpdateMutation(showToast);
   const [initialMoves, setInitialMoves] = useState<MoveItem[] | undefined>([]) // To initialize moves
   const [updatedCombo, setUpdatedCombo] = useState<ComboQueryResponse | undefined>(undefined)
 
@@ -71,14 +80,14 @@ export default function EditCombo() {
   if (!combo || isComboLoading || !initialMoves) {
     return
   }
-  
+
   return (
     <>
       <SignedIn>
           <ThemedView style={styles.titleContainer}>
             <Header>{combo.name}</Header>
             <ThemedView>
-                <Button title='Valider' onPress={handleSave}/>
+                <Button title='Valider' onPress={handleSave} disabled={!updatedCombo} />
             </ThemedView>
             <DraggableFlatList
               data={initialMoves}
