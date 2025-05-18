@@ -1,7 +1,7 @@
 import { movesImagesDataset } from '@/assets/datasets/movesImageDataset';
 import { DraggableMoveCard, MoveItem } from '@/components/DraggableMoveCard';
 import { Header } from '@/components/grid/Header';
-import { Spacer } from '@/components/Spacer';
+import { PlusButton } from '@/components/PlusButton';
 import { ThemedView } from '@/components/ThemedView';
 import { ComboQueryResponse, MoveFromComboQueryResponse } from '@/src/api/combos';
 import { useComboQuery } from '@/src/hooks/useComboQuery';
@@ -99,7 +99,7 @@ export default function EditCombo() {
                 setUpdatedCombo(updatedCombo);
               }}
             />
-            <Spacer/>
+            <PlusButton onPress={()=>{}} style={styles.plusButton}/>
           </ThemedView>
       </SignedIn>
 
@@ -121,4 +121,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 8,
   },
+  plusButton: {
+    alignItems: "center"
+  }
 });
