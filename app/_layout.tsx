@@ -14,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 SplashScreen.preventAutoHideAsync();
@@ -58,6 +59,7 @@ export default function RootLayout() {
           tokenCache={tokenCache}
         >
           <QueryClientProvider client={queryClient}>
+            <SafeAreaView style={{ flex: 1 }}>
               <GestureHandlerRootView style={{ flex: 1 }}>
                 <Stack>
                   <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -66,7 +68,8 @@ export default function RootLayout() {
                 </Stack>
                 <StatusBar style="auto" />
               </GestureHandlerRootView>
-              <Toast />
+            </SafeAreaView>
+            <Toast />
           </QueryClientProvider>
         </ClerkProvider>
       </ThemeProvider>
