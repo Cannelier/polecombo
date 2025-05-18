@@ -21,3 +21,5 @@ export interface CompleteMove extends z.infer<typeof MoveModel> {
 export const RelatedMoveModel: z.ZodSchema<CompleteMove> = z.lazy(() => MoveModel.extend({
   combos: RelatedComboMoveModel.array(),
 }))
+
+export const MoveArrayModel = z.array(MoveModel);
