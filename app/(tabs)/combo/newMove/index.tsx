@@ -2,16 +2,17 @@ import { movesImagesDataset } from "@/assets/datasets/movesImageDataset";
 import { Body } from "@/components/grid/Body";
 import { Spacer } from "@/components/Spacer";
 import { ThemedText } from "@/components/typography/ThemedText";
+import { MoveData } from "@/src/api/moves";
 import { useMovesQuery } from "@/src/hooks/useMovesQuery";
 import React, { useState } from "react";
 import { ActivityIndicator, Image, StyleSheet, View } from "react-native";
 
 export default function NewMoveScreen() {
-    const [currentMove, setCurrentMove] = useState(undefined);
-    // TODO: Type moves and edit snake_case in prisma schema
+    const [currentMove, setCurrentMove] = useState<MoveData | undefined>(undefined);
+
     const { data: allMoves, isLoading: areAllMovesLoading } = useMovesQuery();
 
-    if (areAllMovesLoading) {
+    if (areAllMovesLoading || !allMoves) {
       return <ActivityIndicator />
     }
 
