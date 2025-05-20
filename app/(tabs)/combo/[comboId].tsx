@@ -78,7 +78,10 @@ export default function EditCombo() {
   }
 
   const handleNewMove = () => {
-    router.navigate('/combo/newMove')
+    router.navigate({
+      pathname:'/combo/newMove',
+      params: { comboId: Number(comboId) }
+    })
   }
 
   if (!combo || isComboLoading || !initialMoves) {

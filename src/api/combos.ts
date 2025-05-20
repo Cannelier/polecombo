@@ -1,15 +1,17 @@
 import { PrismaClient } from '@prisma/client';
 import { Hono } from "hono";
+import { z } from 'zod';
 
 const prisma = new PrismaClient()
 
 const combos = new Hono()
 
-combos.get("/", async (c) => {
-    const data = await prisma.combo.findMany()
-    return c.json(data);
+
+export const CombosPatchAddMoveSchema = z.object({
+    moveId: z.number()
 })
 
+export type CombosPatchAddMoveVariables = z.infer<typeof CombosPatchAddMoveSchema>
 
 export interface MoveFromComboQueryResponse {
     moveId: number,
@@ -24,6 +26,11 @@ export interface ComboQueryResponse {
     name: string,
     movesInCombo: MoveFromComboQueryResponse[]
 }
+
+combos.get("/", async (c) => {
+    const data = await prisma.combo.findMany()
+    return c.json(data);
+})
 
 combos.get("/:comboId", async (c) => {
     const comboId = Number(c.req.param('comboId'))
@@ -95,6 +102,43 @@ combos.put("/:comboId", async (c) => {
         }
     })
     return c.json({ combo }, 200)
+})
+
+combos.patch("/:comboId", async (c) => {
+    // TODO: Add check combo can be accessed by user
+    const comboId = Number(c.req.param("comboId"))
+    const payload = await c.req.json()
+    const safePayload = CombosPatchAddMoveSchema.safeParse(payload)
+    const { moveId } = payload
+    
+    if (!safePayload.success) {
+        console.error(safePayload.error)
+        throw new Error(`Invalid data passed to create move in combo ${comboId}`)
+    }
+    const combo = await prisma.combo.findUnique({
+        where: { id: comboId },
+        include: {
+            movesInCombo: true
+        }
+    })
+    
+    const newRank = combo?.movesInCombo.length || 0;
+    
+    console.log(`In combo ID ${comboId} adding move ID ${moveId} at position ${newRank}`)
+    
+    if (combo?.movesInCombo.every((moveInCombo) => (moveInCombo.rank !== newRank))) {
+        const newComboMoveId = await prisma.comboMove.create({
+            data: {
+                comboId: comboId,
+                moveId: moveId,
+                rank: newRank,
+            }
+        })
+        return c.json({ newComboMoveId }, 200)
+
+    } else {
+        throw new Error("Already a move with this rank. Can't save new move.")
+    }
 })
 
 export default combos

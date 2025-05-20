@@ -17,5 +17,4 @@ moves.get('/', async (c) => {
     return c.json(allMoves)
 })
 
-
 export default moves;

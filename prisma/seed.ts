@@ -43,7 +43,7 @@ async function seedComboMoves() {
             { comboId: 2, moveId: 4, rank: 1 },
             { comboId: 2, moveId: 6, rank: 2 },
             { comboId: 2, moveId: 8, rank: 3 },
-            { comboId: 3, moveId: 10, rank: 1 },
+            { comboId: 3, moveId: 10, rank: 0 },
         ]
     })
 
