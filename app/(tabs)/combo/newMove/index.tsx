@@ -1,5 +1,6 @@
 import { movesImagesDataset } from "@/assets/datasets/movesImageDataset";
 import { Body } from "@/components/grid/Body";
+import { SearchBar } from "@/components/SearchBar";
 import { Spacer } from "@/components/Spacer";
 import { ThemedText } from "@/components/typography/ThemedText";
 import { MoveData } from "@/src/api/moves";
@@ -9,7 +10,7 @@ import { ActivityIndicator, Image, StyleSheet, View } from "react-native";
 
 export default function NewMoveScreen() {
     const [currentMove, setCurrentMove] = useState<MoveData | undefined>(undefined);
-
+    
     const { data: allMoves, isLoading: areAllMovesLoading } = useMovesQuery();
 
     if (areAllMovesLoading || !allMoves) {
@@ -18,17 +19,16 @@ export default function NewMoveScreen() {
 
     const movesForDropdownList = allMoves?.map((move) => ({
         label: move.name,
-        value: move.id,
+        value: move,
     }))
-    
+
     return (
         <>
         <Body>
             <View style={styles.container}>
-                <MoveSearchBar data={movesForDropdownList}
-                    allMoves={allMoves}
-                    currentMove={currentMove}
-                    setCurrentMove={setCurrentMove}
+                <SearchBar
+                    options={movesForDropdownList}
+                    onSelect={(value: any) => setCurrentMove(value)}
                 />
                 <Spacer />
                 <View style={styles.imageContainer}>
@@ -53,79 +53,21 @@ export default function NewMoveScreen() {
     )
 }
 
-// TODO: Type parameters
-export function MoveSearchBar({
-    allMoves,
-    data,
-    currentMove,
-    setCurrentMove 
-}: {
-    allMoves: any,
-    data: any,
-    currentMove: any
-    setCurrentMove: (move: any) => void
-}) {
-    const [isFocus, setIsFocus] = useState(false);
-
-    return (
-    <></>
-    )
-}
-
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: "column",
         alignItems: "center",
     },
     imageContainer: {
-        height: 300,
-        width: 300,
+        height: 200,
+        width: 200,
         backgroundColor: "pink",
     },
     image: {
-        height: 300,
-        width: 300,
+        height: "100%",
+        width: "100%",
     },
     moveHeader: {
-            height: 100,
+        height: 100,
     },
-
-
-
-    dropdown: {
-      width: '100%', 
-      height: 50,
-      borderColor: 'gray',
-      borderWidth: 0.5,
-      borderRadius: 8,
-      paddingHorizontal: 8,
-    },
-    icon: {
-      marginRight: 5,
-    },
-    label: {
-      position: 'absolute',
-      backgroundColor: 'white',
-      left: 22,
-      top: 8,
-      zIndex: 999,
-      paddingHorizontal: 8,
-      fontSize: 14,
-    },
-    placeholderStyle: {
-      fontSize: 16,
-    },
-    selectedTextStyle: {
-      fontSize: 16,
-    },
-    iconStyle: {
-      width: 20,
-      height: 20,
-    },
-    inputSearchStyle: {
-      height: 40,
-      fontSize: 16,
-    },
-
+    
 })
