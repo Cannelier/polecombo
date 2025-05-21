@@ -20,7 +20,6 @@ export function useNewComboMoveMutation(onSuccess?: () => void) {
             return axios.patch(`${BASE_URL}/api/combos/${comboId}`, { moveId: moveId })
         },
         onSuccess: () => {
-            console.log("Mutation succeeded");
             onSuccess?.()
             queryClient.invalidateQueries()
         }
