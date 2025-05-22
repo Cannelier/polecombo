@@ -48,13 +48,13 @@ export default function EditCombo() {
   }
 
   const { mutate: editCombo } = useComboUpdateMutation(showToast);
-  const [initialMoves, setInitialMoves] = useState<MoveItem[] | undefined>([]) // To initialize moves
+  const [moves, setMoves] = useState<MoveItem[]>([]) // To initialize moves
   const [updatedCombo, setUpdatedCombo] = useState<ComboQueryResponse | undefined>(undefined)
 
   // Set moves once loaded
   useEffect(() => {
     if (combo?.movesInCombo) {
-      setInitialMoves(
+      setMoves(
         combo.movesInCombo.map((move) => fromMoveToItem(move)))
       }
   },[combo])
@@ -84,7 +84,7 @@ export default function EditCombo() {
     })
   }
 
-  if (!combo || isComboLoading || !initialMoves) {
+  if (!combo || isComboLoading || !moves) {
     return
   }
 
@@ -97,11 +97,12 @@ export default function EditCombo() {
                 <Button title='Valider' onPress={handleSave} disabled={!updatedCombo} />
             </ThemedView>
             <DraggableFlatList
-              data={initialMoves}
+              data={moves}
               renderItem={renderItem}
               keyExtractor={(item, index) => `draggableItem-${item.key}`}
               onDragEnd={({ data }) => {
                 const updatedMoves = data.map((data, index) => ({...data, rank: index}));
+                setMoves(updatedMoves);
                 const updatedCombo = { ...combo, movesInCombo: updatedMoves.map((item) => (fromItemToMove(item))) }
                 setUpdatedCombo(updatedCombo);
               }}
