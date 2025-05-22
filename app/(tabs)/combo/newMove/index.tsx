@@ -3,33 +3,20 @@ import { Body } from "@/components/grid/Body";
 import { SearchBar } from "@/components/SearchBar";
 import { Spacer } from "@/components/Spacer";
 import { ThemedText } from "@/components/typography/ThemedText";
+import { ComboQueryResponse, MoveFromComboQueryResponse } from "@/src/api/combos";
 import { MoveData } from "@/src/api/moves";
 import { useMovesQuery } from "@/src/hooks/useMovesQuery";
-import { useNewComboMoveMutation } from "@/src/hooks/useNewComboMoveMutation";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { ActivityIndicator, Button, Image, StyleSheet, View } from "react-native";
-import Toast from 'react-native-toast-message';
 
 export default function NewMoveScreen() {
-    const { comboId } = useLocalSearchParams()
+    const { comboId, comboData } = useLocalSearchParams<{comboId: string, comboData: string}>()
     const [currentMove, setCurrentMove] = useState<MoveData | undefined>(undefined);
-
-    const showToast = () => {
-        Toast.show({
-        type: 'success',
-        text1: '✅ Enregistré',
-        });
-    }
-    const handleSuccess = () => {
-        showToast()
-        setTimeout(() =>{ router.back()}, 1000)
-    }
-
+    const [currentCombo, setCurrentCombo] = useState<ComboQueryResponse>(JSON.parse(comboData) as ComboQueryResponse)
     const { data: allMoves, isLoading: areAllMovesLoading } = useMovesQuery();
-    const { mutate: addComboMove } = useNewComboMoveMutation(handleSuccess)
 
-    if (areAllMovesLoading || !allMoves || !comboId) {
+    if (areAllMovesLoading || !allMoves || !currentCombo) {
       return <ActivityIndicator />
     }
 
@@ -51,10 +38,28 @@ export default function NewMoveScreen() {
                         title="Valider"
                         disabled={!currentMove} 
                         onPress={() => {
-                            addComboMove({
-                                comboId: Number(comboId),
-                                moveId: currentMove!.id
-                            })
+                            if (currentMove) {
+                                const newCombo = {
+                                    ...currentCombo,
+                                    movesInCombo: [
+                                        ...currentCombo.movesInCombo,
+                                        {   
+                                            moveId: currentMove.id,
+                                            rank: currentCombo.movesInCombo.length,
+                                            name: currentMove.name,
+                                            imageUrl: currentMove.imageUrl,
+                                            codeNo: currentMove.codeNo,
+                                        } as MoveFromComboQueryResponse
+                                    ]
+                                };
+                                setCurrentCombo(newCombo)
+                                router.replace({
+                                    pathname: `/combo/${comboId}`,
+                                    params: {
+                                        comboId: comboId,
+                                        comboData: JSON.stringify(newCombo)
+                                    }
+                            })}
                         }}   
                     />
                 </View>

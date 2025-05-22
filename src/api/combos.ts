@@ -74,33 +74,36 @@ combos.get("/:comboId", async (c) => {
 combos.put("/:comboId", async (c) => {
     const comboId = Number(c.req.param("comboId"));
     const updatedCombo = await c.req.json();
-    const movesInCombo = updatedCombo.movesInCombo.map((moveFromComboResponse: MoveFromComboQueryResponse) => (
+    const newMovesInCombo = updatedCombo.movesInCombo.map((moveFromComboResponse: MoveFromComboQueryResponse, index) => (
         { comboId: comboId,
           moveId: moveFromComboResponse.moveId,
-          rank: moveFromComboResponse.rank,
+          rank: index,
         }
-    ))
-    await Promise.all(
-        movesInCombo.map(
-            async (moveInCombo: { comboId: number, moveId: number, rank: number}) => {
-                return prisma.comboMove.update({
-                    where: {
-                        comboId_rank: {
-                            comboId: moveInCombo.comboId,
-                            rank: moveInCombo.rank
-                        }
-                    },
-                    data: {
-                        moveId: moveInCombo.moveId,
-                    }
-                })
-            }
-        )
-    )
-    const combo = await prisma.combo.findUnique({
-        where: {
-            id: comboId,
-        }
+    ));
+
+    const combo = await prisma.$transaction(async (transaction) => {
+        // Delete existing moves for combo
+        await transaction.comboMove.deleteMany({
+            where: { comboId: comboId }
+        });
+
+        // Insert new moves
+        await transaction.comboMove.createMany({
+            data: newMovesInCombo
+        })
+
+        return transaction.combo.findUnique({
+            where: { id: comboId },
+            include: {
+                movesInCombo: {
+                    include: {
+                        move: {
+                            select: {
+                                name: true,
+                                imageUrl: true,
+                                codeNo: true
+                            }
+            }}}}})
     })
     return c.json({ combo }, 200)
 })
