@@ -1,5 +1,6 @@
 import { movesImagesDataset } from '@/assets/datasets/movesImageDataset';
 import { DraggableMoveCard, MoveItem } from '@/components/DraggableMoveCard';
+import { Body } from '@/components/grid/Body';
 import { Header } from '@/components/grid/Header';
 import { PlusButton } from '@/components/PlusButton';
 import { ThemedView } from '@/components/ThemedView';
@@ -104,36 +105,38 @@ export default function EditCombo() {
   console.log("UPDATED COMBO", updatedCombo)
   return (
     <>
-      <SignedIn>
-          <ThemedView style={styles.titleContainer}>
-            <Header>{combo.name}</Header>
-            <ThemedView>
-                <Button title='Valider' onPress={handleSave} disabled={!updatedCombo} />
+      <Body>
+        <SignedIn>
+            <ThemedView style={styles.titleContainer}>
+              <Header>{combo.name}</Header>
+              <ThemedView>
+                  <Button title='Valider' onPress={handleSave} disabled={!updatedCombo} />
+              </ThemedView>
+              <DraggableFlatList
+                data={moves}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => `draggableItem-${item.key}`}
+                onDragEnd={({ data }) => {
+                  const updatedMoves = data.map((data, index) => ({...data, rank: index}));
+                  setMoves(updatedMoves);
+                  const updatedCombo = { ...combo, movesInCombo: updatedMoves.map((item) => (fromItemToMove(item))) }
+                  setUpdatedCombo(updatedCombo);
+                }}
+              />
+              <PlusButton onPress={handleNewMove} style={styles.plusButton}/>
             </ThemedView>
-            <DraggableFlatList
-              data={moves}
-              renderItem={renderItem}
-              keyExtractor={(item, index) => `draggableItem-${item.key}`}
-              onDragEnd={({ data }) => {
-                const updatedMoves = data.map((data, index) => ({...data, rank: index}));
-                setMoves(updatedMoves);
-                const updatedCombo = { ...combo, movesInCombo: updatedMoves.map((item) => (fromItemToMove(item))) }
-                setUpdatedCombo(updatedCombo);
-              }}
-            />
-            <PlusButton onPress={handleNewMove} style={styles.plusButton}/>
-          </ThemedView>
-      </SignedIn>
+        </SignedIn>
 
 
-      <SignedOut>
-      <Link href="/(auth)/signIn">
-        <Text>Sign in</Text>
-      </Link>
-      <Link href="/(auth)/signUp">
-        <Text>Sign up</Text>
-      </Link>
-      </SignedOut>
+        <SignedOut>
+        <Link href="/(auth)/signIn">
+          <Text>Sign in</Text>
+        </Link>
+        <Link href="/(auth)/signUp">
+          <Text>Sign up</Text>
+        </Link>
+        </SignedOut>
+      </Body>
     </>
   );
 }

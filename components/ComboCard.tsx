@@ -3,7 +3,7 @@ import { Combo } from '@/src/hooks/useCombosQuery';
 
 import { ThemedText } from '@/components/typography/ThemedText';
 import { router } from 'expo-router';
-import { StyleSheet, TouchableHighlight, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export function ComboCard({combo}: {combo: Combo}) {
 const handlePress = () => {
@@ -13,13 +13,18 @@ const handlePress = () => {
 }
 
     return (
-        <TouchableHighlight onPress={handlePress}>
+        <TouchableOpacity onPress={handlePress}>
             <View style={styles.card}>
+                <View style={styles.cardImageContainer}>
+                  <Image
+                    source={require('@/assets/images/moves/F1.png')}
+                    style={styles.cardImage} />
+                </View>
                 <View style={styles.cardContent}>
-                    <ThemedText style={styles.cardTitle}>{combo.name}</ThemedText>
+                    <ThemedText type="strong">{combo.name}</ThemedText>
                 </View>
             </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
     )
 }
 
@@ -27,14 +32,23 @@ const handlePress = () => {
 const styles = StyleSheet.create({
   card: {
     height: 50,
-    backgroundColor: "pink",
-    justifyContent: "center"
+    justifyContent: "center",
+    flexDirection: "row",
+
+    backgroundColor: "rgba(122, 125, 166, 0.1)",
+    borderRadius: 7
+  },
+  cardImageContainer: {
+    flex: 1,
+  },
+  cardImage: {
+    height:50,
+    width:50,
+    borderTopLeftRadius: 7,
+    borderBottomLeftRadius: 7,
   },
   cardContent: {
-    padding: 10
+    flex: 4,
+    justifyContent: "center"
   },
-  cardTitle: {
-    fontWeight: 600,
-    fontSize: 16,
-  }
 });

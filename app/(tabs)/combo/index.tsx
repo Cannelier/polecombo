@@ -10,7 +10,6 @@ import { StyleSheet, Text } from 'react-native';
 
 
 
-
 export default function HomeScreen() {
   const { data: combos, isLoading: areCombosLoading } = useCombosQuery();
 
@@ -51,5 +50,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   columnContainer: {
     flexDirection: 'column',
+    backgroundColor: "transparent"
   }
 });

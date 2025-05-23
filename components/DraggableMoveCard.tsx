@@ -13,33 +13,42 @@ export type MoveItem = {
 
 export function DraggableMoveCard({ item, drag, movesImagesDataset }: { item: MoveItem, drag: (event: GestureResponderEvent) => void, movesImagesDataset: any}) {
     return (
+      <>
         <TouchableOpacity onLongPress={drag}>
-            <View style={styles.cardContent}>
-                <View style={styles.cardImage}>
+            <View style={styles.card}>
+                <View style={styles.cardImageContainer}>
                     <Image
                         source={movesImagesDataset[item.codeNo]}
-                        style={{ width: 75, height: 75 }}
+                        style={styles.cardImage}
                     />
                 </View>
-                <View style={styles.cardName}>
-                    <ThemedText>{item.label}</ThemedText>
+                <View style={styles.cardContent}>
+                    <ThemedText type="strong">{item.label}</ThemedText>
                 </View>
             </View>
           </TouchableOpacity>
+      </>
     )
 }
 
 
 
 const styles = StyleSheet.create({
+  card: {
+    flexDirection: "row",
+    backgroundColor: "rgba(122, 125, 166, 0.1)",
+    borderRadius: 7,
+    marginBottom: 5,
+  },
+  cardImageContainer: {
+    flex: 1,
+  },
+  cardImage: { 
+    borderTopLeftRadius: 7,
+    borderBottomLeftRadius: 7,width: 75, height: 75
+  },
   cardContent: {
-    padding: 5,
-    flexDirection: "row"
+    flex: 2,
+    justifyContent: "center"
   },
-  cardImage: {
-    flex: 1
-  },
-  cardName: {
-    flex: 3
-  }
 })
