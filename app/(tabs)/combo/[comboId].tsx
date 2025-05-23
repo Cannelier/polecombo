@@ -9,7 +9,7 @@ import { useComboQuery } from '@/src/hooks/useComboQuery';
 import { useComboUpdateMutation } from '@/src/hooks/useComboUpdateMutation';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link, router, useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, StyleSheet, Text } from 'react-native';
 import DraggableFlatList, {
   RenderItemParams,
@@ -41,36 +41,38 @@ export default function EditCombo() {
   const { comboId, comboData } = useLocalSearchParams<{comboId: string, comboData?: string}>();
   const { data: combo, isLoading: isComboLoading } = useComboQuery(Number(comboId));
 
-  const parsedComboData = useMemo(() => {
-    return comboData ? JSON.parse(comboData) as ComboQueryResponse : undefined
-  }, [comboData]); 
-
-  const showToast = () => {
+  const handleSuccess = () => {
     Toast.show({
       type: 'success',
       text1: '✅ Enregistré',
     });
+    router.back()
   }
 
-  const { mutate: editCombo } = useComboUpdateMutation(showToast);
+
+  const { mutate: editCombo } = useComboUpdateMutation(handleSuccess);
   
   // We use `moves` to display the list, and `updatedCombo` to pass data to another screen or save the combo
   const [moves, setMoves] = useState<MoveItem[]>([]) // To initialize moves
-  const [updatedCombo, setUpdatedCombo] = useState<ComboQueryResponse | undefined>(parsedComboData)
-
-  // Set moves once loaded
+  const [updatedCombo, setUpdatedCombo] = useState<ComboQueryResponse | undefined>(comboData ? JSON.parse(comboData) : undefined)
+  
   useEffect(() => {
     // If comboData is passed, we come here from another screen that passed a combo. Use it.
-    if (parsedComboData) {
-      setMoves(parsedComboData.movesInCombo.map((move) => fromMoveToItem(move)))
+    if (comboData) {
+      setUpdatedCombo(JSON.parse(comboData))
     }
-    // If no comboData was passed, we load the initial moves of the combo
+    // If no comboData was passed, we set the combo in memory to the initial combo loaded from the backend
     else if (combo?.movesInCombo) {
       setUpdatedCombo(combo);
-      setMoves(
-        combo.movesInCombo.map((move) => fromMoveToItem(move)))
-      }
-  },[combo, parsedComboData])
+    }
+  },[combo, comboData])
+
+  useEffect(() => {
+    // The moves displayed are from the combo on the fly
+    if (updatedCombo?.movesInCombo) {
+      setMoves(updatedCombo?.movesInCombo.map((move) => fromMoveToItem(move)))
+    }
+  }, [updatedCombo])
   
   const renderItem = useCallback(
     ({ item, index, drag, isActive}: RenderItemParams<MoveItem>) => {
@@ -91,7 +93,7 @@ export default function EditCombo() {
   }
 
   const handleNewMove = () => {
-    router.replace({
+    router.push({
       pathname:'/combo/newMove',
       params: {
         comboId: comboId,
