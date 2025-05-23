@@ -32,8 +32,10 @@ export function SearchBar({
         <TextInput
             onChangeText={(input: string) => { handleChangeText(input) }}
             value={searchQuery}
-            style={styles.searchBarTextInput}
+            style={[styles.searchBarTextInput,
+                filteredOptions.length > 0 && displayDropDown ? styles.searchBarTextInputExtended : styles.searchBarTextInputCollapsed ]}
             placeholder="Search"
+            placeholderTextColor="#FFFFFF"
         />
         
         { filteredOptions.length > 0 && displayDropDown ?
@@ -60,20 +62,25 @@ export function SearchBar({
 
 const styles = StyleSheet.create({
     searchBarContainer: {
-        backgroundColor: '#fff',
         position: 'relative',
     },
 
     searchBarTextInput: {
         height: 40,
-        width: 250,
-
-        borderColor: '#ccc',
-        borderWidth: 1,
+        width: 300,
         paddingHorizontal: 10,
-        backgroundColor: '#fff',
+        backgroundColor: "rgb(139, 126, 139)",
+        color: "FFFFFF",
     },
-
+    searchBarTextInputCollapsed: {
+        borderRadius: 20,
+    },
+    searchBarTextInputExtended: {
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderBottomColor:  "rgb(159, 146, 159)",
+        borderBottomWidth: 0.5,
+    },
     searchBarDropDown: {
         maxHeight: 150, // <- Important to make it expand visibly
         position: 'absolute',
@@ -82,9 +89,9 @@ const styles = StyleSheet.create({
         right: 0,
         zIndex: 999,
 
-        backgroundColor: '#f9f9f9',
-        borderColor: '#ccc',
-        borderWidth: 1,
+        backgroundColor: "rgb(139, 126, 139)",
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
     },
 
     searchBarDropDownOption: {
@@ -92,8 +99,8 @@ const styles = StyleSheet.create({
         width: "100%",
         padding: 10,
         
-        borderBottomColor: '#eee',
-        borderBottomWidth: 1,
+        borderTopColor: "rgb(159, 146, 159)",
+        borderTopWidth: 0.5,
     }
 
 })

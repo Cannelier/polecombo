@@ -36,16 +36,15 @@ export function DraggableMoveCard({ item, drag, movesImagesDataset }: { item: Mo
 const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
-    backgroundColor: "rgba(122, 125, 166, 0.1)",
-    borderRadius: 7,
     marginBottom: 5,
   },
   cardImageContainer: {
     flex: 1,
   },
   cardImage: { 
-    borderTopLeftRadius: 7,
-    borderBottomLeftRadius: 7,width: 75, height: 75
+    borderRadius: 4,
+    width: 75,
+    height: 75,
   },
   cardContent: {
     flex: 2,

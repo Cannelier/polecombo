@@ -28,15 +28,16 @@ const handlePress = () => {
     )
 }
 
+// rgba(30, 30, 30, 0.6)
+// rgba(60, 60, 60, 0.4)
+// rgba(255, 255, 255, 0.07)
+  
 
 const styles = StyleSheet.create({
   card: {
     height: 50,
     justifyContent: "center",
     flexDirection: "row",
-
-    backgroundColor: "rgba(122, 125, 166, 0.1)",
-    borderRadius: 7
   },
   cardImageContainer: {
     flex: 1,
@@ -44,8 +45,7 @@ const styles = StyleSheet.create({
   cardImage: {
     height:50,
     width:50,
-    borderTopLeftRadius: 7,
-    borderBottomLeftRadius: 7,
+    borderRadius: 4,
   },
   cardContent: {
     flex: 4,

@@ -3,14 +3,19 @@ import { StyleSheet } from 'react-native';
 import { ThemedView } from "../ThemedView";
 import { ThemedText } from "../typography/ThemedText";
 
-export const Header = ({children}: {children: ReactNode }) => (
+export const Header = ({children}: {children: ReactNode }) => {
+  const titleUppercase =
+    typeof children === 'string' ? children.toUpperCase() : children;
 
-    <ThemedView style={styles.header}>
-        <ThemedText type="title">
-            {children}
-        </ThemedText>
-    </ThemedView>
-)
+    return (
+      <ThemedView style={styles.header}>
+          <ThemedText type="title">
+              {titleUppercase}
+          </ThemedText>
+      </ThemedView>
+    )
+  }
+
 
 const styles = StyleSheet.create({
   header: {

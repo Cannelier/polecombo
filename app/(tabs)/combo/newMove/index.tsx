@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     imageContainer: {
         height: 200,
         width: 200,
-        backgroundColor: "pink",
+        backgroundColor: "rgb(139, 126, 139)",
     },
     image: {
         height: "100%",
@@ -102,9 +102,5 @@ const styles = StyleSheet.create({
     moveHeader: {
         height: 100,
     },
-
-    searchHeader: {
-        flexDirection: 'row',
-    }
-    
+  
 })
