@@ -13,9 +13,7 @@ export function Searchbar({
     }
 
     useEffect(() => {
-        if (searchQuery) {
-            onSearch(searchQuery);
-        }
+        onSearch(searchQuery ?? '');
     }, [onSearch, searchQuery])
 
     return (

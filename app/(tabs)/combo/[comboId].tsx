@@ -104,7 +104,7 @@ export default function EditCombo() {
   if (!combo || isComboLoading || !moves) {
     return
   }
-  console.log("UPDATED COMBO", updatedCombo)
+  
   return (
     <>
       <Body>

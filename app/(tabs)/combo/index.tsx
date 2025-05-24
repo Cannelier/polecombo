@@ -3,6 +3,7 @@ import { Body } from '@/components/grid/Body';
 import { Searchbar } from '@/components/Searchbar';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
+import { areFirstLettersFound } from '@/helpers/search';
 import { useCombosQuery } from '@/src/hooks/useCombosQuery';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
@@ -22,8 +23,8 @@ export default function HomeScreen() {
     if (!combos) return [];
     if (!searchQuery) return combos;
     return combos?.filter((combo) =>
-      combo.name.toLowerCase().includes(searchQuery.toLowerCase()
-    ));
+      areFirstLettersFound(combo.name, searchQuery)
+    );
   }, [combos, searchQuery])
 
   if (!combos || areCombosLoading) {
