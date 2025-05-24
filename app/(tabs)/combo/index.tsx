@@ -1,28 +1,43 @@
 import { ComboCard } from '@/components/ComboCard';
 import { Body } from '@/components/grid/Body';
+import { Searchbar } from '@/components/Searchbar';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
 import { useCombosQuery } from '@/src/hooks/useCombosQuery';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 
 
 export default function HomeScreen() {
   const { data: combos, isLoading: areCombosLoading } = useCombosQuery();
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  
+  const handleSearch = (searchQuery: string) => {
+    setSearchQuery(searchQuery)
+  }
+  const filteredCombos = useMemo(() => {
+    if (!combos) return [];
+    if (!searchQuery) return combos;
+    return combos?.filter((combo) =>
+      combo.name.toLowerCase().includes(searchQuery.toLowerCase()
+    ));
+  }, [combos, searchQuery])
 
   if (!combos || areCombosLoading) {
     return
   }
+
   return (
     <>
       <SignedIn>
           <Spacer/>
           <Body>
             <ThemedView style={styles.columnContainer}>
-              {combos.map((combo) => {
+              <Searchbar onSearch={handleSearch} />
+              {filteredCombos?.map((combo) => {
                 return (
                   <>
                     <ComboCard combo={combo} key={combo.name}/>

@@ -1,6 +1,6 @@
 import { movesImagesDataset } from "@/assets/datasets/movesImageDataset";
+import { DropdownSearchbar } from "@/components/DropdownSearchbar";
 import { Body } from "@/components/grid/Body";
-import { SearchBar } from "@/components/SearchBar";
 import { Spacer } from "@/components/Spacer";
 import { ThemedText } from "@/components/typography/ThemedText";
 import { ComboQueryResponse, MoveFromComboQueryResponse } from "@/src/api/combos";
@@ -29,8 +29,8 @@ export default function NewMoveScreen() {
         <>
         <Body>
             <View style={styles.container}>
-                <View style={styles.searchHeader}>
-                    <SearchBar
+                <View>
+                    <DropdownSearchbar
                         options={movesForDropdownList}
                         onSelect={(value: any) => setCurrentMove(value)}
                     />
@@ -102,5 +102,4 @@ const styles = StyleSheet.create({
     moveHeader: {
         height: 100,
     },
-  
 })
