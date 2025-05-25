@@ -28,7 +28,16 @@ export interface ComboQueryResponse {
 }
 
 combos.get("/", async (c) => {
-    const data = await prisma.combo.findMany()
+    const data = await prisma.combo.findMany({
+        include: {
+            movesInCombo: { include: {
+                move: { select: {
+                    imageUrl: true,
+                    codeNo: true,
+                }}
+            }}
+        }
+    })
     return c.json(data);
 })
 

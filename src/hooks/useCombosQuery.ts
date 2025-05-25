@@ -19,4 +19,10 @@ export const useCombosQuery = () => {
 export type Combo = {
     id: number,
     name: string,
+    movesInCombo: {
+        move: {
+            imageUrl: string,
+            codeNo: string,
+        }
+    }[]
 }
