@@ -1,5 +1,6 @@
+import { Image } from "expo-image";
 import React from "react";
-import { GestureResponderEvent, Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from "react-native";
 import { ThemedText } from "./typography/ThemedText";
 
  
@@ -15,18 +16,26 @@ export function DraggableMoveCard({ item, drag, movesImagesDataset }: { item: Mo
     return (
       <>
         <TouchableOpacity onLongPress={drag}>
-            <View style={styles.card}>
-                <View style={styles.cardImageContainer}>
-                    <Image
-                        source={movesImagesDataset[item.codeNo]}
-                        style={styles.cardImage}
+          <View style={styles.cardContainer}>
+              <View style={styles.cardRow}>
+                <View style={styles.cardDrag}>
+                  <Image
+                    source={require('@/assets/svg/drag.svg')}
+                    style={styles.dragIcon}
                     />
                 </View>
-                <View style={styles.cardContent}>
-                    <ThemedText type="strong">{item.label}</ThemedText>
-                </View>
-            </View>
-          </TouchableOpacity>
+                  <View style={styles.cardImageContainer}>
+                      <Image
+                          source={movesImagesDataset[item.codeNo]}
+                          style={styles.cardImage}
+                      />
+                  </View>
+                  <View style={styles.cardContent}>
+                      <ThemedText type="strong">{item.label}</ThemedText>
+                  </View>
+              </View>
+          </View>
+        </TouchableOpacity>
       </>
     )
 }
@@ -34,20 +43,35 @@ export function DraggableMoveCard({ item, drag, movesImagesDataset }: { item: Mo
 
 
 const styles = StyleSheet.create({
-  card: {
-    flexDirection: "row",
+  cardContainer: {
     marginBottom: 5,
   },
+  cardRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  cardDrag: {
+    width: 40,
+    alignItems: "center",
+  },
   cardImageContainer: {
+    width: 75,
+    height: 75,
+    marginHorizontal: 10,
+    alignItems: "center",
+  },
+  cardContent: {
     flex: 1,
   },
   cardImage: { 
-    borderRadius: 4,
     width: 75,
     height: 75,
+    borderRadius: 4,
   },
-  cardContent: {
-    flex: 2,
-    justifyContent: "center"
+  dragIcon: {
+    width: 24,
+    height: 24,
   },
+  
+
 })
