@@ -1,5 +1,5 @@
+import { Image } from "expo-image";
 import { TouchableOpacity, View } from "react-native";
-import { ThemedText } from "./typography/ThemedText";
 
 export function PlusButton({ onPress, style }: { onPress: () => void, style: any }) {
     const color = "#CCCCCC"
@@ -8,20 +8,17 @@ export function PlusButton({ onPress, style }: { onPress: () => void, style: any
             <TouchableOpacity
                 onPress={onPress}
                  style={{
-                    borderRadius: 20,
-                    borderWidth: 2,
-                    width: 40,
-                    height: 40,
+                    width: 30,
+                    height: 30,
                     justifyContent: "center",
                     alignItems: "center",
-                    borderColor: color
             }}>
-                <ThemedText lightColor={color} style={{
-                    fontSize: 35,
-                    lineHeight: 35, // close to fontSize but slightly more for better vertical centering
-                }}>
-                    +
-                </ThemedText>
+                <Image
+                    source={require("@/assets/svg/plus.svg")}
+                    style={{
+                        width:30,
+                        height:30,
+                    }} />
             </TouchableOpacity>
         </View>
     )
