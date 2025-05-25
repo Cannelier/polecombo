@@ -28,11 +28,6 @@ const handlePress = () => {
     )
 }
 
-// rgba(30, 30, 30, 0.6)
-// rgba(60, 60, 60, 0.4)
-// rgba(255, 255, 255, 0.07)
-  
-
 const styles = StyleSheet.create({
   card: {
     height: 50,

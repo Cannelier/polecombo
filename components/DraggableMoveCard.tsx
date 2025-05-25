@@ -1,6 +1,8 @@
 import { Image } from "expo-image";
 import React from "react";
 import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from "react-native";
+import { DerivedValue } from "react-native-reanimated";
+import SwipeableItem from "react-native-swipeable-item";
 import { ThemedText } from "./typography/ThemedText";
 
  
@@ -12,9 +14,30 @@ export type MoveItem = {
     rank: number;
 };
 
-export function DraggableMoveCard({ item, drag, movesImagesDataset }: { item: MoveItem, drag: (event: GestureResponderEvent) => void, movesImagesDataset: any}) {
+interface DraggableMoveCardProps {
+  item: MoveItem,
+  drag: (event: GestureResponderEvent) => void,
+  movesImagesDataset: any,
+  handleDelete: () => void,
+}
+
+export function DraggableMoveCard({
+  item,
+  drag,
+  movesImagesDataset,
+  handleDelete
+}: DraggableMoveCardProps) {
     return (
       <>
+
+    <SwipeableItem
+      key={item.key}
+      item={item}
+      snapPointsLeft={[80]} // Enable left swipe with a snap point of 80 pixels
+      renderUnderlayLeft={({ percentOpen }) => (
+        <DeleteMove percentOpen={percentOpen} handleDelete={handleDelete} />
+      )}
+    >
         <TouchableOpacity onLongPress={drag}>
           <View style={styles.cardContainer}>
               <View style={styles.cardRow}>
@@ -36,9 +59,26 @@ export function DraggableMoveCard({ item, drag, movesImagesDataset }: { item: Mo
               </View>
           </View>
         </TouchableOpacity>
+      </SwipeableItem>
       </>
     )
 }
+
+function DeleteMove({ percentOpen, handleDelete }: {
+  percentOpen: DerivedValue<number>,
+  handleDelete: () => void
+}) {
+  return (
+      <TouchableOpacity onPress={handleDelete} style={styles.underlayLeft}>
+        <View>
+          <Image
+            source={require('@/assets/svg/trash.svg')}
+            style={styles.dragIcon}
+            />
+        </View>
+      </TouchableOpacity>
+        )
+} 
 
 
 
@@ -74,4 +114,10 @@ const styles = StyleSheet.create({
   },
   
 
+  underlayLeft: {
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 20,
+    flex: 1,
+  },
 })

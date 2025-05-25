@@ -10,7 +10,7 @@ import { useComboUpdateMutation } from '@/src/hooks/useComboUpdateMutation';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link, router, useLocalSearchParams } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Button, StyleSheet, Text } from 'react-native';
+import { ActivityIndicator, Button, StyleSheet, Text } from 'react-native';
 import DraggableFlatList, {
   RenderItemParams,
 } from "react-native-draggable-flatlist";
@@ -27,7 +27,7 @@ const fromMoveToItem =(move: MoveFromComboQueryResponse): MoveItem => (
 )
 
 
-const fromItemToMove =(item: MoveItem): MoveFromComboQueryResponse => (
+const fromItemToMove = (item: MoveItem): MoveFromComboQueryResponse => (
   { moveId: Number(item.key),
     rank: item.rank,
     name: item.label,
@@ -38,7 +38,7 @@ const fromItemToMove =(item: MoveItem): MoveFromComboQueryResponse => (
 
 
 export default function EditCombo() {
-  const { comboId, comboData } = useLocalSearchParams<{comboId: string, comboData?: string}>();
+  const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData?: string }>();
   const { data: combo, isLoading: isComboLoading } = useComboQuery(Number(comboId));
 
   const handleSuccess = () => {
@@ -46,102 +46,123 @@ export default function EditCombo() {
       type: 'success',
       text1: '✅ Enregistré',
     });
-    router.back()
-  }
-
+    router.back();
+  };
 
   const { mutate: editCombo } = useComboUpdateMutation(handleSuccess);
-  
-  // We use `moves` to display the list, and `updatedCombo` to pass data to another screen or save the combo
-  const [moves, setMoves] = useState<MoveItem[]>([]) // To initialize moves
-  const [updatedCombo, setUpdatedCombo] = useState<ComboQueryResponse | undefined>(comboData ? JSON.parse(comboData) : undefined)
-  
-  useEffect(() => {
-    // If comboData is passed, we come here from another screen that passed a combo. Use it.
-    if (comboData) {
-      setUpdatedCombo(JSON.parse(comboData))
-    }
-    // If no comboData was passed, we set the combo in memory to the initial combo loaded from the backend
-    else if (combo?.movesInCombo) {
-      setUpdatedCombo(combo);
-    }
-  },[combo, comboData])
+
+  const [moves, setMoves] = useState<MoveItem[]>([]);
+  const [updatedCombo, setUpdatedCombo] = useState<ComboQueryResponse | undefined>(
+    comboData ? JSON.parse(comboData) : undefined
+  );
 
   useEffect(() => {
-    // The moves displayed are from the combo on the fly
-    if (updatedCombo?.movesInCombo) {
-      setMoves(updatedCombo?.movesInCombo.map((move) => fromMoveToItem(move)))
+    if (comboData) {
+      const parsed = JSON.parse(comboData);
+      setUpdatedCombo(parsed);
+      setMoves(parsed.movesInCombo.map(fromMoveToItem));
     }
-  }, [updatedCombo])
-  
-  const renderItem = useCallback(
-    ({ item, index, drag, isActive}: RenderItemParams<MoveItem>) => {
-      return (
-        <DraggableMoveCard item={item} drag={drag} movesImagesDataset={movesImagesDataset} />
-      )
+  }, [comboData]);
+
+  useEffect(() => {
+    if (!comboData && combo?.movesInCombo) {
+      setUpdatedCombo(combo);
+      setMoves(combo.movesInCombo.map(fromMoveToItem));
     }
-    ,[]
-  )
+  }, [comboData, combo]);
+
+  // LOADING CONDITION: wait for these to be ready before rendering UI
+  const isDataReady = !isComboLoading && updatedCombo !== undefined && moves.length > 0 && combo !== undefined;
+
+  const handleDelete = (item: MoveItem) => {
+    if (!isDataReady) {
+      // Prevent delete if data isn't ready yet
+      console.log("Delete blocked - data not ready");
+      return;
+    }
+
+    const updatedMoves = moves.filter((move) => move.rank !== item.rank);
+    setMoves(updatedMoves);
+    setUpdatedCombo((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        movesInCombo: updatedMoves.map((item) => fromItemToMove(item)),
+      };
+    });
+  };
 
   const handleSave = () => {
-    if (updatedCombo) {
-      editCombo({
-        comboId: Number(comboId),
-        updatedCombo: updatedCombo
-      })
-    }
-  }
+    if (!isDataReady) return;
+    editCombo({
+      comboId: Number(comboId),
+      updatedCombo: updatedCombo!,
+    });
+  };
 
   const handleNewMove = () => {
+    if (!isDataReady) return;
     router.push({
-      pathname:'/combo/newMove',
+      pathname: '/combo/newMove',
       params: {
         comboId: comboId,
-        comboData: JSON.stringify(updatedCombo) }
-    })
+        comboData: JSON.stringify(updatedCombo),
+      },
+    });
+  };
+
+  if (!isDataReady) {
+    return <ActivityIndicator style={{ flex: 1, justifyContent: 'center' }} />;
   }
 
-  if (!combo || isComboLoading || !moves) {
-    return
-  }
-  
   return (
-    <>
-      <Body>
-        <SignedIn>
-            <ThemedView style={styles.titleContainer}>
-              <Header>{combo.name}</Header>
-              <ThemedView>
-                  <Button title='Valider' onPress={handleSave} disabled={!updatedCombo} />
-              </ThemedView>
-              <DraggableFlatList
-                data={moves}
-                renderItem={renderItem}
-                keyExtractor={(item, index) => `draggableItem-${item.key}`}
-                onDragEnd={({ data }) => {
-                  const updatedMoves = data.map((data, index) => ({...data, rank: index}));
-                  setMoves(updatedMoves);
-                  const updatedCombo = { ...combo, movesInCombo: updatedMoves.map((item) => (fromItemToMove(item))) }
-                  setUpdatedCombo(updatedCombo);
-                }}
+    <Body>
+      <SignedIn>
+        <ThemedView style={styles.titleContainer}>
+          <Header>{combo.name}</Header>
+          <ThemedView>
+            <Button title="Valider" onPress={handleSave} disabled={!isDataReady} />
+          </ThemedView>
+          <DraggableFlatList
+            data={moves}
+            renderItem={({ item, drag }) => (
+              <DraggableMoveCard
+                item={item}
+                drag={drag}
+                movesImagesDataset={movesImagesDataset}
+                handleDelete={() => handleDelete(item)}
               />
-              <PlusButton onPress={handleNewMove} style={styles.plusButton}/>
-            </ThemedView>
-        </SignedIn>
+            )}
+            keyExtractor={(item) => `draggableItem-${item.key}`}
+            onDragEnd={({ data }) => {
+              const updatedMoves = data.map((item, index) => ({ ...item, rank: index }));
+              setMoves(updatedMoves);
+              setUpdatedCombo((prev) => {
+                if (!prev) return prev;
+                return {
+                  ...prev,
+                  movesInCombo: updatedMoves.map(fromItemToMove),
+                };
+              });
+            }}
+            activationDistance={10}
+          />
+          <PlusButton onPress={handleNewMove} style={styles.plusButton} />
+        </ThemedView>
+      </SignedIn>
 
-
-        <SignedOut>
+      <SignedOut>
         <Link href="/(auth)/signIn">
           <Text>Sign in</Text>
         </Link>
         <Link href="/(auth)/signUp">
           <Text>Sign up</Text>
         </Link>
-        </SignedOut>
-      </Body>
-    </>
+      </SignedOut>
+    </Body>
   );
 }
+
 
 const styles = StyleSheet.create({
   titleContainer: {
