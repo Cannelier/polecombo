@@ -1,6 +1,7 @@
 import { ComboCard } from '@/components/ComboCard';
 import { Body } from '@/components/grid/Body';
-import { Searchbar } from '@/components/Searchbar';
+import { Header } from '@/components/grid/Header';
+import { SearchBar } from '@/components/SearchBar';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
 import { areFirstLettersFound } from '@/helpers/search';
@@ -34,10 +35,10 @@ export default function HomeScreen() {
   return (
     <>
       <SignedIn>
-          <Spacer/>
           <Body>
+            <Header>Mes combos</Header>
             <ThemedView style={styles.columnContainer}>
-              <Searchbar onSearch={handleSearch} />
+              <SearchBar onSearch={handleSearch} />
               {filteredCombos?.map((combo) => {
                 return (
                   <>

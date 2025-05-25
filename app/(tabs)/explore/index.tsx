@@ -2,7 +2,7 @@ import movesData from '@/assets/datasets/moves.json';
 import { movesImagesDataset } from '@/assets/datasets/movesImageDataset';
 import { Body } from '@/components/grid/Body';
 import { Header } from '@/components/grid/Header';
-import { Searchbar } from '@/components/Searchbar';
+import { SearchBar } from '@/components/SearchBar';
 import { ThemedText } from '@/components/typography/ThemedText';
 import { areFirstLettersFound } from '@/helpers/search';
 import { useMemo, useState } from 'react';
@@ -48,7 +48,7 @@ export default function ExploreScreen() {
     <>
     <Body>
       <Header>Moves</Header>
-      <Searchbar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} />
       <FlatList
         data={filteredMoves}
         renderItem={renderItem}
