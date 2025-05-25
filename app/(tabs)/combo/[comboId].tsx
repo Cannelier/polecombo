@@ -3,17 +3,17 @@ import { DraggableMoveCard, MoveItem } from '@/components/DraggableMoveCard';
 import { Body } from '@/components/grid/Body';
 import { Header } from '@/components/grid/Header';
 import { PlusButton } from '@/components/PlusButton';
+import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '@/components/typography/ThemedText';
 import { ComboQueryResponse, MoveFromComboQueryResponse } from '@/src/api/combos';
 import { useComboQuery } from '@/src/hooks/useComboQuery';
 import { useComboUpdateMutation } from '@/src/hooks/useComboUpdateMutation';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link, router, useLocalSearchParams } from 'expo-router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, StyleSheet, Text } from 'react-native';
-import DraggableFlatList, {
-  RenderItemParams,
-} from "react-native-draggable-flatlist";
+import DraggableFlatList from "react-native-draggable-flatlist";
 import Toast from 'react-native-toast-message';
 
 
@@ -44,9 +44,11 @@ export default function EditCombo() {
   const handleSuccess = () => {
     Toast.show({
       type: 'success',
-      text1: '✅ Enregistré',
+      text1: `✅ ${combo?.name} a été enregistré`,
     });
-    router.back();
+  router.replace({
+    pathname: '/combo', // back to main list
+});
   };
 
   const { mutate: editCombo } = useComboUpdateMutation(handleSuccess);
@@ -72,7 +74,7 @@ export default function EditCombo() {
   }, [comboData, combo]);
 
   // LOADING CONDITION: wait for these to be ready before rendering UI
-  const isDataReady = !isComboLoading && updatedCombo !== undefined && moves.length > 0 && combo !== undefined;
+  const isDataReady = !isComboLoading && updatedCombo !== undefined && combo !== undefined;
 
   const handleDelete = (item: MoveItem) => {
     if (!isDataReady) {
@@ -120,33 +122,37 @@ export default function EditCombo() {
       <SignedIn>
         <ThemedView style={styles.titleContainer}>
           <Header>{combo.name}</Header>
-          <ThemedView>
-            <Button title="Valider" onPress={handleSave} disabled={!isDataReady} />
-          </ThemedView>
-          <DraggableFlatList
-            data={moves}
-            renderItem={({ item, drag }) => (
-              <DraggableMoveCard
-                item={item}
-                drag={drag}
-                movesImagesDataset={movesImagesDataset}
-                handleDelete={() => handleDelete(item)}
+          { moves.length ? (
+            <>
+              <ThemedView>
+                <Button title="Valider" onPress={handleSave} disabled={!isDataReady || updatedCombo === combo} />
+              </ThemedView>
+              <DraggableFlatList
+                data={moves}
+                renderItem={({ item, drag }) => (
+                  <DraggableMoveCard
+                    item={item}
+                    drag={drag}
+                    movesImagesDataset={movesImagesDataset}
+                    handleDelete={() => handleDelete(item)}
+                  />
+                )}
+                keyExtractor={(item) => `draggableItem-${item.rank}`}
+                onDragEnd={({ data }) => {
+                  const updatedMoves = data.map((item, index) => ({ ...item, rank: index }));
+                  setMoves(updatedMoves);
+                  setUpdatedCombo((prev) => {
+                    if (!prev) return prev;
+                    return {
+                      ...prev,
+                      movesInCombo: updatedMoves.map(fromItemToMove),
+                    };
+                  });
+                }}
+                activationDistance={10}
               />
-            )}
-            keyExtractor={(item) => `draggableItem-${item.key}`}
-            onDragEnd={({ data }) => {
-              const updatedMoves = data.map((item, index) => ({ ...item, rank: index }));
-              setMoves(updatedMoves);
-              setUpdatedCombo((prev) => {
-                if (!prev) return prev;
-                return {
-                  ...prev,
-                  movesInCombo: updatedMoves.map(fromItemToMove),
-                };
-              });
-            }}
-            activationDistance={10}
-          />
+            </>
+          ) : <NoMovesInCombo /> }
           <PlusButton onPress={handleNewMove} style={styles.plusButton} />
         </ThemedView>
       </SignedIn>
@@ -163,6 +169,14 @@ export default function EditCombo() {
   );
 }
 
+function NoMovesInCombo() {
+  return (
+    <>
+      <ThemedText style={styles.noMovesInComboText}>Appuyez sur + pour ajouter des figures.</ThemedText>
+      <Spacer/>
+    </>
+  )
+}
 
 const styles = StyleSheet.create({
   titleContainer: {
@@ -171,5 +185,8 @@ const styles = StyleSheet.create({
   },
   plusButton: {
     alignItems: "center"
+  },
+  noMovesInComboText: {
+    textAlign: "center"
   }
 });

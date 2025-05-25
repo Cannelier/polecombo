@@ -9,7 +9,7 @@ export const Header = ({children}: {children: ReactNode }) => {
 
     return (
       <ThemedView style={styles.header}>
-          <ThemedText type="title">
+          <ThemedText type="title" style={styles.headerText}>
               {titleUppercase}
           </ThemedText>
       </ThemedView>
@@ -24,4 +24,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 10,
   },
+  headerText: {
+    textAlign: "center"
+  }
 });
