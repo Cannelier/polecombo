@@ -3,32 +3,47 @@ import { areFirstLettersFound } from "@/helpers/search"
 import { Image } from "expo-image"
 import { useMemo, useState } from "react"
 import { FlatList, StyleSheet, TextInput, TouchableOpacity, View } from "react-native"
+import { PlusButton } from "./PlusButton"
 import { ThemedText } from "./typography/ThemedText"
 
 export interface DropdownItem {
     label: string,
     value: any,
     imageSource?: string,
+    isAddOption?: boolean,
 }
 
 export function DropdownSearchbar({
     options,
     onSelect,
+    handleAddOption,
 }: {
     options: DropdownItem[],
     onSelect: (value: any) => void,
+    handleAddOption?: () => void
 }) {
     const [displayDropDown, setDisplayDropDown] = useState<boolean>(false)
 
     const [searchQuery, setSearchQuery] = useState<string>('')
-    
+
     const filteredOptions = useMemo(() => {
-        if (!options) return [];
-        if (!searchQuery) return options;
-        return options?.filter((option) =>
-        areFirstLettersFound(option.label, searchQuery)
-        );
-    }, [options, searchQuery])
+        const addOption: DropdownItem = {
+            label: "plus",
+            value: "plus",
+            isAddOption: true,
+        }
+
+        // If options haven't loaded, return empty list
+        if (!options) return handleAddOption ? [addOption] : [];
+        // If nothing was typed, return all options
+        if (!searchQuery) return handleAddOption ? [...options, addOption] : options;
+        // Return filtered options
+        const filtered = options?.filter((option) =>
+            areFirstLettersFound(option.label, searchQuery)
+            )
+        return handleAddOption ? [...filtered, addOption] : filtered;
+
+    }, [options, searchQuery, handleAddOption])
 
     const handleSelect = (item: DropdownItem) => {
         onSelect(item.value)
@@ -38,7 +53,38 @@ export function DropdownSearchbar({
         setSearchQuery(input)
         setDisplayDropDown(true)
     }
-
+    const renderItem = ({ item }: { item: DropdownItem }) =>  {
+        if (!item.isAddOption) {
+            return (
+                <TouchableOpacity
+                    onPress={() => handleSelect(item)}
+                    style={
+                        [styles.searchBarDropDownOption,
+                            item.imageSource ?
+                            styles.searchBarDropDownOptionWithImage
+                            : styles.searchBarDropDownOptionWithoutImage]}
+                    >
+                        {item.imageSource &&
+                        <Image
+                            source={movesImagesDataset[item.imageSource]}
+                            style={styles.optionImage}
+                        />}
+                        <ThemedText>{item.label}</ThemedText>
+                </TouchableOpacity>
+            )} else {
+                // Add option
+            return (
+                <TouchableOpacity
+                    onPress={() => handleAddOption!()}
+                    style={[styles.searchBarDropDownOption,
+                        styles.plusButtonContainer]}
+                    >
+                        
+                    <PlusButton onPress={() => handleAddOption!()} isLight />
+                </TouchableOpacity>
+            )
+            }
+        }
     return (
     <View style={styles.searchBarContainer}>
         <TextInput
@@ -58,25 +104,7 @@ export function DropdownSearchbar({
             (<FlatList
                 data={filteredOptions}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({item}) =>  {
-                    return (
-                        <TouchableOpacity
-                            onPress={() => handleSelect(item)}
-                            style={
-                                [styles.searchBarDropDownOption,
-                                    item.imageSource ?
-                                    styles.searchBarDropDownOptionWithImage
-                                    : styles.searchBarDropDownOptionWithoutImage]}
-                            >
-                                {item.imageSource &&
-                                <Image
-                                    source={movesImagesDataset[item.imageSource]}
-                                    style={styles.optionImage}
-                                />}
-                                <ThemedText>{item.label}</ThemedText>
-                        </TouchableOpacity>
-                    )}
-                }
+                renderItem={renderItem}
                 style={styles.searchBarDropDown}
             />)
         : null}
@@ -151,6 +179,14 @@ const styles = StyleSheet.create({
         width: imageSize,
         height: imageSize,
         marginRight:10,
+    },
+    plusButtonContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: 50,
+    },
+    plusButton: {
+        width: 20,
+        height: 20,
     }
-
 })

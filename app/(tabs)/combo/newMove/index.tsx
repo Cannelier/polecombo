@@ -26,6 +26,12 @@ export default function NewMoveScreen() {
         imageSource: move.codeNo,
     }))
 
+    const handleAddOption = () => {
+        router.navigate({
+            pathname: "/combo/customMove",
+            })
+    }
+
     return (
         <>
         <Body>
@@ -34,56 +40,57 @@ export default function NewMoveScreen() {
                     <DropdownSearchbar
                         options={movesForDropdownList}
                         onSelect={(value: any) => setCurrentMove(value)}
-                    />
-                    <Button
-                        title="Valider"
-                        disabled={!currentMove} 
-                        onPress={() => {
-                            if (currentMove) {
-                                const newCombo = {
-                                    ...currentCombo,
-                                    movesInCombo: [
-                                        ...currentCombo.movesInCombo,
-                                        {   
-                                            moveId: currentMove.id,
-                                            rank: currentCombo.movesInCombo.length,
-                                            name: currentMove.name,
-                                            imageUrl: currentMove.imageUrl,
-                                            codeNo: currentMove.codeNo,
-                                        } as MoveFromComboQueryResponse
-                                    ]
-                                };
-                                setCurrentCombo(newCombo)
-                                router.replace({
-                                    pathname: `/combo/${comboId}`,
-                                    params: {
-                                        comboId: comboId,
-                                        comboData: JSON.stringify(newCombo)
-                                    }
-                            })}
-                        }}   
+                        handleAddOption={handleAddOption}
                     />
                 </View>
-                <Spacer />
-                <View style={styles.imageContainer}>
-                    {currentMove ? (
-                        <Image source={movesImagesDataset[currentMove.codeNo]} 
-                            style={styles.image}
-                            />
-                    ) : null}
-                </View>
+                
 
                 {currentMove ? (
                     <>
-                    <Spacer />
+                        <View>
+                            <Button
+                                title="Valider"
+                                onPress={() => {
+                                    if (currentMove) {
+                                        const newCombo = {
+                                            ...currentCombo,
+                                            movesInCombo: [
+                                                ...currentCombo.movesInCombo,
+                                                {   
+                                                    moveId: currentMove.id,
+                                                    rank: currentCombo.movesInCombo.length,
+                                                    name: currentMove.name,
+                                                    imageUrl: currentMove.imageUrl,
+                                                    codeNo: currentMove.codeNo,
+                                                } as MoveFromComboQueryResponse
+                                            ]
+                                        };
+                                        setCurrentCombo(newCombo)
+                                        router.replace({
+                                            pathname: `/combo/${comboId}`,
+                                            params: {
+                                                comboId: comboId,
+                                                comboData: JSON.stringify(newCombo)
+                                            }
+                                    })}
+                                }}   
+                            />
+                        </View>
+                        <Spacer />
+                        <View style={styles.imageContainer}>
+                            <Image source={movesImagesDataset[currentMove.codeNo]} 
+                                style={styles.image}
+                                />
+                        </View>
+                        <Spacer />
                         <View style={styles.moveHeader}>
                             <ThemedText type="title">{currentMove.name}</ThemedText>
                         </View>
                     </>
-                    ) : null
-                }
+                    ) : null }
             </View>
-        </Body></>
+        </Body>
+        </>
     )
 }
 
