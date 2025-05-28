@@ -1,24 +1,36 @@
-import { useState } from "react"
+import { movesImagesDataset } from "@/assets/datasets/movesImageDataset"
+import { areFirstLettersFound } from "@/helpers/search"
+import { Image } from "expo-image"
+import { useMemo, useState } from "react"
 import { FlatList, StyleSheet, TextInput, TouchableOpacity, View } from "react-native"
 import { ThemedText } from "./typography/ThemedText"
 
-export interface Item {
+export interface DropdownItem {
     label: string,
     value: any,
+    imageSource?: string,
 }
 
 export function DropdownSearchbar({
     options,
     onSelect,
 }: {
-    options: Item[],
+    options: DropdownItem[],
     onSelect: (value: any) => void,
 }) {
     const [displayDropDown, setDisplayDropDown] = useState<boolean>(false)
-    const [searchQuery, setSearchQuery] = useState<string | undefined>('')
-    const filteredOptions = searchQuery ? options.filter((option) => option.label.includes(searchQuery)) : []
 
-    const handleSelect = (item: Item) => {
+    const [searchQuery, setSearchQuery] = useState<string>('')
+    
+    const filteredOptions = useMemo(() => {
+        if (!options) return [];
+        if (!searchQuery) return options;
+        return options?.filter((option) =>
+        areFirstLettersFound(option.label, searchQuery)
+        );
+    }, [options, searchQuery])
+
+    const handleSelect = (item: DropdownItem) => {
         onSelect(item.value)
         setDisplayDropDown(false)
     }
@@ -37,6 +49,10 @@ export function DropdownSearchbar({
             placeholder="Search"
             placeholderTextColor="#FFFFFF"
         />
+        <Image
+            source={require('@/assets/svg/search.svg')}
+            style={styles.searchIcon}
+            />
         
         { filteredOptions.length > 0 && displayDropDown ?
             (<FlatList
@@ -46,8 +62,17 @@ export function DropdownSearchbar({
                     return (
                         <TouchableOpacity
                             onPress={() => handleSelect(item)}
-                            style={styles.searchBarDropDownOption}
+                            style={
+                                [styles.searchBarDropDownOption,
+                                    item.imageSource ?
+                                    styles.searchBarDropDownOptionWithImage
+                                    : styles.searchBarDropDownOptionWithoutImage]}
                             >
+                                {item.imageSource &&
+                                <Image
+                                    source={movesImagesDataset[item.imageSource]}
+                                    style={styles.optionImage}
+                                />}
                                 <ThemedText>{item.label}</ThemedText>
                         </TouchableOpacity>
                     )}
@@ -59,16 +84,23 @@ export function DropdownSearchbar({
     )
 }
 
+const imageSize = 60;
+
+const sizeWithoutImage = 40;
+const sizeWithImage = imageSize;
 
 const styles = StyleSheet.create({
     searchBarContainer: {
         position: 'relative',
+        marginTop: 10,
+        marginBottom: 20,
+        justifyContent: "center",
     },
 
     searchBarTextInput: {
         height: 40,
         width: 300,
-        paddingHorizontal: 10,
+        paddingHorizontal: 45,
         backgroundColor: "rgb(139, 126, 139)",
         color: "#FFFFFF",
     },
@@ -80,6 +112,13 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
         borderBottomColor:  "rgb(159, 146, 159)",
         borderBottomWidth: 0.5,
+    },
+    searchIcon: {
+        width: 20,
+        height: 20,
+        position: "absolute",
+        top: 10,
+        left: 15,
     },
     searchBarDropDown: {
         maxHeight: 150, // <- Important to make it expand visibly
@@ -93,14 +132,25 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
     },
-
     searchBarDropDownOption: {
-        height: 40,
         width: "100%",
-        padding: 10,
         
         borderTopColor: "rgb(159, 146, 159)",
         borderTopWidth: 0.5,
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    searchBarDropDownOptionWithImage: {
+        height: sizeWithImage
+    },
+    searchBarDropDownOptionWithoutImage: {
+        padding: 10,
+        height: sizeWithoutImage
+    },
+    optionImage: {
+        width: imageSize,
+        height: imageSize,
+        marginRight:10,
     }
 
 })

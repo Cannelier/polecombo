@@ -1,5 +1,5 @@
 import { movesImagesDataset } from "@/assets/datasets/movesImageDataset";
-import { DropdownSearchbar } from "@/components/DropdownSearchbar";
+import { DropdownItem, DropdownSearchbar } from "@/components/DropdownSearchbar";
 import { Body } from "@/components/grid/Body";
 import { Spacer } from "@/components/Spacer";
 import { ThemedText } from "@/components/typography/ThemedText";
@@ -20,9 +20,10 @@ export default function NewMoveScreen() {
       return <ActivityIndicator />
     }
 
-    const movesForDropdownList = allMoves?.map((move) => ({
+    const movesForDropdownList: DropdownItem[] = allMoves?.map((move) => ({
         label: move.name,
         value: move,
+        imageSource: move.codeNo,
     }))
 
     return (
