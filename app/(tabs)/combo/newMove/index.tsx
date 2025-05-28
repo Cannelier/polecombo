@@ -28,7 +28,7 @@ export default function NewMoveScreen() {
 
     const handleAddOption = () => {
         router.navigate({
-            pathname: "/combo/customMove",
+            pathname: "/combo/newMove/customMove",
             })
     }
 

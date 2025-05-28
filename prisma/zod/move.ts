@@ -3,10 +3,10 @@ import { CompleteComboMove, RelatedComboMoveModel } from "./index"
 
 export const MoveModel = z.object({
   id: z.number().int(),
-  codeNo: z.string(),
   name: z.string(),
+  codeNo: z.string().nullish(),
   imageUrl: z.string().nullish(),
-  techValue: z.number(),
+  techValue: z.number().nullish(),
 })
 
 export interface CompleteMove extends z.infer<typeof MoveModel> {

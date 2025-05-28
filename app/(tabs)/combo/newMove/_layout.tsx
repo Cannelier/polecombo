@@ -7,6 +7,10 @@ export default function NewMoveStack() {
         title: 'Nouvelle figure',
         headerShown: false,
         }} />
+      <Stack.Screen name="customMove" options={{
+        title: 'Custom figure',
+        headerShown: false,
+        }} />
     </Stack>
   );
 }

@@ -17,4 +17,20 @@ moves.get('/', async (c) => {
     return c.json(allMoves)
 })
 
+
+moves.post('/', async (c) => {
+    console.log("On essaie de creer le move")
+    // Add custom user and image
+    const { moveName } = await c.req.json();
+    const customMove = await prisma.move.create({
+        data: {
+            name: moveName
+        }
+    })
+
+    console.log("✅ Move créé")
+  return c.json(customMove);
+})
+
+
 export default moves;
