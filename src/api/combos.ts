@@ -1,4 +1,4 @@
-import { supabase } from '@/src/services/supabaseClient';
+import { getComboWithSignedUrls, toComboWithMoves } from '@/src/domain/combo/helpers';
 import { PrismaClient } from '@prisma/client';
 import { Hono } from "hono";
 import { z } from 'zod';
@@ -40,56 +40,13 @@ combos.get("/", async (c) => {
     })
     // Get signed image URL
     const combosWithSignedUrl = await Promise.all(
-        data.map(async (combo) => {
-            return {
-                ...combo,
-                movesInCombo: await Promise.all(
-                    combo.movesInCombo.map(
-                        async (moveInCombo) => {
-                            const imagePath = moveInCombo.move.imageUrl ?? 'images/moves/undefined.png';
-                            const { data, error } = await supabase
-                                .storage
-                                .from('staging')
-                                .createSignedUrl(imagePath, 60) // Replace by moveInCombo.move.imageUrl
-                            
-                            return {
-                                ...moveInCombo,
-                                move: {
-                                    codeNo: moveInCombo.move.codeNo,
-                                    imageUrl: data?.signedUrl
-                            }
-                        }}
-                    )
-                )
-            }
-        })
-        )
+        data.map(async (combo) => getComboWithSignedUrls(combo))
+    )
     return c.json(combosWithSignedUrl)
 })
 
 combos.get("/:comboId", async (c) => {
     const comboId = Number(c.req.param('comboId'))
-    async function toComboWithMoves(combo): Promise<ComboQueryResponse>  {
-        return { 
-            comboId: combo.id,
-            name: combo.name,
-            movesInCombo: await Promise.all(combo.movesInCombo.map(async (mic) => {
-                const imagePath = mic.move.imageUrl ?? 'images/moves/undefined.png';
-                const { data, error } = await supabase
-                    .storage
-                    .from('staging')
-                .createSignedUrl(imagePath, 60) // Replace by moveInCombo.move.imageUrl
-
-                return {
-                    moveId: mic.moveId,
-                    rank: mic.rank,
-                    name: mic.move.name,
-                    imageUrl: data?.signedUrl,
-                    codeNo: mic.move.codeNo
-                }})
-            )}
-    }
-
     const data = await prisma.combo.findUnique({
         where: {
             id: comboId
