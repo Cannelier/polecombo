@@ -2,6 +2,8 @@ import { MoveModel } from "@/prisma/zod/move";
 import { PrismaClient } from "@prisma/client";
 import { Hono } from "hono";
 import { z } from "zod";
+import { getMoveWithSignedUrl } from "../domain/move/helpers";
+
 
 const prisma = new PrismaClient();
 const moves = new Hono();
@@ -14,7 +16,8 @@ export type MovesData = z.infer<typeof MovesSchema>
 
 moves.get('/', async (c) => {
     const allMoves = await prisma.move.findMany();
-    return c.json(allMoves)
+    const allMovesWithSignedUrl = await Promise.all(allMoves.map(async(move) => await getMoveWithSignedUrl(move)))
+    return c.json(allMovesWithSignedUrl)
 })
 
 

@@ -1,4 +1,3 @@
-import { movesImagesDataset } from "@/assets/datasets/movesImageDataset";
 import { DropdownItem, DropdownSearchbar } from "@/components/DropdownSearchbar";
 import { Body } from "@/components/grid/Body";
 import { Spacer } from "@/components/Spacer";
@@ -82,7 +81,7 @@ export default function NewMoveScreen() {
                         </View>
                         <Spacer />
                         <View style={styles.imageContainer}>
-                            <Image source={movesImagesDataset[currentMove.codeNo]} 
+                            <Image source={{ uri: currentMove.imageUrl}} 
                                 style={styles.image}
                                 />
                         </View>
