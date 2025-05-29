@@ -9,8 +9,8 @@ import { ThemedText } from "./typography/ThemedText";
 export type MoveItem = {
     key: string; // Combo ID
     label: string; // Combo name
-    imageUrl: string;
-    codeNo: string;
+    imageUrl?: string;
+    codeNo?: string;
     rank: number;
 };
 
@@ -27,6 +27,9 @@ export function DraggableMoveCard({
   movesImagesDataset,
   handleDelete
 }: DraggableMoveCardProps) {
+
+    const hasImage = !!item.codeNo;
+
     return (
       <>
 
@@ -49,7 +52,10 @@ export function DraggableMoveCard({
                 </View>
                   <View style={styles.cardImageContainer}>
                       <Image
-                          source={movesImagesDataset[item.codeNo]}
+                          source={hasImage ?
+                            movesImagesDataset[item.codeNo!] :
+                            require('@/assets/images/moves/undefined.png')
+                          }
                           style={styles.cardImage}
                       />
                   </View>

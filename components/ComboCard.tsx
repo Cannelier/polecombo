@@ -12,7 +12,6 @@ export function ComboCard({combo}: {combo: Combo}) {
     });
   }
   const codeNos = combo.movesInCombo.map((mic) => mic.move.codeNo).slice(0,4);
-  console.log(codeNos)
 
     return (
         <TouchableOpacity onPress={handlePress}>

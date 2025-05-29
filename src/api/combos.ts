@@ -17,8 +17,8 @@ export interface MoveFromComboQueryResponse {
     moveId: number,
     rank: number,
     name: string,
-    imageUrl: string,
-    codeNo: string,
+    imageUrl?: string,
+    codeNo?: string,
 }
 
 export interface ComboQueryResponse {

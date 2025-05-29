@@ -29,7 +29,11 @@ export default function NewMoveScreen() {
     const handleAddOption = () => {
         router.navigate({
             pathname: "/combo/newMove/customMove",
-            })
+            params: {
+                comboId: Number(comboId),
+                comboData: JSON.stringify(currentCombo)
+            }
+        })
     }
 
     return (

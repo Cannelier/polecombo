@@ -1,12 +1,38 @@
 import { Body } from "@/components/grid/Body";
 import UploadImage from "@/components/UploadImage";
+import { MoveFromComboQueryResponse } from "@/src/api/combos";
 import { useCustomMoveMutation } from "@/src/hooks/useCustomMoveMutation";
+import { router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, TextInput } from "react-native";
 
 export default function CustomMoveScreen() {
     const [moveName, setMoveName] = useState("");
-    const { mutate: createCustomMove } = useCustomMoveMutation()
+    const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData?: string }>();
+
+    const handleSuccess = (data: { id: string }) => {
+        const { id } = data;
+        const parsedComboData = JSON.parse(comboData);
+        const newCombo = {
+            ...parsedComboData,
+            movesInCombo: [
+                ...parsedComboData.movesInCombo,
+                {   
+                    moveId: Number(id),
+                    rank: parsedComboData.movesInCombo.length,
+                    name: moveName,
+                } as MoveFromComboQueryResponse
+            ]
+        };
+        router.replace({
+            pathname: `/combo/${comboId}`,
+            params: {
+                comboId: Number(comboId),
+                comboData: JSON.stringify(newCombo)
+            }
+        })
+    }
+    const { mutate: createCustomMove } = useCustomMoveMutation(handleSuccess)
 
     return (
         <Body>

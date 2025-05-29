@@ -19,16 +19,23 @@ moves.get('/', async (c) => {
 
 
 moves.post('/', async (c) => {
-    console.log("On essaie de creer le move")
     // Add custom user and image
     const { moveName } = await c.req.json();
+    const moveWithSameName = await prisma.move.findFirst({
+        where: {
+            name: moveName
+        }
+    })
+    if (moveWithSameName) {
+        console.log("❌ Move with the same name already exists")
+        return c.json({ moveId: moveWithSameName.id }, 400)
+    }
     const customMove = await prisma.move.create({
         data: {
             name: moveName
         }
     })
 
-    console.log("✅ Move créé")
   return c.json(customMove);
 })
 

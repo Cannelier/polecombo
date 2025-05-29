@@ -73,7 +73,6 @@ export default function EditCombo() {
     }
   }, [comboData, combo]);
 
-  // LOADING CONDITION: wait for these to be ready before rendering UI
   const isDataReady = !isComboLoading && updatedCombo !== undefined && combo !== undefined;
 
   const handleDelete = (item: MoveItem) => {
