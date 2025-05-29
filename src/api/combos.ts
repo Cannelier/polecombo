@@ -19,7 +19,6 @@ export interface MoveFromComboQueryResponse {
     rank: number,
     name: string,
     imageUrl?: string,
-    codeNo?: string,
 }
 
 export interface ComboQueryResponse {
@@ -35,7 +34,6 @@ combos.get("/", async (c) => {
                 move: { select: {
                     id: true,
                     imageUrl: true,
-                    codeNo: true,
                 }}
             }}
         }
@@ -71,17 +69,25 @@ combos.get("/", async (c) => {
 
 combos.get("/:comboId", async (c) => {
     const comboId = Number(c.req.param('comboId'))
-    function toComboWithMoves(combo): ComboQueryResponse  {
+    async function toComboWithMoves(combo): Promise<ComboQueryResponse>  {
         return { 
             comboId: combo.id,
             name: combo.name,
-            movesInCombo: combo.movesInCombo.map((mic) => ({
-                moveId: mic.moveId,
-                rank: mic.rank,
-                name: mic.move.name,
-                imageUrl: mic.move.imageUrl,
-                codeNo: mic.move.codeNo
-        }))}
+            movesInCombo: await Promise.all(combo.movesInCombo.map(async (mic) => {
+                const imagePath = mic.move.imageUrl ?? 'images/moves/undefined.png';
+                const { data, error } = await supabase
+                    .storage
+                    .from('staging')
+                .createSignedUrl(imagePath, 60) // Replace by moveInCombo.move.imageUrl
+
+                return {
+                    moveId: mic.moveId,
+                    rank: mic.rank,
+                    name: mic.move.name,
+                    imageUrl: data?.signedUrl,
+                    codeNo: mic.move.codeNo
+                }})
+            )}
     }
 
     const data = await prisma.combo.findUnique({
@@ -103,7 +109,7 @@ combos.get("/:comboId", async (c) => {
     if (!data) {
         throw new Error(`Combo with id ${comboId} not found`);
     }
-    const comboWithMoves = toComboWithMoves(data);
+    const comboWithMoves = await toComboWithMoves(data);
     return c.json(comboWithMoves);
 })
 

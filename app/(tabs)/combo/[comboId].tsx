@@ -1,4 +1,3 @@
-import { movesImagesDataset } from '@/assets/datasets/movesImageDataset';
 import { DraggableMoveCard, MoveItem } from '@/components/DraggableMoveCard';
 import { Body } from '@/components/grid/Body';
 import { Header } from '@/components/grid/Header';
@@ -21,7 +20,6 @@ const fromMoveToItem =(move: MoveFromComboQueryResponse): MoveItem => (
   { key: String(move.moveId),
     label: move.name,
     imageUrl: move.imageUrl,
-    codeNo: move.codeNo,
     rank: move.rank
   }
 )
@@ -32,7 +30,6 @@ const fromItemToMove = (item: MoveItem): MoveFromComboQueryResponse => (
     rank: item.rank,
     name: item.label,
     imageUrl: item.imageUrl,
-    codeNo: item.codeNo,
   }
 )
 
@@ -132,7 +129,6 @@ export default function EditCombo() {
                   <DraggableMoveCard
                     item={item}
                     drag={drag}
-                    movesImagesDataset={movesImagesDataset}
                     handleDelete={() => handleDelete(item)}
                   />
                 )}

@@ -10,25 +10,22 @@ export type MoveItem = {
     key: string; // Combo ID
     label: string; // Combo name
     imageUrl?: string;
-    codeNo?: string;
     rank: number;
 };
 
 interface DraggableMoveCardProps {
   item: MoveItem,
   drag: (event: GestureResponderEvent) => void,
-  movesImagesDataset: any,
   handleDelete: () => void,
 }
 
 export function DraggableMoveCard({
   item,
   drag,
-  movesImagesDataset,
   handleDelete
 }: DraggableMoveCardProps) {
 
-    const hasImage = !!item.codeNo;
+    const hasImage = !!item.imageUrl;
 
     return (
       <>
@@ -50,15 +47,14 @@ export function DraggableMoveCard({
                     style={styles.dragIcon}
                     />
                 </View>
-                  <View style={styles.cardImageContainer}>
+                { hasImage &&
+                  (<View style={styles.cardImageContainer}>
                       <Image
-                          source={hasImage ?
-                            movesImagesDataset[item.codeNo!] :
-                            require('@/assets/images/moves/undefined.png')
-                          }
+                          source={item.imageUrl}
                           style={styles.cardImage}
                       />
-                  </View>
+                  </View>)
+                }
                   <View style={styles.cardContent}>
                       <ThemedText type="strong">{item.label}</ThemedText>
                   </View>
