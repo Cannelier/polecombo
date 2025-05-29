@@ -1,3 +1,4 @@
+import { supabase } from '@/src/services/supabaseClient';
 import { PrismaClient } from '@prisma/client';
 import { Hono } from "hono";
 import { z } from 'zod';
@@ -32,19 +33,45 @@ combos.get("/", async (c) => {
         include: {
             movesInCombo: { include: {
                 move: { select: {
+                    id: true,
                     imageUrl: true,
                     codeNo: true,
                 }}
             }}
         }
     })
-    return c.json(data);
+    // Get signed image URL
+    const combosWithSignedUrl = await Promise.all(
+        data.map(async (combo) => {
+            return {
+                ...combo,
+                movesInCombo: await Promise.all(
+                    combo.movesInCombo.map(
+                        async (moveInCombo) => {
+                            const imagePath = moveInCombo.move.imageUrl ?? 'images/moves/undefined.png';
+                            const { data, error } = await supabase
+                                .storage
+                                .from('staging')
+                                .createSignedUrl(imagePath, 60) // Replace by moveInCombo.move.imageUrl
+                            
+                            return {
+                                ...moveInCombo,
+                                move: {
+                                    codeNo: moveInCombo.move.codeNo,
+                                    imageUrl: data?.signedUrl
+                            }
+                        }}
+                    )
+                )
+            }
+        })
+        )
+    return c.json(combosWithSignedUrl)
 })
 
 combos.get("/:comboId", async (c) => {
     const comboId = Number(c.req.param('comboId'))
-
-    function toComboWithMoves(combo):  ComboQueryResponse  {
+    function toComboWithMoves(combo): ComboQueryResponse  {
         return { 
             comboId: combo.id,
             name: combo.name,

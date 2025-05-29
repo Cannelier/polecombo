@@ -21,8 +21,9 @@ export type Combo = {
     name: string,
     movesInCombo: {
         move: {
+            id: number,
             imageUrl: string,
             codeNo: string,
-        }
+        },
     }[]
 }

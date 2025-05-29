@@ -1,5 +1,4 @@
 
-import { movesImagesDataset } from '@/assets/datasets/movesImageDataset';
 import { ThemedText } from '@/components/typography/ThemedText';
 import { Combo } from '@/src/hooks/useCombosQuery';
 import { router } from 'expo-router';
@@ -11,7 +10,8 @@ export function ComboCard({combo}: {combo: Combo}) {
       pathname: `/combo/${combo.id}`
     });
   }
-  const codeNos = combo.movesInCombo.map((mic) => mic.move.codeNo).slice(0,4);
+
+  const moves = combo.movesInCombo.map((mic) => mic.move).slice(0,4);
 
     return (
         <TouchableOpacity onPress={handlePress}>
@@ -20,12 +20,12 @@ export function ComboCard({combo}: {combo: Combo}) {
                     <ThemedText type="strong">{combo.name.toUpperCase()}</ThemedText>
                 </View>
                 <View style={styles.cardImageContainer}>
-                  {codeNos.map((codeNo) => {
+                  {moves.map((move) => {
                     return (
                       <Image
-                      source={movesImagesDataset[codeNo]}
+                      source={{ uri: move.imageUrl }}
                       style={styles.cardImage}
-                      key={codeNo}/>
+                      key={move.id}/>
                   )
                   })}
                 </View>

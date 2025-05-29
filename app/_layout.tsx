@@ -53,7 +53,7 @@ export default function RootLayout() {
   
   const clerkPublishableKey = Constants?.expoConfig?.extra?.clerkPublishableKey;
   const queryClient = getQueryClient();
-
+  
   return (
     <>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>

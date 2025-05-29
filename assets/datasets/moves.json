@@ -2,7 +2,7 @@
     {
       "codeNo": "F1",
       "name": "Inside Leg Hang 1",
-      "imageUrl": "@/assets/images/moves/F1.png",
+      "imageUrl": "images/moves/F1.png",
       "techValue": 0.1,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -16,7 +16,7 @@
     {
       "codeNo": "F2",
       "name": "Side Pole Straddle Base 1",
-      "imageUrl": "@/assets/images/moves/F2.png",
+      "imageUrl": "images/moves/F2.png",
       "techValue": 0.1,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -30,7 +30,7 @@
     {
       "codeNo": "F3",
       "name": "Ballerina Sit",
-      "imageUrl": "@/assets/images/moves/F3.png",
+      "imageUrl": "images/moves/F3.png",
       "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -44,7 +44,7 @@
     {
       "codeNo": "F4",
       "name": "Front Split 1",
-      "imageUrl": "@/assets/images/moves/F4.png",
+      "imageUrl": "images/moves/F4.png",
       "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -58,7 +58,7 @@
     {
       "codeNo": "F5",
       "name": "Inside Leg Hang 2",
-      "imageUrl": "@/assets/images/moves/F5.png",
+      "imageUrl": "images/moves/F5.png",
       "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -72,7 +72,7 @@
     {
       "codeNo": "F6",
       "name": "Side Pole Straddle Base 2",
-      "imageUrl": "@/assets/images/moves/F6.png",
+      "imageUrl": "images/moves/F6.png",
       "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -86,7 +86,7 @@
     {
       "codeNo": "F7",
       "name": "Twisted Allegra",
-      "imageUrl": "@/assets/images/moves/F7.png",
+      "imageUrl": "images/moves/F7.png",
       "techValue": 0.2,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -100,7 +100,7 @@
     {
       "codeNo": "F8",
       "name": "Allegra Split 1",
-      "imageUrl": "@/assets/images/moves/F8.png",
+      "imageUrl": "images/moves/F8.png",
       "techValue": 0.3,
       "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -114,7 +114,7 @@
     {
         "codeNo": "F9",
         "name": "Front Split 2",
-        "imageUrl": "@/assets/images/moves/F9.png",
+        "imageUrl": "images/moves/F9.png",
         "techValue": 0.3,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -128,7 +128,7 @@
     {
         "codeNo": "F10",
         "name": "Hip Hold Split 1",
-        "imageUrl": "@/assets/images/moves/F10.png",
+        "imageUrl": "images/moves/F10.png",
         "techValue": 0.3,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -142,7 +142,7 @@
     {
         "codeNo": "F11",
         "name": "Inside Leg Hang 3",
-        "imageUrl": "@/assets/images/moves/F11.png",
+        "imageUrl": "images/moves/F11.png",
         "techValue": 0.3,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -156,7 +156,7 @@
     {
         "codeNo": "F12",
         "name": "Pole Straddle 1",
-        "imageUrl": "@/assets/images/moves/F12.png",
+        "imageUrl": "images/moves/F12.png",
         "techValue": 0.3,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -170,7 +170,7 @@
     {
         "codeNo": "F13",
         "name": "Allegra Half Split 1",
-        "imageUrl": "@/assets/images/moves/F13.png",
+        "imageUrl": "images/moves/F13.png",
         "techValue": 0.4,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -184,7 +184,7 @@
     {
         "codeNo": "F14",
         "name": "Allegra Split 2",
-        "imageUrl": "@/assets/images/moves/F14.png",
+        "imageUrl": "images/moves/F14.png",
         "techValue": 0.4,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -198,7 +198,7 @@
     {
         "codeNo": "F15",
         "name": "Bridge",
-        "imageUrl": "@/assets/images/moves/F15.png",
+        "imageUrl": "images/moves/F15.png",
         "techValue": 0.4,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
@@ -211,7 +211,7 @@
     {
         "codeNo": "F16",
         "name": "Capezio 1",
-        "imageUrl": "@/assets/images/moves/F16.png",
+        "imageUrl": "images/moves/F16.png",
         "techValue": 0.4,
         "criteria": {
             "Hold the position": "a minimum of 2 seconds",
@@ -225,7 +225,7 @@
     {
         "codeNo": "F17",
         "name": "Cross Bow Elbow Hold",
-        "imageUrl": "@/assets/images/moves/F17.png",
+        "imageUrl": "images/moves/F17.png",
         "techValue": 0.4,
         "criteria": {
         "Hold the position": "a minimum of 2 seconds",
