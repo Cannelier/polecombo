@@ -62,7 +62,10 @@ export default function RootLayout() {
           tokenCache={tokenCache}
         >
           <QueryClientProvider client={queryClient}>
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView
+              style={{ flex: 1 }} 
+              edges={['left', 'right']} // skip top and bottom safe areas
+            >
               <GestureHandlerRootView style={{ flex: 1 }}>
                 <Stack>
                   <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

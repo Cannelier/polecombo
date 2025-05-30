@@ -11,7 +11,7 @@ export function ComboCard({combo}: {combo: Combo}) {
     });
   }
 
-  const moves = combo.movesInCombo.map((mic) => mic.move).slice(0,4);
+  const moves = combo.movesInCombo.map((mic) => mic.move).slice(0,3);
 
     return (
         <TouchableOpacity onPress={handlePress}>
@@ -37,7 +37,6 @@ export function ComboCard({combo}: {combo: Combo}) {
 const styles = StyleSheet.create({
   card: {
     height: 125,
-    width: 325,
     justifyContent: "center",
     flexDirection: "column",
     gap: 8,

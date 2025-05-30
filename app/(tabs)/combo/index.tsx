@@ -9,7 +9,7 @@ import { useCombosQuery } from '@/src/hooks/useCombosQuery';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
 import React, { useMemo, useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 
 
 
@@ -37,7 +37,7 @@ export default function HomeScreen() {
       <SignedIn>
           <Body>
             <Header>Mes combos</Header>
-            <ThemedView style={styles.columnContainer}>
+            <ThemedView>
               <SearchBar onSearch={handleSearch} />
               {filteredCombos?.map((combo) => {
                 return (
@@ -64,9 +64,3 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  columnContainer: {
-    flexDirection: 'column',
-    backgroundColor: "transparent"
-  }
-});
