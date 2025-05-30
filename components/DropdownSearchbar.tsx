@@ -1,4 +1,3 @@
-import { movesImagesDataset } from "@/assets/datasets/movesImageDataset"
 import { areFirstLettersFound } from "@/helpers/search"
 import { Image } from "expo-image"
 import { useMemo, useState } from "react"
@@ -16,15 +15,18 @@ export interface DropdownItem {
 export function DropdownSearchbar({
     options,
     onSelect,
+    searchQuery,
+    setSearchQuery,
     handleAddOption,
 }: {
     options: DropdownItem[],
     onSelect: (value: any) => void,
+    searchQuery: string,
+    setSearchQuery: (value: string) => void,
     handleAddOption?: () => void
 }) {
     const [displayDropDown, setDisplayDropDown] = useState<boolean>(false)
 
-    const [searchQuery, setSearchQuery] = useState<string>('')
 
     const filteredOptions = useMemo(() => {
         const addOption: DropdownItem = {
@@ -66,7 +68,7 @@ export function DropdownSearchbar({
                     >
                         {item.imageSource &&
                         <Image
-                            source={movesImagesDataset[item.imageSource]}
+                            source={{uri: item.imageSource }}
                             style={styles.optionImage}
                         />}
                         <ThemedText>{item.label}</ThemedText>

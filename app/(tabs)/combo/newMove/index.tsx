@@ -4,7 +4,7 @@ import { Spacer } from "@/components/Spacer";
 import { ThemedText } from "@/components/typography/ThemedText";
 import { ComboQueryResponse, MoveFromComboQueryResponse } from "@/src/api/combos";
 import { MoveData } from "@/src/api/moves";
-import { useMovesQuery } from "@/src/hooks/useMovesQuery";
+import { useFilteredMovesQuery } from "@/src/hooks/useFilteredMovesQuery";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { ActivityIndicator, Button, Image, StyleSheet, View } from "react-native";
@@ -13,16 +13,17 @@ export default function NewMoveScreen() {
     const { comboId, comboData } = useLocalSearchParams<{comboId: string, comboData: string}>()
     const [currentMove, setCurrentMove] = useState<MoveData | undefined>(undefined);
     const [currentCombo, setCurrentCombo] = useState<ComboQueryResponse>(JSON.parse(comboData) as ComboQueryResponse)
-    const { data: allMoves, isLoading: areAllMovesLoading } = useMovesQuery();
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const { data: filteredMoves, isLoading: areFilteredMovesLoading } = useFilteredMovesQuery(searchQuery);
 
-    if (areAllMovesLoading || !allMoves || !currentCombo) {
+    if (areFilteredMovesLoading || !filteredMoves || !currentCombo) {
       return <ActivityIndicator />
     }
 
-    const movesForDropdownList: DropdownItem[] = allMoves?.map((move) => ({
+    const movesForDropdownList: DropdownItem[] = filteredMoves?.map((move) => ({
         label: move.name,
-        value: move,
-        imageSource: move.codeNo,
+        value: move as MoveData,
+        imageSource: move.imageUrl,
     }))
 
     const handleAddOption = () => {
@@ -44,6 +45,8 @@ export default function NewMoveScreen() {
                         options={movesForDropdownList}
                         onSelect={(value: any) => setCurrentMove(value)}
                         handleAddOption={handleAddOption}
+                        searchQuery={searchQuery}
+                        setSearchQuery={setSearchQuery}
                     />
                 </View>
                 

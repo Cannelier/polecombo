@@ -21,6 +21,24 @@ moves.get('/', async (c) => {
 })
 
 
+moves.get('/filter', async (c) => {
+    const searchQuery = c.req.query('searchQuery');
+    if (!searchQuery) {
+        return c.json([])
+    }
+
+    const filteredMoves = await prisma.move.findMany({
+        where: {
+            name: {
+                contains: searchQuery, // use 'contains' for partial matches
+                mode: 'insensitive',   // optional: case-insensitive searc
+            }
+        }
+    });
+    const filteredMovesWithSignedUrl = await Promise.all(filteredMoves.map(async(move) => await getMoveWithSignedUrl(move)))
+    return c.json(filteredMovesWithSignedUrl)
+})
+
 moves.post('/', async (c) => {
     // Add custom user and image
     const { moveName } = await c.req.json();
