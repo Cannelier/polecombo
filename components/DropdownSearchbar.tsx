@@ -77,7 +77,8 @@ export function DropdownSearchbar({
                 // Add option
             return (
                 <TouchableOpacity
-                    onPress={() => handleAddOption!()}
+                    onPress={() => {
+                        handleAddOption!()}}
                     style={[styles.searchBarDropDownOption,
                         styles.plusButtonContainer]}
                     >
@@ -90,8 +91,8 @@ export function DropdownSearchbar({
     return (
     <View style={styles.searchBarContainer}>
         <TextInput
-            onChangeText={(input: string) => { handleChangeText(input) }}
             value={searchQuery}
+            onChangeText={handleChangeText}
             style={[styles.searchBarTextInput,
                 filteredOptions.length > 0 && displayDropDown ? styles.searchBarTextInputExtended : styles.searchBarTextInputCollapsed ]}
             placeholder="Search"

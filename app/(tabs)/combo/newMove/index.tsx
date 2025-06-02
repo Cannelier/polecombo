@@ -2,19 +2,35 @@ import { DropdownItem, DropdownSearchbar } from "@/components/DropdownSearchbar"
 import { Body } from "@/components/grid/Body";
 import { Spacer } from "@/components/Spacer";
 import { ThemedText } from "@/components/typography/ThemedText";
+import { useDebouncedValue } from "@/hooks/useDebounceValue";
 import { ComboQueryResponse, MoveFromComboQueryResponse } from "@/src/api/combos";
 import { MoveData } from "@/src/api/moves";
 import { useFilteredMovesQuery } from "@/src/hooks/useFilteredMovesQuery";
 import { router, useLocalSearchParams } from "expo-router";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { ActivityIndicator, Button, Image, StyleSheet, View } from "react-native";
 
 export default function NewMoveScreen() {
     const { comboId, comboData } = useLocalSearchParams<{comboId: string, comboData: string}>()
     const [currentMove, setCurrentMove] = useState<MoveData | undefined>(undefined);
     const [currentCombo, setCurrentCombo] = useState<ComboQueryResponse>(JSON.parse(comboData) as ComboQueryResponse)
-    const [searchQuery, setSearchQuery] = useState<string>('');
-    const { data: filteredMoves, isLoading: areFilteredMovesLoading } = useFilteredMovesQuery(searchQuery);
+    const [searchQuery, setSearchQuery] = useState('');
+    const debouncedSearchQuery = useDebouncedValue(searchQuery, 300);
+    const { data: filteredMoves, isLoading: areFilteredMovesLoading } = useFilteredMovesQuery(debouncedSearchQuery);
+
+    const handleSelect = useCallback((value: MoveData) => {
+    setCurrentMove(value);
+    }, []);
+
+    const handleAddOption = useCallback(() => {
+        router.navigate({
+            pathname: "/combo/newMove/customMove",
+            params: {
+            comboId: Number(comboId),
+            comboData: JSON.stringify(currentCombo),
+            },
+        });
+    }, [comboId, currentCombo]);
 
     if (areFilteredMovesLoading || !filteredMoves || !currentCombo) {
       return <ActivityIndicator />
@@ -26,16 +42,6 @@ export default function NewMoveScreen() {
         imageSource: move.imageUrl,
     }))
 
-    const handleAddOption = () => {
-        router.navigate({
-            pathname: "/combo/newMove/customMove",
-            params: {
-                comboId: Number(comboId),
-                comboData: JSON.stringify(currentCombo)
-            }
-        })
-    }
-
     return (
         <>
         <Body>
@@ -43,7 +49,7 @@ export default function NewMoveScreen() {
                 <View>
                     <DropdownSearchbar
                         options={movesForDropdownList}
-                        onSelect={(value: any) => setCurrentMove(value)}
+                        onSelect={handleSelect}
                         handleAddOption={handleAddOption}
                         searchQuery={searchQuery}
                         setSearchQuery={setSearchQuery}
