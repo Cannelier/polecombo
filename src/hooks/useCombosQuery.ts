@@ -1,9 +1,10 @@
+import { ComboQueryResponse } from "@/src/api/combos";
 import { useQuery } from "@tanstack/react-query";
 import { BASE_URL } from "../config/constants";
 
 
 export const useCombosQuery = () => {
-    return useQuery<Combo[]>({
+    return useQuery<ComboQueryResponse[]>({
         queryKey: ["useCombosQuery"],
         queryFn: async () => {
             const response = await fetch(`${BASE_URL}/api/combos`);
@@ -11,7 +12,7 @@ export const useCombosQuery = () => {
                 throw new Error('useCombosQuery: Failed to fetch combos')
             }
             return response.json()
-        }
+        },
     })
 }
 

@@ -1,18 +1,18 @@
 
 import { ThemedText } from '@/components/typography/ThemedText';
-import { Combo } from '@/src/hooks/useCombosQuery';
+import { ComboQueryResponse } from '@/src/api/combos';
 import { router } from 'expo-router';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-export function ComboCard({combo}: {combo: Combo}) {
+export function ComboCard({combo}: {combo: ComboQueryResponse}) {
   const handlePress = () => {
     router.push({
-      pathname: `/combo/${combo.id}`
+      pathname: `/combo/${combo.comboId}`,
+      params: { initialCombo: JSON.stringify(combo)}//TODO: Add combo with moves
     });
   }
 
-  const moves = combo.movesInCombo.map((mic) => mic.move).slice(0,3);
-
+  const moves = combo.movesInCombo.slice(0,3);
     return (
         <TouchableOpacity onPress={handlePress}>
             <View style={styles.card}>
@@ -25,7 +25,7 @@ export function ComboCard({combo}: {combo: Combo}) {
                       <Image
                       source={{ uri: move.imageUrl }}
                       style={styles.cardImage}
-                      key={move.id}/>
+                      key={move.moveId}/>
                   )
                   })}
                 </View>

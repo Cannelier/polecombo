@@ -1,3 +1,4 @@
+import { ComboForCombosScreen } from '@/shared/types/combo';
 import { getComboWithSignedUrls, toComboWithMoves } from '@/src/domain/combo/helpers';
 import { PrismaClient } from '@prisma/client';
 import { Hono } from "hono";
@@ -28,47 +29,54 @@ export interface ComboQueryResponse {
 }
 
 combos.get("/", async (c) => {
-    const data = await prisma.combo.findMany({
+    // ToDO: type better data, but the output should still  be ComboQueryResponse[]
+    const data: ComboForCombosScreen[] = await prisma.combo.findMany({
         include: {
             movesInCombo: { include: {
                 move: { select: {
                     id: true,
                     imageUrl: true,
-                }}
-            }}
+                    name: true,
+                }},
+                },
+                orderBy: { rank: "asc" }}
         }
     })
     // Get signed image URL
-    const combosWithSignedUrl = await Promise.all(
+    const combosWithSignedUrl: ComboForCombosScreen[] = await Promise.all(
         data.map(async (combo) => getComboWithSignedUrls(combo))
     )
-    return c.json(combosWithSignedUrl)
+    // We use a specific dataclass to pass to frontend
+    const combosWithMovesAndSignedUrl = await Promise.all(
+        combosWithSignedUrl.map((comboWithSignedUrl) => 
+            toComboWithMoves(comboWithSignedUrl))
+    )
+    return c.json(combosWithMovesAndSignedUrl)
 })
 
-combos.get("/:comboId", async (c) => {
-    const comboId = Number(c.req.param('comboId'))
-    const data = await prisma.combo.findUnique({
-        where: {
-            id: comboId
-        },
-        include: {
-            movesInCombo: { include: {
-                move: { select: {
-                    name: true,
-                    imageUrl: true,
-                    codeNo: true,
-                }},
-            },
-            orderBy: { rank: "asc" }}
-        }
-    })
+// combos.get("/:comboId", async (c) => {
+//     const comboId = Number(c.req.param('comboId'))
+//     const data = await prisma.combo.findUnique({
+//         where: {
+//             id: comboId
+//         },
+//         include: {
+//             movesInCombo: { include: {
+//                 move: { select: {
+//                     name: true,
+//                     imageUrl: true,
+//                 }},
+//             },
+//             orderBy: { rank: "asc" }}
+//         }
+//     })
 
-    if (!data) {
-        throw new Error(`Combo with id ${comboId} not found`);
-    }
-    const comboWithMoves = await toComboWithMoves(data);
-    return c.json(comboWithMoves);
-})
+//     if (!data) {
+//         throw new Error(`Combo with id ${comboId} not found`);
+//     }
+//     const comboWithMoves = await toComboWithMoves(data);
+//     return c.json(comboWithMoves);
+// })
 
 combos.put("/:comboId", async (c) => {
     const comboId = Number(c.req.param("comboId"));

@@ -5,11 +5,12 @@ import { SearchBar } from '@/components/SearchBar';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
 import { areFirstLettersFound } from '@/helpers/search';
+import { ComboQueryResponse } from '@/src/api/combos';
 import { useCombosQuery } from '@/src/hooks/useCombosQuery';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link } from 'expo-router';
 import React, { useMemo, useState } from 'react';
-import { Text } from 'react-native';
+import { ActivityIndicator, Text } from 'react-native';
 
 
 
@@ -20,7 +21,7 @@ export default function HomeScreen() {
   const handleSearch = (searchQuery: string) => {
     setSearchQuery(searchQuery)
   }
-  const filteredCombos = useMemo(() => {
+  const filteredCombos: ComboQueryResponse[] = useMemo(() => {
     if (!combos) return [];
     if (!searchQuery) return combos;
     return combos?.filter((combo) =>
@@ -29,7 +30,7 @@ export default function HomeScreen() {
   }, [combos, searchQuery])
 
   if (!combos || areCombosLoading) {
-    return
+    return <ActivityIndicator/>
   }
 
   return (
@@ -41,10 +42,10 @@ export default function HomeScreen() {
               <SearchBar onSearch={handleSearch} />
               {filteredCombos?.map((combo) => {
                 return (
-                  <>
-                    <ComboCard combo={combo} key={combo.name}/>
-                    <Spacer/>
-                  </>
+                    <React.Fragment key={combo.comboId}>
+                      <ComboCard combo={combo}/>
+                      <Spacer/>
+                    </React.Fragment>
                 )
               })}
             </ThemedView>

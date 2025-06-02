@@ -6,18 +6,17 @@ import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/typography/ThemedText';
 import { ComboQueryResponse, MoveFromComboQueryResponse } from '@/src/api/combos';
-import { useComboQuery } from '@/src/hooks/useComboQuery';
 import { useComboUpdateMutation } from '@/src/hooks/useComboUpdateMutation';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link, router, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ActivityIndicator, Button, StyleSheet, Text } from 'react-native';
 import DraggableFlatList from "react-native-draggable-flatlist";
 import Toast from 'react-native-toast-message';
 
 
-const fromMoveToItem =(move: MoveFromComboQueryResponse): MoveItem => (
-  { key: String(move.moveId),
+const fromMoveToItem = (move: MoveFromComboQueryResponse): MoveItem => (
+  { key: `${String(move.moveId)}`,
     label: move.name,
     imageUrl: move.imageUrl,
     rank: move.rank
@@ -35,13 +34,15 @@ const fromItemToMove = (item: MoveItem): MoveFromComboQueryResponse => (
 
 
 export default function EditCombo() {
-  const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData?: string }>();
-  const { data: combo, isLoading: isComboLoading } = useComboQuery(Number(comboId));
+  const { comboId, comboData, initialCombo } = useLocalSearchParams<{ comboId: string; comboData?: string; initialCombo?: string }>();
+  const initialComboData: ComboQueryResponse = useMemo(() => {
+    return initialCombo ? JSON.parse(initialCombo) : undefined;
+  }, [initialCombo]);
 
   const handleSuccess = () => {
     Toast.show({
       type: 'success',
-      text1: `✅ ${combo?.name} a été enregistré`,
+      text1: `✅ ${initialComboData?.name} a été enregistré`,
     });
   router.replace({
     pathname: '/combo', // back to main list
@@ -64,13 +65,13 @@ export default function EditCombo() {
   }, [comboData]);
 
   useEffect(() => {
-    if (!comboData && combo?.movesInCombo) {
-      setUpdatedCombo(combo);
-      setMoves(combo.movesInCombo.map(fromMoveToItem));
+    if (!comboData && initialComboData?.movesInCombo) {
+      setUpdatedCombo(initialComboData);
+      setMoves(initialComboData.movesInCombo.map(fromMoveToItem));
     }
-  }, [comboData, combo]);
+  }, [comboData, initialComboData]);
 
-  const isDataReady = !isComboLoading && updatedCombo !== undefined && combo !== undefined;
+  const isDataReady = updatedCombo !== undefined && initialComboData !== undefined;
 
   const handleDelete = (item: MoveItem) => {
     if (!isDataReady) {
@@ -117,11 +118,11 @@ export default function EditCombo() {
     <Body>
       <SignedIn>
         <ThemedView style={styles.titleContainer}>
-          <Header>{combo.name}</Header>
+          <Header>{initialComboData.name}</Header>
           { moves.length ? (
             <>
               <ThemedView>
-                <Button title="Valider" onPress={handleSave} disabled={!isDataReady || updatedCombo === combo} />
+                <Button title="Valider" onPress={handleSave} disabled={!isDataReady || updatedCombo === initialComboData} />
               </ThemedView>
               <DraggableFlatList
                 data={moves}
@@ -132,7 +133,7 @@ export default function EditCombo() {
                     handleDelete={() => handleDelete(item)}
                   />
                 )}
-                keyExtractor={(item) => `draggableItem-${item.rank}`}
+                keyExtractor={(item) => `draggableItem-${item.key}`}
                 onDragEnd={({ data }) => {
                   const updatedMoves = data.map((item, index) => ({ ...item, rank: index }));
                   setMoves(updatedMoves);
