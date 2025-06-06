@@ -63,8 +63,8 @@ moves.post('/custom', async (c) => {
             imageUrl: imageUrl ?? null,
         }
     })
-
-  return c.json(customMove);
+    const customMoveWithPresignedUrl = await getMoveWithSignedUrl(customMove)
+    return c.json(customMoveWithPresignedUrl);
 })
 
 async function uploadCustomMoveImage(image: File, moveName: string) {

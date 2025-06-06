@@ -13,7 +13,7 @@ export default function CustomMoveScreen() {
     const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData: string }>();
     const [image, setImage] = useState<ImagePickerAsset | null>(null);
 
-    const handleSuccess = (data: { id: string, name: string, imageUrl: string }) => {
+    const handleSuccess = (data: { id: string, name: string, imageUrl?: string | null }) => {
         const { id, name, imageUrl } = data;
         const parsedComboData = JSON.parse(comboData);
         const newCombo = {

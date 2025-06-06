@@ -1,3 +1,4 @@
+import { UNDEFINED_MOVE_IMAGE_URL } from "@/src/config/constants";
 import { Image } from "expo-image";
 import React from "react";
 import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -24,20 +25,15 @@ export function DraggableMoveCard({
   drag,
   handleDelete
 }: DraggableMoveCardProps) {
-
-    const hasImage = !!item.imageUrl;
-
     return (
-      <>
-
-    <SwipeableItem
-      key={item.key}
-      item={item}
-      snapPointsLeft={[80]} // Enable left swipe with a snap point of 80 pixels
-      renderUnderlayLeft={({ percentOpen }) => (
-        <DeleteMove percentOpen={percentOpen} handleDelete={handleDelete} />
-      )}
-    >
+      <SwipeableItem
+        key={item.key}
+        item={item}
+        snapPointsLeft={[80]} // Enable left swipe with a snap point of 80 pixels
+        renderUnderlayLeft={({ percentOpen }) => (
+          <DeleteMove percentOpen={percentOpen} handleDelete={handleDelete} />
+        )}
+      >
         <TouchableOpacity onLongPress={drag}>
           <View style={styles.cardContainer}>
               <View style={styles.cardRow}>
@@ -47,22 +43,19 @@ export function DraggableMoveCard({
                     style={styles.dragIcon}
                     />
                 </View>
-                { hasImage &&
-                  (<View style={styles.cardImageContainer}>
-                      <Image
-                          source={item.imageUrl}
-                          style={styles.cardImage}
-                      />
-                  </View>)
-                }
-                  <View style={styles.cardContent}>
-                      <ThemedText type="strong">{item.label}</ThemedText>
-                  </View>
+                <View style={styles.cardImageContainer}>
+                    <Image
+                        source={{ uri: item.imageUrl ?? UNDEFINED_MOVE_IMAGE_URL }}
+                        style={styles.cardImage}
+                    />
+                </View>
+                <View style={styles.cardContent}>
+                    <ThemedText type="strong">{item.label}</ThemedText>
+                </View>
               </View>
           </View>
         </TouchableOpacity>
       </SwipeableItem>
-      </>
     )
 }
 

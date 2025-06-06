@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ImagePickerAsset } from "expo-image-picker";
 
-export function useCustomMoveMutation(onSuccess: (data: { id: string }) => void) {
+export function useCustomMoveMutation(onSuccess: (data: { id: string, name: string, imageUrl?: string | null }) => void) {
     return useMutation({
         mutationKey: ["CustomMoveMutation"],
         mutationFn: async ({ moveName, image }: { moveName: string, image: ImagePickerAsset | null }) => {
