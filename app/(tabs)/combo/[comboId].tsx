@@ -38,7 +38,7 @@ export default function EditCombo() {
   const initialComboData: ComboQueryResponse = useMemo(() => {
     return initialCombo ? JSON.parse(initialCombo) : undefined;
   }, [initialCombo]);
-  console.log(initialComboData)
+
   const handleSuccess = () => {
     Toast.show({
       type: 'success',

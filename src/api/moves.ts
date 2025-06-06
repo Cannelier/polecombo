@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { Hono } from "hono";
 import { z } from "zod";
 import { getMoveWithSignedUrl } from "../domain/move/helpers";
-
+import { supabase } from "../services/supabaseClient";
 
 const prisma = new PrismaClient();
 const moves = new Hono();
@@ -39,9 +39,15 @@ moves.get('/filter', async (c) => {
     return c.json(filteredMovesWithSignedUrl)
 })
 
-moves.post('/', async (c) => {
-    // Add custom user and image
-    const { moveName } = await c.req.json();
+moves.post('/custom', async (c) => {
+    // Add a custom move from user
+    const formData = await c.req.formData();
+    const moveName = formData.get('moveName') as string;
+    const image = formData.get('file') as File | null;
+    const imageUrl = image ?
+        await uploadCustomMoveImage(image, moveName).then((self) => self?.path)
+        : null
+
     const moveWithSameName = await prisma.move.findFirst({
         where: {
             name: moveName
@@ -53,12 +59,31 @@ moves.post('/', async (c) => {
     }
     const customMove = await prisma.move.create({
         data: {
-            name: moveName
+            name: moveName,
+            imageUrl: imageUrl ?? null,
         }
     })
 
   return c.json(customMove);
 })
 
+async function uploadCustomMoveImage(image: File, moveName: string) {
+    const CUSTOM_MOVES_FOLDER = "images/customMoves"
+    const timestamp = new Date().toISOString();
+    const safeTimestamp = timestamp.replace(/[:.]/g, '-');
+
+    const fileName = `${CUSTOM_MOVES_FOLDER}/${moveName}-${safeTimestamp}.png`
+    const { data: imageData, error } = await supabase.storage
+            .from('staging')
+            .upload(fileName, image.stream(), {
+                contentType: "image/png",
+                upsert: false,
+            })
+        
+        if (error) {
+            console.error("❌ Could not upload custom move image")
+        }
+        return imageData
+}
 
 export default moves;

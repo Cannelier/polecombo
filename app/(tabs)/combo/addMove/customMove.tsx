@@ -2,16 +2,19 @@ import { Body } from "@/components/grid/Body";
 import UploadImage from "@/components/UploadImage";
 import { MoveFromComboQueryResponse } from "@/src/api/combos";
 import { useCustomMoveMutation } from "@/src/hooks/useCustomMoveMutation";
+import { Image } from "expo-image";
+import { ImagePickerAsset } from "expo-image-picker";
 import { router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Button, StyleSheet, TextInput } from "react-native";
+import { Button, StyleSheet, TextInput, View } from "react-native";
 
 export default function CustomMoveScreen() {
     const [moveName, setMoveName] = useState("");
-    const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData?: string }>();
+    const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData: string }>();
+    const [image, setImage] = useState<ImagePickerAsset | null>(null);
 
-    const handleSuccess = (data: { id: string }) => {
-        const { id } = data;
+    const handleSuccess = (data: { id: string, name: string, imageUrl: string }) => {
+        const { id, name, imageUrl } = data;
         const parsedComboData = JSON.parse(comboData);
         const newCombo = {
             ...parsedComboData,
@@ -20,7 +23,8 @@ export default function CustomMoveScreen() {
                 {   
                     moveId: Number(id),
                     rank: parsedComboData.movesInCombo.length,
-                    name: moveName,
+                    name: name,
+                    imageUrl: imageUrl,
                 } as MoveFromComboQueryResponse
             ]
         };
@@ -46,10 +50,13 @@ export default function CustomMoveScreen() {
             ></TextInput>
             <Button
                 title="Créer"
-                onPress={() => createCustomMove({ moveName })}
+                onPress={() => createCustomMove({ moveName, image })}
                 disabled={!moveName}
             />
-            <UploadImage />
+            <View style={styles.uploadImageContainer}>
+                <UploadImage setImage={setImage} />
+                {image && <Image source={{ uri: image.uri }} style={styles.image} />}
+            </View>
         </Body>
     )
 }
@@ -61,5 +68,13 @@ const styles = StyleSheet.create({
         lineHeight: 32,
         fontFamily: "NunitoSansExtraBold",
         textAlign: "center",
+    },
+    image: {
+        width: 200,
+        height: 200,
+    },
+    uploadImageContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 })
