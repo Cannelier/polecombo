@@ -42,7 +42,7 @@ export default function EditCombo() {
   const handleSuccess = () => {
     Toast.show({
       type: 'success',
-      text1: `✅ ${initialComboData?.name} a été enregistré`,
+      text1: `✅ ${updatedCombo?.name} a été enregistré`,
     });
   router.replace({
     pathname: '/combo', // back to main list
@@ -102,7 +102,7 @@ export default function EditCombo() {
   const handleNewMove = () => {
     if (!isDataReady) return;
     router.push({
-      pathname: '/combo/newMove',
+      pathname: '/combo/addMove',
       params: {
         comboId: comboId,
         comboData: JSON.stringify(updatedCombo),

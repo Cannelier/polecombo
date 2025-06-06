@@ -54,30 +54,6 @@ combos.get("/", async (c) => {
     return c.json(combosWithMovesAndSignedUrl)
 })
 
-// combos.get("/:comboId", async (c) => {
-//     const comboId = Number(c.req.param('comboId'))
-//     const data = await prisma.combo.findUnique({
-//         where: {
-//             id: comboId
-//         },
-//         include: {
-//             movesInCombo: { include: {
-//                 move: { select: {
-//                     name: true,
-//                     imageUrl: true,
-//                 }},
-//             },
-//             orderBy: { rank: "asc" }}
-//         }
-//     })
-
-//     if (!data) {
-//         throw new Error(`Combo with id ${comboId} not found`);
-//     }
-//     const comboWithMoves = await toComboWithMoves(data);
-//     return c.json(comboWithMoves);
-// })
-
 combos.put("/:comboId", async (c) => {
     const comboId = Number(c.req.param("comboId"));
     const updatedCombo = await c.req.json();

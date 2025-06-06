@@ -24,7 +24,7 @@ export default function NewMoveScreen() {
 
     const handleAddOption = useCallback(() => {
         router.navigate({
-            pathname: "/combo/newMove/customMove",
+            pathname: "/combo/addMove/customMove",
             params: {
             comboId: Number(comboId),
             comboData: JSON.stringify(currentCombo),
