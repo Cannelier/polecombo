@@ -54,6 +54,32 @@ combos.get("/", async (c) => {
     return c.json(combosWithMovesAndSignedUrl)
 })
 
+
+combos.get("/:comboId", async (c) => {
+    // ToDO: type better data, but the output should still  be ComboQueryResponse[]
+    const comboId = Number(c.req.param("comboId"))
+    const combo: ComboForCombosScreen = await prisma.combo.findUniqueOrThrow({
+        where: {
+            id: comboId,
+        },
+        include: {
+            movesInCombo: { include: {
+                move: { select: {
+                    id: true,
+                    imageUrl: true,
+                    name: true,
+                }},
+                },
+                orderBy: { rank: "asc" }}
+        }
+    })
+    // Get signed image URL
+    const comboWithSignedUrl: ComboForCombosScreen = await  getComboWithSignedUrls(combo)
+    // We use a specific dataclass to pass to frontend
+    const comboWithMovesAndSignedUrl = await toComboWithMoves(comboWithSignedUrl)
+    return c.json(comboWithMovesAndSignedUrl)
+})
+
 combos.put("/:comboId", async (c) => {
     const comboId = Number(c.req.param("comboId"));
     const updatedCombo = await c.req.json();

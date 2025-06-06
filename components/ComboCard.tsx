@@ -8,7 +8,6 @@ export function ComboCard({combo}: {combo: ComboQueryResponse}) {
   const handlePress = () => {
     router.push({
       pathname: `/combo/${combo.comboId}`,
-      params: { initialCombo: JSON.stringify(combo)}//TODO: Add combo with moves
     });
   }
 

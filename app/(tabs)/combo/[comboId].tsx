@@ -6,10 +6,11 @@ import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/typography/ThemedText';
 import { ComboQueryResponse, MoveFromComboQueryResponse } from '@/src/api/combos';
+import { useComboQuery } from '@/src/hooks/useComboQuery';
 import { useComboUpdateMutation } from '@/src/hooks/useComboUpdateMutation';
 import { SignedIn, SignedOut } from '@clerk/clerk-expo';
 import { Link, router, useLocalSearchParams } from 'expo-router';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Button, StyleSheet, Text } from 'react-native';
 import DraggableFlatList from "react-native-draggable-flatlist";
 import Toast from 'react-native-toast-message';
@@ -34,10 +35,10 @@ const fromItemToMove = (item: MoveItem): MoveFromComboQueryResponse => (
 
 
 export default function EditCombo() {
-  const { comboId, comboData, initialCombo } = useLocalSearchParams<{ comboId: string; comboData?: string; initialCombo?: string }>();
-  const initialComboData: ComboQueryResponse = useMemo(() => {
-    return initialCombo ? JSON.parse(initialCombo) : undefined;
-  }, [initialCombo]);
+  const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData?: string; initialCombo?: string }>();
+  
+  // Get initial combo
+  const { data: initialComboData, isLoading: isInitialComboLoading } = useComboQuery(Number(comboId))
 
   const handleSuccess = () => {
     Toast.show({
@@ -71,7 +72,7 @@ export default function EditCombo() {
     }
   }, [comboData, initialComboData]);
 
-  const isDataReady = updatedCombo !== undefined || initialComboData !== undefined;
+  const isDataReady = !isInitialComboLoading || updatedCombo !== undefined || initialComboData !== undefined;
 
   const handleDelete = (item: MoveItem) => {
     if (!isDataReady) {
