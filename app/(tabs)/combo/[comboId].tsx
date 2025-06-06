@@ -38,7 +38,7 @@ export default function EditCombo() {
   const initialComboData: ComboQueryResponse = useMemo(() => {
     return initialCombo ? JSON.parse(initialCombo) : undefined;
   }, [initialCombo]);
-
+  console.log(initialComboData)
   const handleSuccess = () => {
     Toast.show({
       type: 'success',
@@ -71,7 +71,7 @@ export default function EditCombo() {
     }
   }, [comboData, initialComboData]);
 
-  const isDataReady = updatedCombo !== undefined && initialComboData !== undefined;
+  const isDataReady = updatedCombo !== undefined || initialComboData !== undefined;
 
   const handleDelete = (item: MoveItem) => {
     if (!isDataReady) {
@@ -118,7 +118,7 @@ export default function EditCombo() {
     <Body>
       <SignedIn>
         <ThemedView style={styles.titleContainer}>
-          <Header>{initialComboData.name}</Header>
+          <Header>{initialComboData?.name || updatedCombo?.name}</Header>
           { moves.length ? (
             <>
               <ThemedView>

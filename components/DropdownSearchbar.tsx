@@ -1,6 +1,6 @@
 import { areFirstLettersFound } from "@/helpers/search"
 import { Image } from "expo-image"
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { FlatList, StyleSheet, TextInput, TouchableOpacity, View } from "react-native"
 import { PlusButton } from "./PlusButton"
 import { ThemedText } from "./typography/ThemedText"
@@ -47,14 +47,23 @@ export function DropdownSearchbar({
 
     }, [options, searchQuery, handleAddOption])
 
+    // After filteredOptions updates, show dropdown again if query isn't empty
+    useEffect(() => {
+        if (searchQuery && filteredOptions.length > 0) {
+            setDisplayDropDown(true)
+        }
+    }, [filteredOptions, searchQuery])
+    
     const handleSelect = (item: DropdownItem) => {
         onSelect(item.value)
+        setSearchQuery('')
         setDisplayDropDown(false)
     }
     const handleChangeText = (input: string) => {
         setSearchQuery(input)
         setDisplayDropDown(true)
     }
+
     const renderItem = ({ item }: { item: DropdownItem }) =>  {
         if (!item.isAddOption) {
             return (
@@ -74,7 +83,7 @@ export function DropdownSearchbar({
                         <ThemedText>{item.label}</ThemedText>
                 </TouchableOpacity>
             )} else {
-                // Add option
+                // Add custom option
             return (
                 <TouchableOpacity
                     onPress={() => {
@@ -88,6 +97,7 @@ export function DropdownSearchbar({
             )
             }
         }
+
     return (
     <View style={styles.searchBarContainer}>
         <TextInput
@@ -95,7 +105,7 @@ export function DropdownSearchbar({
             onChangeText={handleChangeText}
             style={[styles.searchBarTextInput,
                 filteredOptions.length > 0 && displayDropDown ? styles.searchBarTextInputExtended : styles.searchBarTextInputCollapsed ]}
-            placeholder="Search"
+            placeholder="Chercher une figure"
             placeholderTextColor="#FFFFFF"
         />
         <Image
@@ -134,6 +144,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 45,
         backgroundColor: "rgb(139, 126, 139)",
         color: "#FFFFFF",
+        fontSize: 14,
+        lineHeight: 17,
+        textAlignVertical: "top", // necessary on Android, even if counterintuitivet
     },
     searchBarTextInputCollapsed: {
         borderRadius: 20,
