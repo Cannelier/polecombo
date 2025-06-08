@@ -1,12 +1,17 @@
 import * as z from "zod"
+import { MoveStyle } from "@prisma/client"
 import { CompleteComboMove, RelatedComboMoveModel } from "./index"
 
 export const MoveModel = z.object({
   id: z.number().int(),
-  name: z.string(),
-  codeNo: z.string().nullish(),
+  names: z.string().array(),
+  namesSearch: z.string().nullish(),
+  ipsfCode: z.string().nullish(),
+  posaCode: z.string().nullish(),
   imageUrl: z.string().nullish(),
-  techValue: z.number().nullish(),
+  ipsfTechValue: z.number().nullish(),
+  posaTechValue: z.number().nullish(),
+  styles: z.nativeEnum(MoveStyle).array(),
 })
 
 export interface CompleteMove extends z.infer<typeof MoveModel> {

@@ -18,7 +18,7 @@ import Toast from 'react-native-toast-message';
 
 const fromMoveToItem = (move: MoveFromComboQueryResponse): MoveItem => (
   { key: `${String(move.moveId)}`,
-    label: move.name,
+    label: move.displayName,
     imageUrl: move.imageUrl,
     rank: move.rank
   }
@@ -28,7 +28,7 @@ const fromMoveToItem = (move: MoveFromComboQueryResponse): MoveItem => (
 const fromItemToMove = (item: MoveItem): MoveFromComboQueryResponse => (
   { moveId: Number(item.key),
     rank: item.rank,
-    name: item.label,
+    displayName: item.label,
     imageUrl: item.imageUrl,
   }
 )

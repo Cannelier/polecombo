@@ -18,7 +18,7 @@ export type CombosPatchAddMoveVariables = z.infer<typeof CombosPatchAddMoveSchem
 export interface MoveFromComboQueryResponse {
     moveId: number,
     rank: number,
-    name: string,
+    displayName: string,
     imageUrl?: string,
 }
 
@@ -36,7 +36,7 @@ combos.get("/", async (c) => {
                 move: { select: {
                     id: true,
                     imageUrl: true,
-                    name: true,
+                    names: true,
                 }},
                 },
                 orderBy: { rank: "asc" }}
@@ -67,7 +67,7 @@ combos.get("/:comboId", async (c) => {
                 move: { select: {
                     id: true,
                     imageUrl: true,
-                    name: true,
+                    names: true,
                 }},
                 },
                 orderBy: { rank: "asc" }}
@@ -108,9 +108,9 @@ combos.put("/:comboId", async (c) => {
                     include: {
                         move: {
                             select: {
-                                name: true,
+                                names: true,
                                 imageUrl: true,
-                                codeNo: true
+                                posaCode: true
                             }
             }}}}})
     })

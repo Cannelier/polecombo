@@ -24,7 +24,7 @@ export type Combo = {
         move: {
             id: number,
             imageUrl: string,
-            codeNo: string,
+            posaCode: string,
         },
     }[]
 }

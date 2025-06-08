@@ -12,7 +12,7 @@ import { ActivityIndicator, Button, Image, StyleSheet, View } from "react-native
 
 export default function NewMoveScreen() {
     const { comboId, comboData } = useLocalSearchParams<{comboId: string, comboData: string}>()
-    const [currentMove, setCurrentMove] = useState<MoveData | undefined>(undefined);
+    const [currentMove, setCurrentMove] = useState<MoveData & { displayName: string} | undefined>(undefined);
     const [currentCombo, setCurrentCombo] = useState<ComboQueryResponse>(JSON.parse(comboData) as ComboQueryResponse)
     const [searchQuery, setSearchQuery] = useState('');
     const debouncedSearchQuery = useDebouncedValue(searchQuery, 300);
@@ -37,11 +37,10 @@ export default function NewMoveScreen() {
     }
 
     const movesForDropdownList: DropdownItem[] = filteredMoves?.map((move) => ({
-        label: move.name,
+        label: move.displayName,
         value: move as MoveData,
         imageSource: move.imageUrl,
     }))
-
     return (
         <>
         <Body>
@@ -71,9 +70,8 @@ export default function NewMoveScreen() {
                                                 {   
                                                     moveId: currentMove.id,
                                                     rank: currentCombo.movesInCombo.length,
-                                                    name: currentMove.name,
+                                                    displayName: currentMove.displayName,
                                                     imageUrl: currentMove.imageUrl,
-                                                    codeNo: currentMove.codeNo,
                                                 } as MoveFromComboQueryResponse
                                             ]
                                         };
@@ -96,7 +94,7 @@ export default function NewMoveScreen() {
                         </View>
                         <Spacer />
                         <View style={styles.moveHeader}>
-                            <ThemedText type="title">{currentMove.name}</ThemedText>
+                            <ThemedText type="title">{currentMove.displayName}</ThemedText>
                         </View>
                     </>
                     ) : null }

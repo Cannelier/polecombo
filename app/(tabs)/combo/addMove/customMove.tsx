@@ -23,7 +23,7 @@ export default function CustomMoveScreen() {
                 {   
                     moveId: Number(id),
                     rank: parsedComboData.movesInCombo.length,
-                    name: name,
+                    displayName: name,
                     imageUrl: imageUrl,
                 } as MoveFromComboQueryResponse
             ]

@@ -1,23 +1,26 @@
-import movesData from '@/assets/datasets/moves.json';
-import { movesImagesDataset } from '@/assets/datasets/movesImageDataset';
+
 import { Body } from '@/components/grid/Body';
 import { Header } from '@/components/grid/Header';
 import { SearchBar } from '@/components/SearchBar';
 import { ThemedText } from '@/components/typography/ThemedText';
 import { areFirstLettersFound } from '@/helpers/search';
 import { useMemo, useState } from 'react';
-import { FlatList, Image, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, StyleSheet, View } from 'react-native';
 
 export interface MoveToDisplay {
-  codeNo: string,
-  name: string,
+  posaCode: string,
+  displayName: string,
   imageUrl: string,
 }
 
 export default function ExploreScreen() {
+  const movesData = undefined
+  if (!movesData)  {
+    return (<ActivityIndicator />)
+  }
   const moves: MoveToDisplay[] = movesData.map((moveData) => ({
-    codeNo: moveData.codeNo,
-    name: moveData.name,
+    posaCode: moveData.posaCode,
+    displayName: moveData.displayName,
     imageUrl: moveData.imageUrl
   }));
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -25,7 +28,7 @@ export default function ExploreScreen() {
     if (!moves) return [];
     if (!searchQuery) return moves;
     return moves.filter((move) =>
-      areFirstLettersFound(move.name, searchQuery))
+      areFirstLettersFound(move.displayName, searchQuery))
   }, [moves, searchQuery])
 
   const handleSearch = (search: string) => {
@@ -36,10 +39,10 @@ export default function ExploreScreen() {
     <>
     <View style={styles.card}>
       <Image
-          source={movesImagesDataset[item.codeNo]}
+          source={movesImagesDataset[item.posaCode]}
           style={styles.image}
       />
-      <ThemedText style={styles.cardTitle}>{item.name}</ThemedText>
+      <ThemedText style={styles.cardTitle}>{item.displayName}</ThemedText>
     </View>
     </>
   );
@@ -52,7 +55,7 @@ export default function ExploreScreen() {
       <FlatList
         data={filteredMoves}
         renderItem={renderItem}
-        keyExtractor={item => item.codeNo}
+        keyExtractor={item => item.posaCode}
         numColumns={3}/>
     </Body>
     </>

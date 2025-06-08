@@ -29,7 +29,7 @@ moves.get('/filter', async (c) => {
 
     const filteredMoves = await prisma.move.findMany({
         where: {
-            name: {
+            namesSearch: {
                 contains: searchQuery, // use 'contains' for partial matches
                 mode: 'insensitive',   // optional: case-insensitive searc
             }
@@ -50,7 +50,9 @@ moves.post('/custom', async (c) => {
 
     const moveWithSameName = await prisma.move.findFirst({
         where: {
-            name: moveName
+            names: {
+                has: moveName
+            }
         }
     })
     if (moveWithSameName) {
@@ -59,7 +61,7 @@ moves.post('/custom', async (c) => {
     }
     const customMove = await prisma.move.create({
         data: {
-            name: moveName,
+            names: [moveName],
             imageUrl: imageUrl ?? null,
         }
     })

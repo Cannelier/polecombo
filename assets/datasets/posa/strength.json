@@ -1,0 +1,938 @@
+[
+  {
+    "posaCode": "B001",
+    "names": [
+      "Inverted Straddle"
+    ],
+    "imageUrl": "images/moves/inverted_straddle.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "B002",
+    "names": [
+      "Outside Knee Hook"
+    ],
+    "imageUrl": "images/moves/outside_knee_hook.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "B003",
+    "names": [
+      "Split Grip Cradle Tuck"
+    ],
+    "imageUrl": "images/moves/split_grip_cradle_tuck.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "B019",
+    "names": [
+      "Cupid (Supported)"
+    ],
+    "imageUrl": "images/moves/cupid_supported.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "B021",
+    "names": [
+      "Genie"
+    ],
+    "imageUrl": "images/moves/genie.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "B160",
+    "names": [
+      "Hoodornament (Angel)"
+    ],
+    "imageUrl": "images/moves/hoodornament_angel.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "B163",
+    "names": [
+      "Spider (AKA Frog)"
+    ],
+    "imageUrl": "images/moves/spider_frog.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B115",
+    "names": [
+      "Pole Plank"
+    ],
+    "imageUrl": "images/moves/pole_plank.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B004",
+    "names": [
+      "Inverted Crucifix"
+    ],
+    "imageUrl": "images/moves/inverted_crucifix.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B116",
+    "names": [
+      "Iguana Hold"
+    ],
+    "imageUrl": "images/moves/iguana_hold.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B005",
+    "names": [
+      "Brass Monkey"
+    ],
+    "imageUrl": "images/moves/brass_monkey.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B006",
+    "names": [
+      "Cupid"
+    ],
+    "imageUrl": "images/moves/cupid.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B007",
+    "names": [
+      "Inside Leg Hang"
+    ],
+    "imageUrl": "images/moves/inside_leg_hang.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B008",
+    "names": [
+      "Knee Hold"
+    ],
+    "imageUrl": "images/moves/knee_hold.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B012",
+    "names": [
+      "Straddle Hold"
+    ],
+    "imageUrl": "images/moves/straddle_hold.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B117",
+    "names": [
+      "Shoulder Mount Hangman"
+    ],
+    "imageUrl": "images/moves/shoulder_mount_hangman.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B045",
+    "names": [
+      "Flag Grip Attitude"
+    ],
+    "imageUrl": "images/moves/flag_grip_attitude.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B120",
+    "names": [
+      "Handspring Hang (Floor Based)"
+    ],
+    "imageUrl": "images/moves/handspring_hang_floor_based.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B121",
+    "names": [
+      "Split Grip Straddle"
+    ],
+    "imageUrl": "images/moves/split_grip_straddle.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "B118",
+    "names": [
+      "Iguana Deadlift"
+    ],
+    "imageUrl": "images/moves/iguana_deadlift.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B009",
+    "names": [
+      "Cross Knee Release"
+    ],
+    "imageUrl": "images/moves/cross_knee_release.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B010",
+    "names": [
+      "Outside Knee Hang"
+    ],
+    "imageUrl": "images/moves/outside_knee_hang.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B015",
+    "names": [
+      "Shoulder Mount Straddle"
+    ],
+    "imageUrl": "images/moves/shoulder_mount_straddle.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B011",
+    "names": [
+      "Underarm Hold Passé"
+    ],
+    "imageUrl": "images/moves/underarm_hold_passe.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B013",
+    "names": [
+      "Superman"
+    ],
+    "imageUrl": "images/moves/superman.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B014",
+    "names": [
+      "Cross Ankle Release"
+    ],
+    "imageUrl": "images/moves/cross_ankle_release.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B033",
+    "names": [
+      "Inverted Thigh Hold"
+    ],
+    "imageUrl": "images/moves/inverted_thigh_hold.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B122",
+    "names": [
+      "No Handed Cradle Tuck"
+    ],
+    "imageUrl": "images/moves/no_handed_cradle_tuck.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B110",
+    "names": [
+      "Double Knee Hook"
+    ],
+    "imageUrl": "images/moves/double_knee_hook.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B034",
+    "names": [
+      "Butterfly"
+    ],
+    "imageUrl": "images/moves/butterfly.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B046",
+    "names": [
+      "Handspring Hang (Aerial)"
+    ],
+    "imageUrl": "images/moves/handspring_hang_aerial.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "B016",
+    "names": [
+      "Shoulder Mount Pencil"
+    ],
+    "imageUrl": "images/moves/shoulder_mount_pencil.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B017",
+    "names": [
+      "Back Support Tuck"
+    ],
+    "imageUrl": "images/moves/back_support_tuck.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B018",
+    "names": [
+      "Iguana Extended Deadlift"
+    ],
+    "imageUrl": "images/moves/iguana_extended_deadlift.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B053",
+    "names": [
+      "Flag Grip Side Passé"
+    ],
+    "imageUrl": "images/moves/flag_grip_side_passe.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B023",
+    "names": [
+      "Side-Superman"
+    ],
+    "imageUrl": "images/moves/side_superman.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B035",
+    "names": [
+      "Butterfly Extended"
+    ],
+    "imageUrl": "images/moves/butterfly_extended.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B036",
+    "names": [
+      "Butterfly (One Handed)"
+    ],
+    "imageUrl": "images/moves/butterfly_one_handed.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B048",
+    "names": [
+      "Twisted Grip Ayesha"
+    ],
+    "imageUrl": "images/moves/twisted_grip_ayesha.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B047",
+    "names": [
+      "Flag Grip Side Straddle"
+    ],
+    "imageUrl": "images/moves/flag_grip_side_straddle.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B176",
+    "names": [
+      "Brass Monkey bridge (Screve)"
+    ],
+    "imageUrl": "images/moves/brass_monkey_bridge_screve.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "B111",
+    "names": [
+      "Underarm Grip Chair"
+    ],
+    "imageUrl": "images/moves/underarm_grip_chair.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B164",
+    "names": [
+      "Methook (front bookmark)"
+    ],
+    "imageUrl": "images/moves/methook_front_bookmark.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B020",
+    "names": [
+      "No Handed Cradle Extended"
+    ],
+    "imageUrl": "images/moves/no_handed_cradle_extended.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B102",
+    "names": [
+      "Shoulder Mount Deadlift"
+    ],
+    "imageUrl": "images/moves/shoulder_mount_deadlift.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B040",
+    "names": [
+      "Reverse Elbow Plank Attitude"
+    ],
+    "imageUrl": "images/moves/reverse_elbow_plank_attitude.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B119",
+    "names": [
+      "Forearm Grip Ayesha"
+    ],
+    "imageUrl": "images/moves/forearm_grip_ayesha.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B055",
+    "names": [
+      "Inverted Forearm Grip Ayesha"
+    ],
+    "imageUrl": "images/moves/inverted_forearm_grip_ayesha.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B056",
+    "names": [
+      "Twisted Grip Handspring (Floor Based)"
+    ],
+    "imageUrl": "images/moves/twisted_grip_handspring_floor_based.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B123",
+    "names": [
+      "Basic Grip Ayesha"
+    ],
+    "imageUrl": "images/moves/basic_grip_ayesha.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B024",
+    "names": [
+      "Superman Passé"
+    ],
+    "imageUrl": "images/moves/superman_passe.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B025",
+    "names": [
+      "Hip Hold Half Split"
+    ],
+    "imageUrl": "images/moves/hip_hold_half_split.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B145",
+    "names": [
+      "Jayden Torsion"
+    ],
+    "imageUrl": "images/moves/jayden_torsion.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B144",
+    "names": [
+      "Sailing Kyra"
+    ],
+    "imageUrl": "images/moves/sailing_kyra.png",
+    "posaTechValue": 0.5
+  },
+  {
+    "posaCode": "B061",
+    "names": [
+      "Janeiro Classic"
+    ],
+    "imageUrl": "images/moves/janeiro_classic.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B068",
+    "names": [
+      "Tabletop (Inside Leg Passé)"
+    ],
+    "imageUrl": "images/moves/tabletop_inside_leg_passe.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B026",
+    "names": [
+      "Superman No Hands"
+    ],
+    "imageUrl": "images/moves/superman_no_hands.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B124",
+    "names": [
+      "Cup Grip Hold"
+    ],
+    "imageUrl": "images/moves/cup_grip_hold.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B038",
+    "names": [
+      "Twisted Grip Handspring (Aerial)"
+    ],
+    "imageUrl": "images/moves/twisted_grip_handspring_aerial.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B128",
+    "names": [
+      "Outvert"
+    ],
+    "imageUrl": "images/moves/outvert.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B050",
+    "names": [
+      "Elbow Grip Hold"
+    ],
+    "imageUrl": "images/moves/elbow_grip_hold.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B101",
+    "names": [
+      "Shoulder Mount Extended Deadlift"
+    ],
+    "imageUrl": "images/moves/shoulder_mount_extended_deadlift.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B125",
+    "names": [
+      "Cup Grip Handspring (Floor Based)"
+    ],
+    "imageUrl": "images/moves/cup_grip_handspring_floor_based.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B051",
+    "names": [
+      "Reverse Elbow Flag Passé"
+    ],
+    "imageUrl": "images/moves/reverse_elbow_flag_passe.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B137",
+    "names": [
+      "Deadlift true grip"
+    ],
+    "imageUrl": "images/moves/deadlift_true_grip.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B052",
+    "names": [
+      "Flag Grip Flag"
+    ],
+    "imageUrl": "images/moves/flag_grip_flag.png",
+    "posaTechValue": 0.6
+  },
+  {
+    "posaCode": "B062",
+    "names": [
+      "Janeiro Plank"
+    ],
+    "imageUrl": "images/moves/janeiro_plank.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B027",
+    "names": [
+      "Shoulder Mount Straddle (Floor Based)"
+    ],
+    "imageUrl": "images/moves/shoulder_mount_straddle_floor_based.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B177",
+    "names": [
+      "Ordonselli Arch"
+    ],
+    "imageUrl": "images/moves/ordonselli_arch.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B037",
+    "names": [
+      "Butterfly (One Handed)"
+    ],
+    "imageUrl": "images/moves/butterfly_one_handed_2.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B069",
+    "names": [
+      "Tabletop (Outside Leg Passé)"
+    ],
+    "imageUrl": "images/moves/tabletop_outside_leg_passe.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B039",
+    "names": [
+      "Cup Grip Handspring (Aerial)"
+    ],
+    "imageUrl": "images/moves/cup_grip_handspring_aerial.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B092",
+    "names": [
+      "Twisted Grip Deadlift"
+    ],
+    "imageUrl": "images/moves/twisted_grip_deadlift.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B129",
+    "names": [
+      "Outvert Deadlift Flag Grip Invert"
+    ],
+    "imageUrl": "images/moves/outvert_deadlift_flag_grip_invert.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B100",
+    "names": [
+      "Forearm Grip Deadlift"
+    ],
+    "imageUrl": "images/moves/forearm_grip_deadlift.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B127",
+    "names": [
+      "Forearm Grip Pencil Lift (Floor Based)"
+    ],
+    "imageUrl": "images/moves/forearm_grip_pencil_lift_floor_based.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B043",
+    "names": [
+      "Reverse Elbow Plank Straddle"
+    ],
+    "imageUrl": "images/moves/reverse_elbow_plank_straddle.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B044",
+    "names": [
+      "Iron X"
+    ],
+    "imageUrl": "images/moves/iron_x.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B130",
+    "names": [
+      "Side Tabletop Straddle (Meo Tabletop)"
+    ],
+    "imageUrl": "images/moves/side_tabletop_straddle_meo_tabletop.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B107",
+    "names": [
+      "One Arm Shoulder Mount Straddle"
+    ],
+    "imageUrl": "images/moves/one_arm_shoulder_mount_straddle.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B150",
+    "names": [
+      "Split Grip- Floor based handstand clock (Minina floor clock)"
+    ],
+    "imageUrl": "images/moves/split_grip_floor_based_handstand_clock_minina_floor_clock.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B042",
+    "names": [
+      "Supported Sailor"
+    ],
+    "imageUrl": "images/moves/supported_sailor.png",
+    "posaTechValue": 0.7
+  },
+  {
+    "posaCode": "B022",
+    "names": [
+      "Titanic"
+    ],
+    "imageUrl": "images/moves/titanic.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B049",
+    "names": [
+      "Cross Grip Tulip"
+    ],
+    "imageUrl": "images/moves/cross_grip_tulip.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B030",
+    "names": [
+      "Marchetti Wenson Straddle"
+    ],
+    "imageUrl": "images/moves/marchetti_wenson_straddle.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B031",
+    "names": [
+      "Handstand Side Plank (Pike)"
+    ],
+    "imageUrl": "images/moves/handstand_side_plank_pike.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B032",
+    "names": [
+      "Starfish"
+    ],
+    "imageUrl": "images/moves/starfish.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B105",
+    "names": [
+      "Iguana Plank Straddle"
+    ],
+    "imageUrl": "images/moves/iguana_plank_straddle.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B131",
+    "names": [
+      "Side Tabletop Pencil (Meo Tabletop 2)"
+    ],
+    "imageUrl": "images/moves/side_tabletop_pencil_meo_tabletop_2.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B070",
+    "names": [
+      "Tabletop"
+    ],
+    "imageUrl": "images/moves/tabletop.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B084",
+    "names": [
+      "Underarm Flag 1 (Straddle)"
+    ],
+    "imageUrl": "images/moves/underarm_flag_1_straddle.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B088",
+    "names": [
+      "Split Grip Reverse Plank 1 (Straddle)"
+    ],
+    "imageUrl": "images/moves/split_grip_reverse_plank_1_straddle.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B091",
+    "names": [
+      "Twisted Grip Extended Deadlift"
+    ],
+    "imageUrl": "images/moves/twisted_grip_extended_deadlift.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B099",
+    "names": [
+      "Forearm Grip Extended Deadlift"
+    ],
+    "imageUrl": "images/moves/forearm_grip_extended_deadlift.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B106",
+    "names": [
+      "Shoulder Mount Plank (Legs Open)"
+    ],
+    "imageUrl": "images/moves/shoulder_mount_plank_legs_open.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B096",
+    "names": [
+      "Neck Grip Deadlift"
+    ],
+    "imageUrl": "images/moves/neck_grip_deadlift.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B151",
+    "names": [
+      "Elbow-Forearm plank (Greshilov/Cogo Plank)"
+    ],
+    "imageUrl": "images/moves/elbow_forearm_plank_greshilov_cogo_plank.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B154",
+    "names": [
+      "Shoulder Clock Helicopter (Snake Helicopter)"
+    ],
+    "imageUrl": "images/moves/shoulder_clock_helicopter_snake_helicopter.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B162",
+    "names": [
+      "Forearm plank straddle (Sanchez plank)"
+    ],
+    "imageUrl": "images/moves/forearm_plank_straddle_sanchez_plank.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B171",
+    "names": [
+      "Sailor no hands (Lipcsei Sailor)"
+    ],
+    "imageUrl": "images/moves/sailor_no_hands_lipcsei_sailor.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B174",
+    "names": [
+      "Elbow/forearm plank (Daza plank)"
+    ],
+    "imageUrl": "images/moves/elbow_forearm_plank_daza_plank.png",
+    "posaTechValue": 0.8
+  },
+  {
+    "posaCode": "B041",
+    "names": [
+      "Tulip"
+    ],
+    "imageUrl": "images/moves/tulip.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B161",
+    "names": [
+      "Forearm plank (Sanchez plank)"
+    ],
+    "imageUrl": "images/moves/forearm_plank_sanchez_plank.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B058",
+    "names": [
+      "Iguana Elbow Hold Straddle"
+    ],
+    "imageUrl": "images/moves/iguana_elbow_hold_straddle.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B059",
+    "names": [
+      "Iron Flag Passé"
+    ],
+    "imageUrl": "images/moves/iron_flag_passe.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B067",
+    "names": [
+      "Cup Grip X"
+    ],
+    "imageUrl": "images/moves/cup_grip_x.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B090",
+    "names": [
+      "Pole Clock"
+    ],
+    "imageUrl": "images/moves/pole_clock.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B066",
+    "names": [
+      "Janeiro Plank (One Handed)"
+    ],
+    "imageUrl": "images/moves/janeiro_plank_one_handed.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B072",
+    "names": [
+      "Saulo Plank (Straddle)"
+    ],
+    "imageUrl": "images/moves/saulo_plank_straddle.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B074",
+    "names": [
+      "Handstand Side Plank (Straddle)"
+    ],
+    "imageUrl": "images/moves/handstand_side_plank_straddle.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B076",
+    "names": [
+      "Toothpick"
+    ],
+    "imageUrl": "images/moves/toothpick.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B077",
+    "names": [
+      "Split Grip Reverse Plank (Pencil)"
+    ],
+    "imageUrl": "images/moves/split_grip_reverse_plank_pencil.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B080",
+    "names": [
+      "Back Grip Plank (Straddle)"
+    ],
+    "imageUrl": "images/moves/back_grip_plank_straddle.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B141",
+    "names": [
+      "Back flag cup straddle (legs open)"
+    ],
+    "imageUrl": "images/moves/back_flag_cup_straddle_legs_open.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B085",
+    "names": [
+      "Underarm Flag (Pencil)"
+    ],
+    "imageUrl": "images/moves/underarm_flag_pencil.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B086",
+    "names": [
+      "Shoulder Mount Plank (Passé)"
+    ],
+    "imageUrl": "images/moves/shoulder_mount_plank_passe.png",
+    "posaTechValue": 0.9
+  },
+  {
+    "posaCode": "B087",
+    "names": [
+      "Split Grip Side Plank (Straddle)"
+    ],
+    "imageUrl": "images/moves/split_grip_side_plank_straddle.png",
+    "posaTechValue": 0.9
+  }
+]

@@ -25,13 +25,26 @@ model User {
   createdAt DateTime @default(now())
 }
 
+enum MoveStyle {
+    STATIC
+    SPIN
+    DYNAMIC
+    FLEXIBILITY
+    STRENGTH
+    STATICSPIN
+}
+
 model Move {
-  id        Int         @id @default(autoincrement())
-  name      String
-  codeNo    String?
-  imageUrl  String?
-  techValue Float?
-  combos    ComboMove[]
+  id              Int         @id @default(autoincrement())
+  names           String[]
+  namesSearch     String?  // concatenated string of names
+  ipsfCode        String?
+  posaCode        String?
+  imageUrl        String?
+  ipsfTechValue   Float?
+  posaTechValue   Float?
+  styles          MoveStyle[]
+  combos          ComboMove[]
 }
 
 model Combo {

@@ -1,0 +1,154 @@
+[
+  {
+    "posaCode": "C001",
+    "names": [
+      "Back Hook Spin"
+    ],
+    "imageUrl": "images/moves/back_hook_spin.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "C002",
+    "names": [
+      "Fireman Spin (Crossed Legs)"
+    ],
+    "imageUrl": "images/moves/fireman_spin_crossed_legs.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "C003",
+    "names": [
+      "Front Hook Spin"
+    ],
+    "imageUrl": "images/moves/front_hook_spin.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "C032",
+    "names": [
+      "Geisha Spin"
+    ],
+    "imageUrl": "images/moves/geisha_spin.png",
+    "posaTechValue": 0.1
+  },
+  {
+    "posaCode": "C005",
+    "names": [
+      "Chair Spin"
+    ],
+    "imageUrl": "images/moves/chair_spin.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "C006",
+    "names": [
+      "Forwards Attitude Spin"
+    ],
+    "imageUrl": "images/moves/forwards_attitude_spin.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "C012",
+    "names": [
+      "Side Spin"
+    ],
+    "imageUrl": "images/moves/side_spin.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "C033",
+    "names": [
+      "Corkscrew Spin"
+    ],
+    "imageUrl": "images/moves/corkscrew_spin.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "C004",
+    "names": [
+      "Attitude Spin"
+    ],
+    "imageUrl": "images/moves/attitude_spin.png",
+    "posaTechValue": 0.2
+  },
+  {
+    "posaCode": "C007",
+    "names": [
+      "Backwards Attitude Spin"
+    ],
+    "imageUrl": "images/moves/backwards_attitude_spin.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "C008",
+    "names": [
+      "Reverse Grab Attitude"
+    ],
+    "imageUrl": "images/moves/reverse_grab_attitude.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "C009",
+    "names": [
+      "Carousel"
+    ],
+    "imageUrl": "images/moves/carousel.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "C010",
+    "names": [
+      "Chair Spin (Extended)"
+    ],
+    "imageUrl": "images/moves/chair_spin_extended.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "C011",
+    "names": [
+      "Cradle Tuck Spin"
+    ],
+    "imageUrl": "images/moves/cradle_tuck_spin.png",
+    "posaTechValue": 0.3
+  },
+  {
+    "posaCode": "C041",
+    "names": [
+      "Spinning Superman"
+    ],
+    "imageUrl": "images/moves/spinning_superman.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "C040",
+    "names": [
+      "Backwards Pencil Spin"
+    ],
+    "imageUrl": "images/moves/backwards_pencil_spin.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "C039",
+    "names": [
+      "Pencil Spin"
+    ],
+    "imageUrl": "images/moves/pencil_spin.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "C016",
+    "names": [
+      "Boomerang Spin"
+    ],
+    "imageUrl": "images/moves/boomerang_spin.png",
+    "posaTechValue": 0.4
+  },
+  {
+    "posaCode": "C013",
+    "names": [
+      "Corkscrew Spin (One Handed)"
+    ],
+    "imageUrl": "images/moves/corkscrew_spin_one_handed.png",
+    "posaTechValue": 0.4
+  }
+]

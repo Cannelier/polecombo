@@ -1,22 +1,62 @@
+import posaStaticMoves from '@/assets/datasets/posa/static.json';
+import posaStrengthMoves from '@/assets/datasets/posa/strength.json';
 import { PrismaClient } from '@prisma/client';
-import moves from '../assets/datasets/moves.json';
 
 const prisma = new PrismaClient()
 
 async function seedMoves() {
-    console.log("Moves loaded:", moves.length);
-    console.log("First move:", moves[0]);
-    for (const move of moves) {
+    // POSA Static moves
+    console.log("🗿 POSA Static Moves loaded:", posaStaticMoves.length);
+    for (const move of posaStaticMoves) {
+        const moveWithSamePosaCode = await prisma.move.findFirst({
+            where: {
+                posaCode: move.posaCode
+            }
+        })
+        if (moveWithSamePosaCode) {
+            console.log(`❌ Move ${move.posaCode} already exists: skipping...`)
+            continue
+        }
+
         await prisma.move.create({
             data: {
-                codeNo: move.codeNo,
-                name: move.name,
+                names: move.names,
+                namesSearch: move.names.join(" "),
+                posaCode: move.posaCode,
                 imageUrl: move.imageUrl,
-                techValue: move.techValue
+                posaTechValue: move.posaTechValue,
+                styles: ['STATIC', 'STATICSPIN']
             }
         })
     }
-    console.log("🚀 Moves created");
+    console.log("🚀 Static Moves created");
+    
+
+    // POSA Strength moves
+    console.log("💪 POSA Strength Moves loaded:", posaStrengthMoves.length);
+    for (const move of posaStrengthMoves) {
+        const moveWithSamePosaCode = await prisma.move.findFirst({
+            where: {
+                posaCode: move.posaCode
+            }
+        })
+        if (moveWithSamePosaCode) {
+            console.log(`❌ Move ${move.posaCode} already exists: skipping...`)
+            continue
+        }
+
+        await prisma.move.create({
+            data: {
+                names: move.names,
+                namesSearch: move.names.join(" "),
+                posaCode: move.posaCode,
+                imageUrl: move.imageUrl,
+                posaTechValue: move.posaTechValue,
+                styles: ['STRENGTH', 'STATIC', 'SPIN']
+            }
+        })
+    }
+    console.log("🚀 Strength Moves created");
 }
 
 

@@ -74,3 +74,7 @@ Thumbs.db
 
 # VSCode settings (optional)
 .vscode/
+
+
+# Images
+assets/images/moves/

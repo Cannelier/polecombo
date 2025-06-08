@@ -14,7 +14,8 @@ export async function getComboWithSignedUrls(combo: ComboQueryResponse): Promise
                                 ...moveInCombo,
                                 move: {
                                     id: moveWithSignedUrl.id,
-                                    name: moveWithSignedUrl.name,
+                                    names: moveWithSignedUrl.names,
+                                    displayName: moveWithSignedUrl.names[0],
                                     imageUrl: moveWithSignedUrl.imageUrl,
                             }
                         }}
@@ -31,7 +32,7 @@ export async function toComboWithMoves(combo: ComboForCombosScreen): Promise<Com
                 return {
                     moveId: mic.moveId,
                     rank: mic.rank,
-                    name: mic.move.name,
+                    displayName: mic.move.names[0],
                     imageUrl: mic.move.imageUrl,
                 }})
             )

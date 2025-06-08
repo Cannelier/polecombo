@@ -7,16 +7,30 @@ const env = process.env.ENV!
 
 export async function getMoveWithSignedUrl(move: MoveForCombosScreen | MoveData): Promise<MoveForCombosScreen> {
     const imagePath = move.imageUrl ?? UNDEFINED_MOVE_IMAGE_URL;
-    const { data, error } = await supabase
+    const { data: moveImageData, error } = await supabase
         .storage
         .from(env)
     .createSignedUrl(imagePath, 60)
 
     if (error) {
-        throw new Error(`Move ${move.id}: Could not load signed url for image`)
+        console.error(`Move ${move.id}: Could not load signed url for image`);
+        const { data: undefinedMoveImageData, error } = await supabase
+            .storage
+            .from(env)
+            .createSignedUrl(UNDEFINED_MOVE_IMAGE_URL, 60)
+            
+        if (error) return { ...move,
+            displayName: move.names[0],
+        }
+
+        return { ...move,
+            displayName: move.names[0],
+            imageUrl: undefinedMoveImageData?.signedUrl
+        }
     }
 
     return { ...move,
-        imageUrl: data.signedUrl
+            displayName: move.names[0],
+        imageUrl: moveImageData.signedUrl
     }
 }
