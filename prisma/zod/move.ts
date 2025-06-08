@@ -1,11 +1,9 @@
 import * as z from "zod"
 import { MoveStyle } from "@prisma/client"
-import { CompleteComboMove, RelatedComboMoveModel } from "./index"
+import { CompleteMoveName, RelatedMoveNameModel, CompleteComboMove, RelatedComboMoveModel } from "./index"
 
 export const MoveModel = z.object({
   id: z.number().int(),
-  names: z.string().array(),
-  namesSearch: z.string().nullish(),
   ipsfCode: z.string().nullish(),
   posaCode: z.string().nullish(),
   imageUrl: z.string().nullish(),
@@ -15,6 +13,7 @@ export const MoveModel = z.object({
 })
 
 export interface CompleteMove extends z.infer<typeof MoveModel> {
+  names: CompleteMoveName[]
   combos: CompleteComboMove[]
 }
 
@@ -24,5 +23,6 @@ export interface CompleteMove extends z.infer<typeof MoveModel> {
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
 export const RelatedMoveModel: z.ZodSchema<CompleteMove> = z.lazy(() => MoveModel.extend({
+  names: RelatedMoveNameModel.array(),
   combos: RelatedComboMoveModel.array(),
 }))

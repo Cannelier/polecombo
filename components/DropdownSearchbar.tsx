@@ -1,4 +1,3 @@
-import { areFirstLettersFound } from "@/helpers/search"
 import { Image } from "expo-image"
 import { useEffect, useMemo, useState } from "react"
 import { FlatList, StyleSheet, TextInput, TouchableOpacity, View } from "react-native"
@@ -27,8 +26,7 @@ export function DropdownSearchbar({
 }) {
     const [displayDropDown, setDisplayDropDown] = useState<boolean>(false)
 
-
-    const filteredOptions = useMemo(() => {
+    const optionsWithPlus = useMemo(() => {
         const addOption: DropdownItem = {
             label: "plus",
             value: "plus",
@@ -40,19 +38,16 @@ export function DropdownSearchbar({
         // If nothing was typed, return all options
         if (!searchQuery) return handleAddOption ? [...options, addOption] : options;
         // Return filtered options
-        const filtered = options?.filter((option) =>
-            areFirstLettersFound(option.label, searchQuery)
-            )
-        return handleAddOption ? [...filtered, addOption] : filtered;
+        return handleAddOption ? [...options, addOption] : options;
 
     }, [options, searchQuery, handleAddOption])
 
     // After filteredOptions updates, show dropdown again if query isn't empty
     useEffect(() => {
-        if (searchQuery && filteredOptions.length > 0) {
+        if (searchQuery && optionsWithPlus.length > 0) {
             setDisplayDropDown(true)
         }
-    }, [filteredOptions, searchQuery])
+    }, [optionsWithPlus, searchQuery])
     
     const handleSelect = (item: DropdownItem) => {
         onSelect(item.value)
@@ -104,7 +99,7 @@ export function DropdownSearchbar({
             value={searchQuery}
             onChangeText={handleChangeText}
             style={[styles.searchBarTextInput,
-                filteredOptions.length > 0 && displayDropDown ? styles.searchBarTextInputExtended : styles.searchBarTextInputCollapsed ]}
+                optionsWithPlus.length > 0 && displayDropDown ? styles.searchBarTextInputExtended : styles.searchBarTextInputCollapsed ]}
             placeholder="Chercher une figure"
             placeholderTextColor="#FFFFFF"
         />
@@ -113,9 +108,9 @@ export function DropdownSearchbar({
             style={styles.searchIcon}
             />
         
-        { filteredOptions.length > 0 && displayDropDown ?
+        { optionsWithPlus.length > 0 && displayDropDown ?
             (<FlatList
-                data={filteredOptions}
+                data={optionsWithPlus}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={renderItem}
                 style={styles.searchBarDropDown}

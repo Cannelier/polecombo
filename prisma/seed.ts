@@ -7,54 +7,77 @@ const prisma = new PrismaClient()
 async function seedMoves() {
     // POSA Static moves
     console.log("🗿 POSA Static Moves loaded:", posaStaticMoves.length);
-    for (const move of posaStaticMoves) {
+    for (const moveData of posaStaticMoves) {
         const moveWithSamePosaCode = await prisma.move.findFirst({
             where: {
-                posaCode: move.posaCode
+                posaCode: moveData.posaCode
             }
         })
+
         if (moveWithSamePosaCode) {
-            console.log(`❌ Move ${move.posaCode} already exists: skipping...`)
+            console.log(`❌ Move ${moveData.posaCode} already exists: skipping...`)
             continue
         }
 
-        await prisma.move.create({
+        const move = await prisma.move.create({
             data: {
-                names: move.names,
-                namesSearch: move.names.join(" "),
-                posaCode: move.posaCode,
-                imageUrl: move.imageUrl,
-                posaTechValue: move.posaTechValue,
+                posaCode: moveData.posaCode,
+                imageUrl: moveData.imageUrl,
+                posaTechValue: moveData.posaTechValue,
                 styles: ['STATIC', 'STATICSPIN']
             }
         })
+
+
+        // Create Move Names
+        try {
+            await prisma.moveName.createMany({
+                data: moveData.names.map((name) => ({
+                    name: name,
+                    moveId: move.id
+                })),
+            })
+         } catch(error) {
+            console.error(`Could not create move for names ${moveData.names}`)
+         }
     }
     console.log("🚀 Static Moves created");
     
 
     // POSA Strength moves
     console.log("💪 POSA Strength Moves loaded:", posaStrengthMoves.length);
-    for (const move of posaStrengthMoves) {
+    for (const moveData of posaStrengthMoves) {
         const moveWithSamePosaCode = await prisma.move.findFirst({
             where: {
-                posaCode: move.posaCode
+                posaCode: moveData.posaCode
             }
         })
         if (moveWithSamePosaCode) {
-            console.log(`❌ Move ${move.posaCode} already exists: skipping...`)
+            console.log(`❌ Move ${moveData.posaCode} already exists: skipping...`)
             continue
         }
 
-        await prisma.move.create({
+        const move = await prisma.move.create({
             data: {
-                names: move.names,
-                namesSearch: move.names.join(" "),
-                posaCode: move.posaCode,
-                imageUrl: move.imageUrl,
-                posaTechValue: move.posaTechValue,
+                posaCode: moveData.posaCode,
+                imageUrl: moveData.imageUrl,
+                posaTechValue: moveData.posaTechValue,
                 styles: ['STRENGTH', 'STATIC', 'SPIN']
             }
         })
+
+        // Create Move Names
+        try {
+            await prisma.moveName.createMany({
+                data: moveData.names.map((name) => ({
+                    name: name,
+                    moveId: move.id
+                })),
+            })
+         } catch(error) {
+            console.error(`Could not create move for names ${moveData.names}`)
+         }
+
     }
     console.log("🚀 Strength Moves created");
 }

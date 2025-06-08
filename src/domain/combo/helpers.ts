@@ -2,7 +2,7 @@ import { ComboForCombosScreen } from "@/shared/types/combo";
 import { ComboQueryResponse } from "@/src/api/combos";
 import { getMoveWithSignedUrl } from "@/src/domain/move/helpers";
 
-export async function getComboWithSignedUrls(combo: ComboQueryResponse): Promise<ComboQueryResponse> {
+export async function getComboWithSignedUrls(combo: ComboForCombosScreen): Promise<ComboQueryResponse> {
             return {
                 ...combo,
                 movesInCombo: await Promise.all(
@@ -14,8 +14,7 @@ export async function getComboWithSignedUrls(combo: ComboQueryResponse): Promise
                                 ...moveInCombo,
                                 move: {
                                     id: moveWithSignedUrl.id,
-                                    names: moveWithSignedUrl.names,
-                                    displayName: moveWithSignedUrl.names[0],
+                                    displayName: moveWithSignedUrl.names[0].name,
                                     imageUrl: moveWithSignedUrl.imageUrl,
                             }
                         }}
@@ -32,7 +31,7 @@ export async function toComboWithMoves(combo: ComboForCombosScreen): Promise<Com
                 return {
                     moveId: mic.moveId,
                     rank: mic.rank,
-                    displayName: mic.move.names[0],
+                    displayName: mic.move.displayName,
                     imageUrl: mic.move.imageUrl,
                 }})
             )

@@ -26,16 +26,19 @@ moves.get('/filter', async (c) => {
     if (!searchQuery) {
         return c.json([])
     }
-
-    const filteredMoves = await prisma.move.findMany({
+    const filteredMoveNames = await prisma.moveName.findMany({
         where: {
-            namesSearch: {
-                contains: searchQuery, // use 'contains' for partial matches
-                mode: 'insensitive',   // optional: case-insensitive searc
+            name: {
+                startsWith: searchQuery
             }
+        },
+        include: {
+            move: { include: { names: true }}
         }
-    });
+    })
+    const filteredMoves = filteredMoveNames.map((moveName) => moveName.move)
     const filteredMovesWithSignedUrl = await Promise.all(filteredMoves.map(async(move) => await getMoveWithSignedUrl(move)))
+
     return c.json(filteredMovesWithSignedUrl)
 })
 
@@ -51,20 +54,28 @@ moves.post('/custom', async (c) => {
     const moveWithSameName = await prisma.move.findFirst({
         where: {
             names: {
-                has: moveName
-            }
+                some: { name: moveName
+            }}
         }
     })
     if (moveWithSameName) {
         console.log("❌ Move with the same name already exists")
         return c.json({ moveId: moveWithSameName.id }, 400)
     }
+    // Create move
     const customMove = await prisma.move.create({
         data: {
-            names: [moveName],
             imageUrl: imageUrl ?? null,
         }
     })
+    // Create move name
+    await prisma.moveName.create({
+        data: {
+            name: moveName,
+            moveId: customMove.id
+        }
+    })
+
     const customMoveWithPresignedUrl = await getMoveWithSignedUrl(customMove)
     return c.json(customMoveWithPresignedUrl);
 })

@@ -36,8 +36,7 @@ enum MoveStyle {
 
 model Move {
   id              Int         @id @default(autoincrement())
-  names           String[]
-  namesSearch     String?  // concatenated string of names
+  names           MoveName[]
   ipsfCode        String?
   posaCode        String?
   imageUrl        String?
@@ -45,6 +44,15 @@ model Move {
   posaTechValue   Float?
   styles          MoveStyle[]
   combos          ComboMove[]
+}
+
+model MoveName {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  move    Move   @relation(fields: [moveId], references: [id])
+  moveId  Int
+
+  @@index([name])
 }
 
 model Combo {

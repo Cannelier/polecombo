@@ -1,4 +1,5 @@
 export * from "./user"
 export * from "./move"
+export * from "./movename"
 export * from "./combo"
 export * from "./combomove"

@@ -21,6 +21,8 @@ export interface ComboForCombosScreen {
 export interface MoveForCombosScreen {
             id: number;
             displayName: string;
-            names: string[],
+            names: {
+                name: string
+            }[],
             imageUrl: string;
         }

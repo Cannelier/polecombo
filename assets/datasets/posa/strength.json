@@ -2,7 +2,8 @@
   {
     "posaCode": "B001",
     "names": [
-      "Inverted Straddle"
+      "Inverted Straddle",
+      "V"
     ],
     "imageUrl": "images/moves/inverted_straddle.png",
     "posaTechValue": 0.1
@@ -50,9 +51,10 @@
   {
     "posaCode": "B163",
     "names": [
-      "Spider (AKA Frog)"
+      "Spider",
+      "Frog"
     ],
-    "imageUrl": "images/moves/spider_frog.png",
+    "imageUrl": "images/moves/spider_aka_frog.png",
     "posaTechValue": 0.2
   },
   {
@@ -338,9 +340,9 @@
   {
     "posaCode": "B164",
     "names": [
-      "Methook (front bookmark)"
+      "Meathook (front bookmark)"
     ],
-    "imageUrl": "images/moves/methook_front_bookmark.png",
+    "imageUrl": "images/moves/meathook_front_bookmark.png",
     "posaTechValue": 0.5
   },
   {
@@ -549,14 +551,6 @@
       "Ordonselli Arch"
     ],
     "imageUrl": "images/moves/ordonselli_arch.png",
-    "posaTechValue": 0.7
-  },
-  {
-    "posaCode": "B037",
-    "names": [
-      "Butterfly (One Handed)"
-    ],
-    "imageUrl": "images/moves/butterfly_one_handed_2.png",
     "posaTechValue": 0.7
   },
   {
@@ -802,7 +796,7 @@
   {
     "posaCode": "B174",
     "names": [
-      "Elbow/forearm plank (Daza plank)"
+      "Elbow / Forearm plank (Daza plank)"
     ],
     "imageUrl": "images/moves/elbow_forearm_plank_daza_plank.png",
     "posaTechValue": 0.8
@@ -818,7 +812,8 @@
   {
     "posaCode": "B161",
     "names": [
-      "Forearm plank (Sanchez plank)"
+      "Forearm plank",
+      "Sanchez plank"
     ],
     "imageUrl": "images/moves/forearm_plank_sanchez_plank.png",
     "posaTechValue": 0.9

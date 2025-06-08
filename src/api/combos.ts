@@ -36,7 +36,9 @@ combos.get("/", async (c) => {
                 move: { select: {
                     id: true,
                     imageUrl: true,
-                    names: true,
+                    names: { select: {
+                        name: true
+                    }},
                 }},
                 },
                 orderBy: { rank: "asc" }}
@@ -67,7 +69,9 @@ combos.get("/:comboId", async (c) => {
                 move: { select: {
                     id: true,
                     imageUrl: true,
-                    names: true,
+                    names: { select: {
+                        name: true
+                    }},
                 }},
                 },
                 orderBy: { rank: "asc" }}
@@ -107,11 +111,13 @@ combos.put("/:comboId", async (c) => {
                 movesInCombo: {
                     include: {
                         move: {
-                            select: {
-                                names: true,
+                            select: {     
+                                names: { select: {
+                                    name: true
+                                }},
                                 imageUrl: true,
                                 posaCode: true
-                            }
+                            },
             }}}}})
     })
     return c.json({ combo }, 200)
