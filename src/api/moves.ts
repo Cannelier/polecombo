@@ -1,9 +1,9 @@
 import { MoveModel } from "@/prisma/zod/move";
+import { supabase } from "@/src/services/supabaseServer";
 import { PrismaClient } from "@prisma/client";
 import { Hono } from "hono";
 import { z } from "zod";
 import { getMoveWithSignedUrl } from "../domain/move/helpers";
-import { supabase } from "../services/supabaseClient";
 
 const prisma = new PrismaClient();
 const moves = new Hono();

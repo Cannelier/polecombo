@@ -1,11 +1,9 @@
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { getQueryClient } from '@/src/hooks/useQueryClient';
-import { ClerkProvider } from '@clerk/clerk-expo';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import {
   QueryClientProvider
 } from '@tanstack/react-query';
-import Constants from "expo-constants";
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
@@ -51,33 +49,27 @@ export default function RootLayout() {
   }
 
   
-  const clerkPublishableKey = Constants?.expoConfig?.extra?.clerkPublishableKey;
   const queryClient = getQueryClient();
   
   return (
     <>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <ClerkProvider
-          publishableKey={clerkPublishableKey}
-          tokenCache={tokenCache}
-        >
-          <QueryClientProvider client={queryClient}>
-            <SafeAreaView
-              style={{ flex: 1 }} 
-              edges={['left', 'right']} // skip top and bottom safe areas
-            >
-              <GestureHandlerRootView style={{ flex: 1 }}>
-                <Stack>
-                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                  <Stack.Screen name="index" options={{ headerShown: false }} />
-                  <Stack.Screen name="+not-found" />
-                </Stack>
-                <StatusBar style="auto" />
-              </GestureHandlerRootView>
-            </SafeAreaView>
-            <Toast />
-          </QueryClientProvider>
-        </ClerkProvider>
+        <QueryClientProvider client={queryClient}>
+          <SafeAreaView
+            style={{ flex: 1 }} 
+            edges={['left', 'right']} // skip top and bottom safe areas
+          >
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+              <StatusBar style="auto" />
+            </GestureHandlerRootView>
+          </SafeAreaView>
+          <Toast />
+        </QueryClientProvider>
       </ThemeProvider>
   </>
   );

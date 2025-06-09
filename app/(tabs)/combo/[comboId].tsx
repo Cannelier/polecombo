@@ -8,10 +8,9 @@ import { ThemedText } from '@/components/typography/ThemedText';
 import { ComboQueryResponse, MoveFromComboQueryResponse } from '@/src/api/combos';
 import { useComboQuery } from '@/src/hooks/useComboQuery';
 import { useComboUpdateMutation } from '@/src/hooks/useComboUpdateMutation';
-import { SignedIn, SignedOut } from '@clerk/clerk-expo';
-import { Link, router, useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Button, StyleSheet, Text } from 'react-native';
+import { ActivityIndicator, Button, StyleSheet } from 'react-native';
 import DraggableFlatList from "react-native-draggable-flatlist";
 import Toast from 'react-native-toast-message';
 
@@ -117,51 +116,40 @@ export default function EditCombo() {
 
   return (
     <Body>
-      <SignedIn>
-        <ThemedView style={styles.titleContainer}>
-          <Header>{initialComboData?.name || updatedCombo?.name}</Header>
-          { moves.length ? (
-            <>
-              <ThemedView>
-                <Button title="Valider" onPress={handleSave} disabled={!isDataReady || updatedCombo === initialComboData} />
-              </ThemedView>
-              <DraggableFlatList
-                data={moves}
-                renderItem={({ item, drag }) => (
-                  <DraggableMoveCard
-                    item={item}
-                    drag={drag}
-                    handleDelete={() => handleDelete(item)}
-                  />
-                )}
-                keyExtractor={(item) => `draggableItem-${item.key}`}
-                onDragEnd={({ data }) => {
-                  const updatedMoves = data.map((item, index) => ({ ...item, rank: index }));
-                  setMoves(updatedMoves);
-                  setUpdatedCombo((prev) => {
-                    if (!prev) return prev;
-                    return {
-                      ...prev,
-                      movesInCombo: updatedMoves.map(fromItemToMove),
-                    };
-                  });
-                }}
-                activationDistance={10}
-              />
-            </>
-          ) : <NoMovesInCombo /> }
-          <PlusButton onPress={handleNewMove} style={styles.plusButton} />
-        </ThemedView>
-      </SignedIn>
-
-      <SignedOut>
-        <Link href="/(auth)/signIn">
-          <Text>Sign in</Text>
-        </Link>
-        <Link href="/(auth)/signUp">
-          <Text>Sign up</Text>
-        </Link>
-      </SignedOut>
+      <ThemedView style={styles.titleContainer}>
+        <Header>{initialComboData?.name || updatedCombo?.name}</Header>
+        { moves.length ? (
+          <>
+            <ThemedView>
+              <Button title="Valider" onPress={handleSave} disabled={!isDataReady || updatedCombo === initialComboData} />
+            </ThemedView>
+            <DraggableFlatList
+              data={moves}
+              renderItem={({ item, drag }) => (
+                <DraggableMoveCard
+                  item={item}
+                  drag={drag}
+                  handleDelete={() => handleDelete(item)}
+                />
+              )}
+              keyExtractor={(item) => `draggableItem-${item.key}`}
+              onDragEnd={({ data }) => {
+                const updatedMoves = data.map((item, index) => ({ ...item, rank: index }));
+                setMoves(updatedMoves);
+                setUpdatedCombo((prev) => {
+                  if (!prev) return prev;
+                  return {
+                    ...prev,
+                    movesInCombo: updatedMoves.map(fromItemToMove),
+                  };
+                });
+              }}
+              activationDistance={10}
+            />
+          </>
+        ) : <NoMovesInCombo /> }
+        <PlusButton onPress={handleNewMove} style={styles.plusButton} />
+      </ThemedView>
     </Body>
   );
 }

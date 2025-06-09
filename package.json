@@ -15,15 +15,14 @@
     "generate:moveNameToNames": "node src/scripts/moveNameToNames.js"
   },
   "dependencies": {
-    "@clerk/backend": "^1.32.0",
-    "@clerk/clerk-expo": "^2.11.3",
     "@expo/vector-icons": "^14.1.0",
-    "@hono/clerk-auth": "^2.0.0",
     "@hono/node-server": "^1.14.1",
     "@prisma/client": "^6.8.2",
+    "@react-native-async-storage/async-storage": "2.1.2",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
-    "@supabase/supabase-js": "^2.49.8",
+    "@rneui/themed": "^4.0.0-rc.8",
+    "@supabase/supabase-js": "^2.50.0",
     "@tanstack/react-query": "^5.76.1",
     "axios": "^1.9.0",
     "expo": "~53.0.9",
@@ -55,6 +54,7 @@
     "react-native-screens": "~4.10.0",
     "react-native-swipeable-item": "^2.0.9",
     "react-native-toast-message": "^2.3.0",
+    "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "~0.20.0",
     "react-native-webview": "13.13.5",
     "zod": "^3.24.4"

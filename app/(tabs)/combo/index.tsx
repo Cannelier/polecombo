@@ -7,10 +7,8 @@ import { ThemedView } from '@/components/ThemedView';
 import { areFirstLettersFound } from '@/helpers/search';
 import { ComboQueryResponse } from '@/src/api/combos';
 import { useCombosQuery } from '@/src/hooks/useCombosQuery';
-import { SignedIn, SignedOut } from '@clerk/clerk-expo';
-import { Link } from 'expo-router';
 import React, { useMemo, useState } from 'react';
-import { ActivityIndicator, Text } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
 
 
@@ -34,34 +32,20 @@ export default function HomeScreen() {
   }
 
   return (
-    <>
-      <SignedIn>
-          <Body>
-            <Header>Mes combos</Header>
-            <ThemedView>
-              <SearchBar onSearch={handleSearch} />
-              {filteredCombos?.map((combo) => {
-                return (
-                    <React.Fragment key={combo.comboId}>
-                      <ComboCard combo={combo}/>
-                      <Spacer/>
-                    </React.Fragment>
-                )
-              })}
-            </ThemedView>
-        </Body>
-      </SignedIn>
-
-
-      <SignedOut>
-      <Link href="/(auth)/signIn">
-        <Text>Sign in</Text>
-      </Link>
-      <Link href="/(auth)/signUp">
-        <Text>Sign up</Text>
-      </Link>
-      </SignedOut>
-    </>
+      <Body>
+        <Header>Mes combos</Header>
+        <ThemedView>
+          <SearchBar onSearch={handleSearch} />
+          {filteredCombos?.map((combo) => {
+            return (
+                <React.Fragment key={combo.comboId}>
+                  <ComboCard combo={combo}/>
+                  <Spacer/>
+                </React.Fragment>
+            )
+          })}
+        </ThemedView>
+    </Body>
   );
 }
 

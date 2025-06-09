@@ -1,7 +1,7 @@
 import { CompleteMove } from "@/prisma/zod/move";
 import { MoveForCombosScreen } from "@/shared/types/combo";
 import { UNDEFINED_MOVE_IMAGE_URL } from "@/src/config/constants";
-import { supabase } from "@/src/services/supabaseClient";
+import { supabase } from "@/src/services/supabaseServer";
 
 const env = process.env.ENV!
 
