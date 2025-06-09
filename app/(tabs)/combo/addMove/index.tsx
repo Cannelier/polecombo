@@ -15,7 +15,7 @@ export default function NewMoveScreen() {
     const [currentMove, setCurrentMove] = useState<MoveData & { displayName: string} | undefined>(undefined);
     const [currentCombo, setCurrentCombo] = useState<ComboQueryResponse>(JSON.parse(comboData) as ComboQueryResponse)
     const [searchQuery, setSearchQuery] = useState('');
-    const debouncedSearchQuery = useDebouncedValue(searchQuery, 300);
+    const debouncedSearchQuery = useDebouncedValue(searchQuery, 900);
     const { data: filteredMoves, isLoading: areFilteredMovesLoading } = useFilteredMovesQuery(debouncedSearchQuery);
 
     const handleSelect = useCallback((value: MoveData) => {
