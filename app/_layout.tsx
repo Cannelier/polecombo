@@ -1,5 +1,5 @@
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { getQueryClient } from '@/src/hooks/useQueryClient';
+import { getQueryClient } from '@/frontend/hooks/useQueryClient';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import {
   QueryClientProvider

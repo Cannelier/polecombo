@@ -1,5 +1,7 @@
 import { supabase } from '@/frontend/services/supabaseClient'
+import { BASE_URL, EXPO_APP_URL } from '@/shared/constants'
 import { Button, Input } from '@rneui/themed'
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Alert, StyleSheet } from 'react-native'
 import { ThemedView } from '../ThemedView'
@@ -11,12 +13,20 @@ export default function Auth() {
 
   async function signInWithEmail() {
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data: { user, session }, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     })
 
     if (error) Alert.alert(error.message)
+    if (user && session) {
+      await axios.post(`${BASE_URL}/api/users`,
+                { 
+                    id: session.user.id,
+                    email: session.user.email
+                }
+            )   
+    }
     setLoading(false)
   }
 
@@ -28,6 +38,9 @@ export default function Auth() {
     } = await supabase.auth.signUp({
       email: email,
       password: password,
+      options: {
+        emailRedirectTo: EXPO_APP_URL,
+      }
     })
 
     if (error) Alert.alert(error.message)

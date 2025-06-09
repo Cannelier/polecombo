@@ -21,7 +21,7 @@ export default function RootStack() {
   return (
     <ThemedView>
       <Auth />
-      { false && session && session.user &&
+      { session && session.user &&
         <Redirect href="/(tabs)/combo" />
       }
     </ThemedView>

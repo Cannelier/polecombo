@@ -1,7 +1,7 @@
-import { getQueryClient } from "@/src/hooks/useQueryClient";
+import { getQueryClient } from "@/frontend/hooks/useQueryClient";
+import { BASE_URL } from "@/shared/constants";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { BASE_URL } from "../config/constants";
 
 export interface NewComboMoveUpdateParams {
     comboId: number,

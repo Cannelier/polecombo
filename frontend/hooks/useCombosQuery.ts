@@ -1,6 +1,6 @@
 import { ComboQueryResponse } from "@/src/api/combos";
 import { useQuery } from "@tanstack/react-query";
-import { BASE_URL } from "../config/constants";
+import { BASE_URL } from "@/shared/constants";
 
 
 export const useCombosQuery = () => {

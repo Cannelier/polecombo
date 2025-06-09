@@ -2,10 +2,10 @@ import { DropdownItem, DropdownSearchbar } from "@/components/DropdownSearchbar"
 import { Body } from "@/components/grid/Body";
 import { Spacer } from "@/components/Spacer";
 import { ThemedText } from "@/components/typography/ThemedText";
+import { useFilteredMovesQuery } from "@/frontend/hooks/useFilteredMovesQuery";
 import { useDebouncedValue } from "@/hooks/useDebounceValue";
 import { ComboQueryResponse, MoveFromComboQueryResponse } from "@/src/api/combos";
 import { MoveData } from "@/src/api/moves";
-import { useFilteredMovesQuery } from "@/src/hooks/useFilteredMovesQuery";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useState } from "react";
 import { ActivityIndicator, Button, Image, StyleSheet, View } from "react-native";

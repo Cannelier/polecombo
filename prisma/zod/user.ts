@@ -1,9 +1,8 @@
 import * as z from "zod"
 
 export const UserModel = z.object({
-  id: z.number().int(),
+  id: z.string(),
   email: z.string(),
-  firstName: z.string().nullish(),
-  lastName: z.string().nullish(),
   createdAt: z.date(),
+  updatedAt: z.date(),
 })

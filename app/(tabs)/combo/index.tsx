@@ -4,9 +4,9 @@ import { Header } from '@/components/grid/Header';
 import { SearchBar } from '@/components/SearchBar';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
+import { useCombosQuery } from '@/frontend/hooks/useCombosQuery';
 import { areFirstLettersFound } from '@/helpers/search';
 import { ComboQueryResponse } from '@/src/api/combos';
-import { useCombosQuery } from '@/src/hooks/useCombosQuery';
 import React, { useMemo, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 

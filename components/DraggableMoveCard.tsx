@@ -1,4 +1,4 @@
-import { UNDEFINED_MOVE_IMAGE_URL } from "@/src/config/constants";
+import { UNDEFINED_MOVE_IMAGE_URL } from "@/shared/constants";
 import { Image } from "expo-image";
 import React from "react";
 import { GestureResponderEvent, StyleSheet, TouchableOpacity, View } from "react-native";

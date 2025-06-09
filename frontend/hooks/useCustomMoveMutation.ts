@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/src/config/constants";
+import { BASE_URL } from "@/shared/constants";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ImagePickerAsset } from "expo-image-picker";

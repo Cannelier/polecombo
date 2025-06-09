@@ -1,7 +1,7 @@
+import { BASE_URL } from "@/shared/constants";
+import { ComboQueryResponse } from "@/src/api/combos";
 import { useMutation } from "@tanstack/react-query";
 import axios from 'axios';
-import { ComboQueryResponse } from "../api/combos";
-import { BASE_URL } from "../config/constants";
 
 export interface ComboUpdateMutationParams {
     comboId: number,

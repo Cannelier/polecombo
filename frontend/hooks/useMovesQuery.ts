@@ -1,6 +1,6 @@
 
+import { BASE_URL } from "@/shared/constants";
 import { useQuery } from "@tanstack/react-query";
-import { BASE_URL } from "../config/constants";
 
 export function useMovesQuery() {
     return useQuery({
