@@ -22,6 +22,9 @@ model User {
   email     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  createdCombos Combo[]
+  createdMoves  Move[]
 }
 
 enum MoveStyle {
@@ -43,6 +46,9 @@ model Move {
   posaTechValue   Float?
   styles          MoveStyle[]
   combos          ComboMove[]
+
+  createdByUser   User?   @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String? @db.Uuid
 }
 
 model MoveName {
@@ -58,6 +64,9 @@ model Combo {
   id           Int         @id @default(autoincrement())
   name         String
   movesInCombo ComboMove[]
+
+  createdByUser   User    @relation(fields: [createdByUserId], references: [id])
+  createdByUserId String  @db.Uuid
 }
 
 model ComboMove {

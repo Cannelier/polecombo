@@ -1,8 +1,33 @@
 import posaStaticMoves from '@/assets/datasets/posa/static.json';
 import posaStrengthMoves from '@/assets/datasets/posa/strength.json';
+import { supabase } from '@/src/services/supabaseServer';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
+
+const USER_EMAIL = 'contact@pole-cards.com'
+
+async function seedUser() {
+    // Create user via Supabase Admin API
+  const { data, error } = await supabase.auth.admin.createUser({
+    email: USER_EMAIL,
+    password: 'Password123!',
+    email_confirm: true,
+  })
+
+  if (error) throw error
+
+  console.log('Created Supabase user:', data.user.email)
+
+  // Create user row in your own database using Prisma
+  await prisma.user.create({
+    data: {
+      id: data.user.id,        // match Supabase auth user id
+      email: data.user.email!,
+      // other fields...
+    }
+  })
+}
 
 async function seedMoves() {
     // POSA Static moves
@@ -84,11 +109,14 @@ async function seedMoves() {
 
 
 async function seedCombos() {
+    const user = await prisma.user.findUnique({
+        where: { email: USER_EMAIL }
+    })
     await prisma.combo.createMany({
         data: [
-            { name: "Static spin - Beginner class" },
-            { name: "Spinning - Inter class" },
-            { name: "Choregraphy - IPSF" },
+            { createdByUserId: user?.id, name: "Static spin - Beginner class" },
+            { createdByUserId: user?.id, name: "Spinning - Inter class" },
+            { createdByUserId: user?.id, name: "Choregraphy - IPSF" },
         ]
     })
 
@@ -116,6 +144,7 @@ async function seedComboMoves() {
 
 
 async function main() {
+    await seedUser()
     await seedMoves()
     await seedCombos()
     await seedComboMoves()

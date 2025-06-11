@@ -1,6 +1,6 @@
 import * as z from "zod"
 import { MoveStyle } from "@prisma/client"
-import { CompleteMoveName, RelatedMoveNameModel, CompleteComboMove, RelatedComboMoveModel } from "./index"
+import { CompleteMoveName, RelatedMoveNameModel, CompleteComboMove, RelatedComboMoveModel, CompleteUser, RelatedUserModel } from "./index"
 
 export const MoveModel = z.object({
   id: z.number().int(),
@@ -10,11 +10,13 @@ export const MoveModel = z.object({
   ipsfTechValue: z.number().nullish(),
   posaTechValue: z.number().nullish(),
   styles: z.nativeEnum(MoveStyle).array(),
+  createdByUserId: z.string().nullish(),
 })
 
 export interface CompleteMove extends z.infer<typeof MoveModel> {
   names: CompleteMoveName[]
   combos: CompleteComboMove[]
+  createdByUser?: CompleteUser | null
 }
 
 /**
@@ -25,4 +27,5 @@ export interface CompleteMove extends z.infer<typeof MoveModel> {
 export const RelatedMoveModel: z.ZodSchema<CompleteMove> = z.lazy(() => MoveModel.extend({
   names: RelatedMoveNameModel.array(),
   combos: RelatedComboMoveModel.array(),
+  createdByUser: RelatedUserModel.nullish(),
 }))
