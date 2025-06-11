@@ -1,3 +1,4 @@
+import { useAuth } from "@/components/auth/AuthProvider";
 import { Body } from "@/components/grid/Body";
 import UploadImage from "@/components/UploadImage";
 import { useCustomMoveMutation } from "@/frontend/hooks/useCustomMoveMutation";
@@ -6,15 +7,17 @@ import { Image } from "expo-image";
 import { ImagePickerAsset } from "expo-image-picker";
 import { router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Button, StyleSheet, TextInput, View } from "react-native";
+import { ActivityIndicator, Button, StyleSheet, TextInput, View } from "react-native";
 
 export default function CustomMoveScreen() {
-    const [moveName, setMoveName] = useState("");
     const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData: string }>();
+
+    const { userId, isUserLoading } = useAuth();
+    const [moveName, setMoveName] = useState("");
     const [image, setImage] = useState<ImagePickerAsset | null>(null);
 
-    const handleSuccess = (data: { id: string, name: string, imageUrl?: string | null }) => {
-        const { id, name, imageUrl } = data;
+    const handleSuccess = (data: { id: string, displayName: string, imageUrl?: string | null }) => {
+        const { id, displayName, imageUrl } = data;
         const parsedComboData = JSON.parse(comboData);
         const newCombo = {
             ...parsedComboData,
@@ -23,7 +26,7 @@ export default function CustomMoveScreen() {
                 {   
                     moveId: Number(id),
                     rank: parsedComboData.movesInCombo.length,
-                    displayName: name,
+                    displayName: displayName,
                     imageUrl: imageUrl,
                 } as MoveFromComboQueryResponse
             ]
@@ -38,6 +41,10 @@ export default function CustomMoveScreen() {
     }
     const { mutate: createCustomMove } = useCustomMoveMutation(handleSuccess)
 
+    if (!userId || isUserLoading) {
+        return <ActivityIndicator />
+    }
+
     return (
         <Body>
             <TextInput
@@ -50,7 +57,11 @@ export default function CustomMoveScreen() {
             ></TextInput>
             <Button
                 title="Créer"
-                onPress={() => createCustomMove({ moveName, image })}
+                onPress={() => createCustomMove({
+                    userId,
+                    moveName,
+                    image
+                })}
                 disabled={!moveName}
             />
             <View style={styles.uploadImageContainer}>

@@ -3,10 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ImagePickerAsset } from "expo-image-picker";
 
-export function useCustomMoveMutation(onSuccess: (data: { id: string, name: string, imageUrl?: string | null }) => void) {
+export function useCustomMoveMutation(onSuccess: (data: { id: string, displayName: string, imageUrl?: string | null }) => void) {
     return useMutation({
         mutationKey: ["CustomMoveMutation"],
-        mutationFn: async ({ moveName, image }: { moveName: string, image: ImagePickerAsset | null }) => {
+        mutationFn: async ({ userId, moveName, image }: useCustomMoveMutationParams) => {
             const formData = new FormData();
             formData.append('moveName', moveName);
             
@@ -20,7 +20,7 @@ export function useCustomMoveMutation(onSuccess: (data: { id: string, name: stri
                 } as any);
             }
 
-            return axios.post(`${BASE_URL}/api/moves/custom`,
+            return axios.post(`${BASE_URL}/api/moves/user/${userId}/custom`,
                 formData,
                 {
                     headers: {
@@ -30,4 +30,10 @@ export function useCustomMoveMutation(onSuccess: (data: { id: string, name: stri
         },
         onSuccess: (response) => onSuccess(response.data)
     })
+}
+
+interface useCustomMoveMutationParams {
+    userId: string,
+    moveName: string,
+    image: ImagePickerAsset | null 
 }

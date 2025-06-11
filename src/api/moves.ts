@@ -42,8 +42,9 @@ moves.get('/filter', async (c) => {
     return c.json(filteredMovesWithSignedUrl)
 })
 
-moves.post('/custom', async (c) => {
+moves.post('/user/:userId/custom', async (c) => {
     // Add a custom move from user
+    const userId = c.req.param("userId");
     const formData = await c.req.formData();
     const moveName = formData.get('moveName') as string;
     const image = formData.get('file') as File | null;
@@ -54,8 +55,7 @@ moves.post('/custom', async (c) => {
     const moveWithSameName = await prisma.move.findFirst({
         where: {
             names: {
-                some: { name: moveName
-            }}
+                some: { name: moveName }}
         }
     })
     if (moveWithSameName) {
@@ -66,16 +66,13 @@ moves.post('/custom', async (c) => {
     const customMove = await prisma.move.create({
         data: {
             imageUrl: imageUrl ?? null,
-        }
+            createdByUserId: userId,
+            names: {
+                create: { name: moveName }
+            },
+        },
+        include: { names: true },
     })
-    // Create move name
-    await prisma.moveName.create({
-        data: {
-            name: moveName,
-            moveId: customMove.id
-        }
-    })
-
     const customMoveWithPresignedUrl = await getMoveWithSignedUrl(customMove)
     return c.json(customMoveWithPresignedUrl);
 })
