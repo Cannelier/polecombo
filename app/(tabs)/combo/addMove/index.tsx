@@ -77,7 +77,7 @@ export default function NewMoveScreen() {
                                         };
                                         setCurrentCombo(newCombo)
                                         router.replace({
-                                            pathname: `/combo/${comboId}`,
+                                            pathname: `/combo/edit/${comboId}`,
                                             params: {
                                                 comboId: comboId,
                                                 comboData: JSON.stringify(newCombo)

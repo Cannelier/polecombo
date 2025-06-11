@@ -9,6 +9,9 @@ export default function ComboStack() {
       <Stack.Screen name="[comboId]" options={{
         title: 'Combo',
         }} />
+      <Stack.Screen name="edit" options={{
+        title: 'Modifier Combo',
+        }} />
       <Stack.Screen name="addMove" options={{
         title: 'Nouvelle figure',
         }} />

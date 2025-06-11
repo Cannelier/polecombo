@@ -32,7 +32,7 @@ export default function CustomMoveScreen() {
             ]
         };
         router.replace({
-            pathname: `/combo/${comboId}`,
+            pathname: `/combo/edit/${comboId}`,
             params: {
                 comboId: Number(comboId),
                 comboData: JSON.stringify(newCombo)
