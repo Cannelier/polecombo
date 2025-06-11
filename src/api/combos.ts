@@ -160,4 +160,37 @@ combos.patch("/:comboId", async (c) => {
     }
 })
 
+
+combos.get("/user/:userId", async (c) => {
+    const userId = c.req.param("userId")
+    const data: ComboForCombosScreen[] = await prisma.combo.findMany({
+        where: {
+            createdByUserId: userId
+        },
+        include: {
+            movesInCombo: { include: {
+                move: { select: {
+                    id: true,
+                    imageUrl: true,
+                    names: { select: {
+                        name: true
+                    }},
+                }},
+                },
+                orderBy: { rank: "asc" }}
+        }
+    })
+    // Get signed image URL
+    const combosWithSignedUrl: ComboForCombosScreen[] = await Promise.all(
+        data.map(async (combo) => getComboWithSignedUrls(combo))
+    )
+    // We use a specific dataclass to pass to frontend
+    const combosWithMovesAndSignedUrl = await Promise.all(
+        combosWithSignedUrl.map((comboWithSignedUrl) => 
+            toComboWithMoves(comboWithSignedUrl))
+    )
+    return c.json(combosWithMovesAndSignedUrl)
+})
+
+
 export default combos

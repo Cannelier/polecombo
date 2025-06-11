@@ -1,10 +1,11 @@
+import { useAuth } from '@/components/auth/AuthProvider';
 import { ComboCard } from '@/components/ComboCard';
 import { Body } from '@/components/grid/Body';
 import { Header } from '@/components/grid/Header';
 import { SearchBar } from '@/components/SearchBar';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
-import { useCombosQuery } from '@/frontend/hooks/useCombosQuery';
+import { useCombosCreatedByUserQuery } from '@/frontend/hooks/useCombosCreatedByUserQuery';
 import { areFirstLettersFound } from '@/helpers/search';
 import { ComboQueryResponse } from '@/src/api/combos';
 import React, { useMemo, useState } from 'react';
@@ -13,7 +14,8 @@ import { ActivityIndicator } from 'react-native';
 
 
 export default function HomeScreen() {
-  const { data: combos, isLoading: areCombosLoading } = useCombosQuery();
+  const { userId, isUserLoading } = useAuth();
+  const { data: combos, isLoading: areCombosLoading } = useCombosCreatedByUserQuery(userId ?? undefined);
   const [searchQuery, setSearchQuery] = useState<string>('')
   
   const handleSearch = (searchQuery: string) => {
@@ -27,7 +29,7 @@ export default function HomeScreen() {
     );
   }, [combos, searchQuery])
 
-  if (!combos || areCombosLoading) {
+  if (!combos || areCombosLoading || isUserLoading) {
     return <ActivityIndicator/>
   }
 

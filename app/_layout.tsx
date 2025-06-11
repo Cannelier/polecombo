@@ -1,5 +1,6 @@
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { AuthProvider } from '@/components/auth/AuthProvider';
 import { getQueryClient } from '@/frontend/hooks/useQueryClient';
+import { useColorScheme } from '@/hooks/useColorScheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import {
   QueryClientProvider
@@ -54,22 +55,24 @@ export default function RootLayout() {
   return (
     <>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <QueryClientProvider client={queryClient}>
-          <SafeAreaView
-            style={{ flex: 1 }} 
-            edges={['left', 'right']} // skip top and bottom safe areas
-          >
-            <GestureHandlerRootView style={{ flex: 1 }}>
-              <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-                <Stack.Screen name="+not-found" />
-              </Stack>
-              <StatusBar style="auto" />
-            </GestureHandlerRootView>
-          </SafeAreaView>
-          <Toast />
-        </QueryClientProvider>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <SafeAreaView
+              style={{ flex: 1 }} 
+              edges={['left', 'right']} // skip top and bottom safe areas
+            >
+              <GestureHandlerRootView style={{ flex: 1 }}>
+                <Stack>
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                  <Stack.Screen name="index" options={{ headerShown: false }} />
+                  <Stack.Screen name="+not-found" />
+                </Stack>
+                <StatusBar style="auto" />
+              </GestureHandlerRootView>
+            </SafeAreaView>
+            <Toast />
+          </QueryClientProvider>
+        </AuthProvider>
       </ThemeProvider>
   </>
   );
