@@ -1,0 +1,8 @@
+export enum MoveStyle {
+    STATIC = "STATIC",
+    SPIN = "SPIN",
+    DYNAMIC = "DYNAMIC",
+    FLEXIBILITY = "FLEXIBILITY",
+    STRENGTH = "STRENGTH",
+    STATICSPIN = "STATICSPIN"
+}

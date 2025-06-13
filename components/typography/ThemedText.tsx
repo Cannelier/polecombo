@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     fontFamily: "NunitoSansExtraBold"
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 14,
     fontWeight: 'bold',
   },
   link: {

@@ -1,15 +1,17 @@
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/typography/ThemedText";
+import { MoveStyle } from "@/frontend/enums/MoveStyle";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import React from 'react';
 import { Dimensions, StyleSheet } from "react-native";
+import { MoveStyleBadge } from "./MoveStyleBadge";
 
 interface MoveCardProps {
     move: {
         displayName: string;
         imageUrl: string;
-        styles: string[];
+        styles: MoveStyle[];
     }
 };
 
@@ -35,7 +37,7 @@ export function MoveCard({
                         'rgba(174, 155, 223, 0.1)',    // Soft lila (top-right)
                         'rgb(242, 237, 245)'     // Back to white (bottom)
                     ]}
-                    locations={[0, 0.5, 0, 1]}
+                    locations={[0, 0.5, 0.9]}
                     style={StyleSheet.absoluteFill}
                     start={{ x: 0, y: 1 }}
                     end={{ x: 1, y: 0 }}
@@ -51,37 +53,28 @@ export function MoveCard({
                     height: CARD_IMAGE_HEIGHT
                 }}
             />
-            <ThemedView>
-                {
-                    move.styles.map((moveStyle, index) => (
-                        <Badge color="#FFFFFF" key={index}>
-                            {moveStyle}
-                        </Badge>
-                ))
-                }
+            <ThemedView style={styles.cardDescriptionContainer}>
+                <ThemedView style={styles.badgesContainer}>
+                    {
+                        move.styles.map((moveStyle, index) => (
+                            <MoveStyleBadge moveStyle={moveStyle} key={index}/>
+                    ))
+                    }
+                </ThemedView>
             </ThemedView>
         </ThemedView>
     )
 }
 
-function Badge({ color, children }: { color: string, children: React.ReactNode }) {
-    return (
-        <ThemedView style={{ backgroundColor: color, padding: 5, borderRadius: 5, margin: 2 }}>
-            <ThemedText style={{ color: 'black' }}>{children}</ThemedText>
-        </ThemedView>
-    );
-}
-
 const styles = StyleSheet.create({
   card: {
-    height: CARD_HEIGHT,
     width: CARD_WIDTH,
     marginVertical: 10,
     marginHorizontal: "auto",
     borderRadius: 10,
     backgroundColor: 'rgb(236, 232, 239)',
     shadowColor: '#000',
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.5,
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 8,
     elevation: 5,
@@ -94,7 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   cardTitleContainer: {
-    height: 40,
+    height: 45,
     width: "100%",
     justifyContent: "center",
   },
@@ -102,4 +95,13 @@ const styles = StyleSheet.create({
     color: "grey",
     textAlign: "center",
   },
+  cardDescriptionContainer: {
+    padding: 10,
+  },
+  badgesContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+  }
 });
