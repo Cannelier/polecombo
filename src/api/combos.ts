@@ -39,6 +39,7 @@ combos.get("/", async (c) => {
                     names: { select: {
                         name: true
                     }},
+                    styles: true,
                 }},
                 },
                 orderBy: { rank: "asc" }}
@@ -72,6 +73,7 @@ combos.get("/:comboId", async (c) => {
                     names: { select: {
                         name: true
                     }},
+                    styles: true,
                 }},
                 },
                 orderBy: { rank: "asc" }}

@@ -25,4 +25,5 @@ export interface MoveForCombosScreen {
                 name: string
             }[],
             imageUrl: string;
+            styles: string[];
         }

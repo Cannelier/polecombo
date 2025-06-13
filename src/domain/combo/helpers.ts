@@ -16,6 +16,7 @@ export async function getComboWithSignedUrls(combo: ComboForCombosScreen): Promi
                                     id: moveWithSignedUrl.id,
                                     displayName: moveWithSignedUrl.names[0].name,
                                     imageUrl: moveWithSignedUrl.imageUrl,
+                                    styles: moveWithSignedUrl.styles,
                             }
                         }}
                     )
@@ -33,6 +34,7 @@ export async function toComboWithMoves(combo: ComboForCombosScreen): Promise<Com
                     rank: mic.rank,
                     displayName: mic.move.displayName,
                     imageUrl: mic.move.imageUrl,
+                    styles: mic.move.styles,
                 }})
             )
         }

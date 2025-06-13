@@ -9,6 +9,7 @@ interface MoveCardProps {
     move: {
         displayName: string;
         imageUrl: string;
+        styles: string[];
     }
 };
 
@@ -50,8 +51,25 @@ export function MoveCard({
                     height: CARD_IMAGE_HEIGHT
                 }}
             />
+            <ThemedView>
+                {
+                    move.styles.map((moveStyle, index) => (
+                        <Badge color="#FFFFFF" key={index}>
+                            {moveStyle}
+                        </Badge>
+                ))
+                }
+            </ThemedView>
         </ThemedView>
     )
+}
+
+function Badge({ color, children }: { color: string, children: React.ReactNode }) {
+    return (
+        <ThemedView style={{ backgroundColor: color, padding: 5, borderRadius: 5, margin: 2 }}>
+            <ThemedText style={{ color: 'black' }}>{children}</ThemedText>
+        </ThemedView>
+    );
 }
 
 const styles = StyleSheet.create({

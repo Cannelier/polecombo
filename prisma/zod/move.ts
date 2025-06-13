@@ -1,6 +1,6 @@
-import * as z from "zod"
 import { MoveStyle } from "@prisma/client"
-import { CompleteMoveName, RelatedMoveNameModel, CompleteComboMove, RelatedComboMoveModel, CompleteUser, RelatedUserModel } from "./index"
+import * as z from "zod"
+import { CompleteComboMove, CompleteMoveName, CompleteUser, RelatedComboMoveModel, RelatedMoveNameModel, RelatedUserModel } from "./index"
 
 export const MoveModel = z.object({
   id: z.number().int(),

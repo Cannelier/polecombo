@@ -22,16 +22,19 @@ export async function getMoveWithSignedUrl(move: MoveForCombosScreen | CompleteM
             
         if (error) return { ...move,
             displayName: move.names[0].name,
+            styles: move.styles,
         }
 
         return { ...move,
             displayName: move.names[0].name,
-            imageUrl: undefinedMoveImageData?.signedUrl
+            imageUrl: undefinedMoveImageData?.signedUrl,
+            styles: move.styles,
         }
     }
 
     return { ...move,
             displayName: move.names[0].name,
-        imageUrl: moveImageData.signedUrl
+            imageUrl: moveImageData.signedUrl,
+            styles: move.styles,
     }
 }
