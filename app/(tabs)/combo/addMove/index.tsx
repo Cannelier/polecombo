@@ -15,22 +15,23 @@ export default function NewMoveScreen() {
     const [currentMove, setCurrentMove] = useState<MoveData & { displayName: string} | undefined>(undefined);
     const [currentCombo, setCurrentCombo] = useState<ComboQueryResponse>(JSON.parse(comboData) as ComboQueryResponse)
     const [searchQuery, setSearchQuery] = useState('');
-    const debouncedSearchQuery = useDebouncedValue(searchQuery, 900);
+    const debouncedSearchQuery = useDebouncedValue(searchQuery, 600);
     const { data: filteredMoves, isLoading: areFilteredMovesLoading } = useFilteredMovesQuery(debouncedSearchQuery);
 
     const handleSelect = useCallback((value: MoveData) => {
-    setCurrentMove(value);
+        setCurrentMove(value);
     }, []);
 
     const handleAddOption = useCallback(() => {
         router.navigate({
             pathname: "/combo/addMove/customMove",
             params: {
-            comboId: Number(comboId),
-            comboData: JSON.stringify(currentCombo),
+                comboId: Number(comboId),
+                comboData: JSON.stringify(currentCombo),
+                customMoveName: searchQuery,
             },
         });
-    }, [comboId, currentCombo]);
+    }, [comboId, currentCombo, searchQuery]);
 
     if (areFilteredMovesLoading || !filteredMoves || !currentCombo) {
       return <ActivityIndicator />
@@ -100,17 +101,5 @@ export default function NewMoveScreen() {
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
-    },
-    imageContainer: {
-        height: 200,
-        width: 200,
-        backgroundColor: "rgb(139, 126, 139)",
-    },
-    image: {
-        height: "100%",
-        width: "100%",
-    },
-    moveHeader: {
-        height: 100,
     },
 })
