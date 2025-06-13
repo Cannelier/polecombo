@@ -1,12 +1,20 @@
-import { Image } from "expo-image"
-import { useEffect, useState } from "react"
-import { StyleSheet, TextInput, View } from "react-native"
+import { Image } from "expo-image";
+import { useEffect, useState } from "react";
+import { StyleSheet, TextInput, useColorScheme, View } from "react-native";
 
 export function SearchBar({
     onSearch,
 }: {
     onSearch: (value: any) => void,
 }) {
+    const colorScheme = useColorScheme();
+    const isDarkMode = colorScheme === 'dark';
+    const searchBarStyle = isDarkMode ? styles.searchBarTextInput : {
+        ...styles.searchBarTextInput,
+        backgroundColor: 'rgba(240, 239, 247, 0.62)',
+        color: "#FFFFFF",
+    };
+
     const [searchQuery, setSearchQuery] = useState<string | undefined>('')
 
     const handleChangeText = (input: string) => {
@@ -22,9 +30,9 @@ export function SearchBar({
         <TextInput
             onChangeText={(input: string) => { handleChangeText(input) }}
             value={searchQuery}
-            style={styles.searchBarTextInput}
-            placeholder="Search"
-            placeholderTextColor="#FFFFFF"
+            style={searchBarStyle}
+            placeholder="Rechercher"
+            placeholderTextColor={ isDarkMode ? "#FFFFFF" : "rgb(152, 152, 186)" }
         />
         <Image
             source={require('@/assets/svg/search.svg')}
@@ -47,7 +55,7 @@ const styles = StyleSheet.create({
         width: 300,
         paddingHorizontal: 45,
         backgroundColor: "rgb(139, 126, 139)",
-        color: "#FFFFFF",
+        color: "rgb(152, 152, 186)",
         borderRadius: 20,
     },
     searchIcon: {

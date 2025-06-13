@@ -2,9 +2,13 @@
 import { ThemedText } from '@/components/typography/ThemedText';
 import { ComboQueryResponse } from '@/src/api/combos';
 import { router } from 'expo-router';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, useColorScheme, View } from 'react-native';
 
 export function ComboCard({combo}: {combo: ComboQueryResponse}) {
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === 'dark';
+  const cardStyle = isDarkMode ? styles.card : { ...styles.card, backgroundColor: 'rgba(182, 180, 202, 0.38)' };
+  
   const handlePress = () => {
     router.push({
       pathname: `/combo/${combo.comboId}`,
@@ -14,7 +18,7 @@ export function ComboCard({combo}: {combo: ComboQueryResponse}) {
   const moves = combo.movesInCombo.slice(0,3);
     return (
         <TouchableOpacity onPress={handlePress}>
-            <View style={styles.card}>
+            <View style={cardStyle}>
                 <View style={styles.cardContent}>
                     <ThemedText type="strong">{combo.name.toUpperCase()}</ThemedText>
                 </View>
@@ -42,6 +46,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(38, 31, 39, 0.5)",
     borderRadius: 6,
+    paddingTop: 5,
   },
   cardImageContainer: {
     flexDirection: "row",

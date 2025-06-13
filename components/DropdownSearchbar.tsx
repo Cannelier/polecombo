@@ -1,6 +1,6 @@
 import { Image } from "expo-image"
 import { useEffect, useMemo, useState } from "react"
-import { FlatList, StyleSheet, TextInput, TouchableOpacity, View } from "react-native"
+import { FlatList, StyleSheet, TextInput, TouchableOpacity, useColorScheme, View } from "react-native"
 import { PlusButton } from "./PlusButton"
 import { ThemedText } from "./typography/ThemedText"
 
@@ -25,6 +25,28 @@ export function DropdownSearchbar({
     handleAddOption?: () => void
 }) {
     const [displayDropDown, setDisplayDropDown] = useState<boolean>(false)
+    
+    const colorScheme = useColorScheme();
+    const isDarkMode = colorScheme === 'dark';
+    const searchBarStyle = isDarkMode ? styles.searchBarTextInput : {
+        ...styles.searchBarTextInput,
+        backgroundColor: 'rgba(240, 239, 247, 0.62)',
+        color: "rgb(152, 152, 186)",
+    };
+
+    const searchBarDropDown = isDarkMode ? styles.searchBarDropDown : {
+        ...styles.searchBarDropDown,
+        backgroundColor: 'rgba(240, 239, 247, 0.62)',
+    };
+    const searchBarDropDownOption = isDarkMode ? styles.searchBarDropDownOption : {
+        ...styles.searchBarDropDownOption,
+        borderTopColor: 'rgb(213, 211, 227)',
+    };
+
+    const searchBarTextInputExtended = isDarkMode ? styles.searchBarTextInputExtended : {
+        ...styles.searchBarTextInputExtended,
+        borderBottomColor: 'rgb(213, 211, 227)',
+    };
 
     const optionsWithPlus = useMemo(() => {
         const addOption: DropdownItem = {
@@ -65,7 +87,7 @@ export function DropdownSearchbar({
                 <TouchableOpacity
                     onPress={() => handleSelect(item)}
                     style={
-                        [styles.searchBarDropDownOption,
+                        [searchBarDropDownOption,
                             item.imageSource ?
                             styles.searchBarDropDownOptionWithImage
                             : styles.searchBarDropDownOptionWithoutImage]}
@@ -83,7 +105,7 @@ export function DropdownSearchbar({
                 <TouchableOpacity
                     onPress={() => {
                         handleAddOption!()}}
-                    style={[styles.searchBarDropDownOption,
+                    style={[searchBarDropDownOption,
                         styles.plusButtonContainer]}
                     >
                         
@@ -98,10 +120,10 @@ export function DropdownSearchbar({
         <TextInput
             value={searchQuery}
             onChangeText={handleChangeText}
-            style={[styles.searchBarTextInput,
-                optionsWithPlus.length > 0 && displayDropDown ? styles.searchBarTextInputExtended : styles.searchBarTextInputCollapsed ]}
+            style={[searchBarStyle,
+                optionsWithPlus.length > 0 && displayDropDown ? searchBarTextInputExtended : styles.searchBarTextInputCollapsed ]}
             placeholder="Chercher une figure"
-            placeholderTextColor="#FFFFFF"
+            placeholderTextColor={ isDarkMode ? "#FFFFFF" : "rgb(152, 152, 186)" }
         />
         <Image
             source={require('@/assets/svg/search.svg')}
@@ -113,7 +135,7 @@ export function DropdownSearchbar({
                 data={optionsWithPlus}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={renderItem}
-                style={styles.searchBarDropDown}
+                style={searchBarDropDown}
             />)
         : null}
     </View>
