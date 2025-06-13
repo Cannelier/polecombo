@@ -1,5 +1,4 @@
-
-import { API_URL } from "@/shared/constants";
+import { API_URL } from '@/frontend/constants/env';
 import { useQuery } from "@tanstack/react-query";
 
 export function useMovesQuery() {

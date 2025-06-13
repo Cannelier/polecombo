@@ -1,4 +1,4 @@
-import { API_URL } from "@/shared/constants";
+import { API_URL } from '@/frontend/constants/env';
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ImagePickerAsset } from "expo-image-picker";

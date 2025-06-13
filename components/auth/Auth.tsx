@@ -1,5 +1,6 @@
+import { API_URL } from '@/frontend/constants/env'
 import { supabase } from '@/frontend/services/supabaseClient'
-import { API_URL, EXPO_APP_URL } from '@/shared/constants'
+import { EXPO_APP_URL } from '@/shared/constants'
 import { Button, Input } from '@rneui/themed'
 import axios from 'axios'
 import React, { useState } from 'react'

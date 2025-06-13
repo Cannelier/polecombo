@@ -1,4 +1,4 @@
-import { API_URL } from "@/shared/constants";
+import { API_URL } from '@/frontend/constants/env';
 import { ComboQueryResponse } from "@/src/api/combos";
 import { useQuery } from "@tanstack/react-query";
 

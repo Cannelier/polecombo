@@ -1,5 +1,5 @@
+import { API_URL } from '@/frontend/constants/env';
 import { getQueryClient } from "@/frontend/hooks/useQueryClient";
-import { API_URL } from "@/shared/constants";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
