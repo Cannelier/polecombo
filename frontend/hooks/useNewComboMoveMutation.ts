@@ -1,5 +1,5 @@
 import { getQueryClient } from "@/frontend/hooks/useQueryClient";
-import { BASE_URL } from "@/shared/constants";
+import { API_URL } from "@/shared/constants";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -17,7 +17,7 @@ export function useNewComboMoveMutation(onSuccess?: () => void) {
             comboId,
             moveId,
         }: NewComboMoveUpdateParams) => {
-            return axios.patch(`${BASE_URL}/api/combos/${comboId}`, { moveId: moveId })
+            return axios.patch(`${API_URL}/api/combos/${comboId}`, { moveId: moveId })
         },
         onSuccess: () => {
             onSuccess?.()

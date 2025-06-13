@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/shared/constants";
+import { API_URL } from "@/shared/constants";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { ImagePickerAsset } from "expo-image-picker";
@@ -20,7 +20,7 @@ export function useCustomMoveMutation(onSuccess: (data: { id: string, displayNam
                 } as any);
             }
 
-            return axios.post(`${BASE_URL}/api/moves/user/${userId}/custom`,
+            return axios.post(`${API_URL}/api/moves/user/${userId}/custom`,
                 formData,
                 {
                     headers: {

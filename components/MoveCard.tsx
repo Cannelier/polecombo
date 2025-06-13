@@ -18,7 +18,6 @@ export const CARD_IMAGE_HEIGHT = CARD_HEIGHT * 0.70
 export function MoveCard({
     move
 }: MoveCardProps) {
-    console.log("MoveCard", move);
     const title = move.displayName.length > 19 ?
         move.displayName.slice(0, 19) + '...' :
         move.displayName;

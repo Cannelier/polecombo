@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/shared/constants";
+import { API_URL } from "@/shared/constants";
 import { ComboQueryResponse } from "@/src/api/combos";
 import { useQuery } from "@tanstack/react-query";
 
@@ -7,7 +7,7 @@ export const useCombosCreatedByUserQuery = (userId: string | undefined) => {
     return useQuery<ComboQueryResponse[]>({
         queryKey: ["useCombosCreatedByUserQuery", userId],
         queryFn: async () => {
-            const response = await fetch(`${BASE_URL}/api/combos/user/${userId}`);
+            const response = await fetch(`${API_URL}/api/combos/user/${userId}`);
             if (!response.ok) {
                 throw new Error(`useCombosQuery: Failed to fetch combos for user ${userId}`)
             }

@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/shared/constants";
+import { API_URL } from "@/shared/constants";
 import { ComboQueryResponse } from "@/src/api/combos";
 import { useMutation } from "@tanstack/react-query";
 import axios from 'axios';
@@ -14,7 +14,7 @@ export function useComboUpdateMutation(onSuccess: () => void) {
             comboId,
             updatedCombo,
         } : ComboUpdateMutationParams) => {
-            return axios.put(`${BASE_URL}/api/combos/${comboId}`, updatedCombo)
+            return axios.put(`${API_URL}/api/combos/${comboId}`, updatedCombo)
         },
         onSuccess: onSuccess
     })

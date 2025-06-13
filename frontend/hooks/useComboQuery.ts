@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/shared/constants";
+import { API_URL } from "@/shared/constants";
 import { useQuery } from "@tanstack/react-query";
 import { ComboQueryResponse } from "../api/combos";
 
@@ -7,7 +7,7 @@ export function useComboQuery(comboId: number) {
     return useQuery<ComboQueryResponse>({
         queryKey: ["useComboQuery", comboId],
         queryFn: async () => {
-            const response = await fetch(`${BASE_URL}/api/combos/${comboId}`);
+            const response = await fetch(`${API_URL}/api/combos/${comboId}`);
             if (!response.ok) {
                 throw new Error(`Could not fetch combo ID ${comboId}`)
             }

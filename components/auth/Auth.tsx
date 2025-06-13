@@ -1,5 +1,5 @@
 import { supabase } from '@/frontend/services/supabaseClient'
-import { BASE_URL, EXPO_APP_URL } from '@/shared/constants'
+import { API_URL, EXPO_APP_URL } from '@/shared/constants'
 import { Button, Input } from '@rneui/themed'
 import axios from 'axios'
 import React, { useState } from 'react'
@@ -20,7 +20,7 @@ export default function Auth() {
 
     if (error) Alert.alert(error.message)
     if (user && session) {
-      await axios.post(`${BASE_URL}/api/users`,
+      await axios.post(`${API_URL}/api/users`,
                 { 
                     id: session.user.id,
                     email: session.user.email
