@@ -7,6 +7,7 @@ const env = process.env.ENV!
 
 export async function getMoveWithSignedUrl(move: MoveForCombosScreen | CompleteMove): Promise<MoveForCombosScreen> {
     const imagePath = move.imageUrl ?? UNDEFINED_MOVE_IMAGE_URL;
+    console.log("Generating signed URL for", { imagePath });
     const { data: moveImageData, error } = await supabase
         .storage
         .from(env)

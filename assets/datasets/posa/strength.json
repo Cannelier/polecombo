@@ -11,7 +11,7 @@
   {
     "posaCode": "B002",
     "names": [
-      "Outside Knee Hook"
+      "Outside Knee Hook", "Gemini", "Outside Leg Hang"
     ],
     "imageUrl": "images/moves/outside_knee_hook.png",
     "posaTechValue": 0.1
@@ -100,7 +100,7 @@
   {
     "posaCode": "B007",
     "names": [
-      "Inside Leg Hang"
+      "Inside Leg Hang", "Scorpio"
     ],
     "imageUrl": "images/moves/inside_leg_hang.png",
     "posaTechValue": 0.2
