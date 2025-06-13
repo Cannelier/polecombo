@@ -1,6 +1,7 @@
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/typography/ThemedText";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import React from 'react';
 import { Dimensions, StyleSheet } from "react-native";
 
@@ -12,8 +13,10 @@ interface MoveCardProps {
 };
 
 const { height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 export const CARD_HEIGHT = height * 0.40;
-export const CARD_IMAGE_HEIGHT = CARD_HEIGHT * 0.70
+export const CARD_WIDTH = width * 0.75;
+export const CARD_IMAGE_HEIGHT = CARD_WIDTH * 0.85
 
 export function MoveCard({
     move
@@ -25,6 +28,17 @@ export function MoveCard({
     return (
         <ThemedView style={styles.card}>
             <ThemedView style={styles.cardTitleContainer}>
+                <LinearGradient
+                    colors={[
+                        'rgb(241, 237, 244)',       // Pure white (top-left)
+                        'rgba(174, 155, 223, 0.1)',    // Soft lila (top-right)
+                        'rgb(242, 237, 245)'     // Back to white (bottom)
+                    ]}
+                    locations={[0, 0.5, 0, 1]}
+                    style={StyleSheet.absoluteFill}
+                    start={{ x: 0, y: 1 }}
+                    end={{ x: 1, y: 0 }}
+                />
                 <ThemedText style={styles.cardTitle} type="title">
                     {title}
                 </ThemedText>
@@ -43,9 +57,9 @@ export function MoveCard({
 const styles = StyleSheet.create({
   card: {
     height: CARD_HEIGHT,
-    width: '90%',
+    width: CARD_WIDTH,
     marginVertical: 10,
-    marginHorizontal: 20,
+    marginHorizontal: "auto",
     borderRadius: 10,
     backgroundColor: 'rgb(236, 232, 239)',
     shadowColor: '#000',
@@ -55,13 +69,13 @@ const styles = StyleSheet.create({
     elevation: 5,
     overflow: 'hidden',
     alignItems: 'center',
+    paddingBottom: 30,
   },
   image: {
     flex: 1,
     borderRadius: 16,
   },
   cardTitleContainer: {
-    marginVertical: 15,
     height: 40,
     width: "100%",
     justifyContent: "center",

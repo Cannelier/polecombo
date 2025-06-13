@@ -1,12 +1,8 @@
 import { MoveFromComboQueryResponse } from "@/src/api/combos";
 import React from 'react';
-import { Dimensions } from "react-native";
 import Animated, { Extrapolation, interpolate, useAnimatedStyle } from 'react-native-reanimated';
-import { MoveCard } from "./MoveCard";
+import { CARD_HEIGHT, MoveCard } from "@/components/MoveCard";
 
-const { height } = Dimensions.get('window');
-export const CARD_HEIGHT = height * 0.40;
-export const CARD_IMAGE_HEIGHT = CARD_HEIGHT * 0.70
 export const SNAP_INTERVAL = CARD_HEIGHT + 20;
 
 
