@@ -45,7 +45,7 @@ export default function EditCombo() {
       text1: `✅ ${updatedCombo?.name} a été enregistré`,
     });
   router.replace({
-    pathname: '/combo', // back to main list
+    pathname: `/combo/${comboId}`,
 });
   };
 

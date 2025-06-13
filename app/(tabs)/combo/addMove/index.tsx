@@ -1,14 +1,14 @@
 import { DropdownItem, DropdownSearchbar } from "@/components/DropdownSearchbar";
 import { Body } from "@/components/grid/Body";
+import { MoveCard } from "@/components/MoveCard";
 import { Spacer } from "@/components/Spacer";
-import { ThemedText } from "@/components/typography/ThemedText";
 import { useFilteredMovesQuery } from "@/frontend/hooks/useFilteredMovesQuery";
 import { useDebouncedValue } from "@/hooks/useDebounceValue";
 import { ComboQueryResponse, MoveFromComboQueryResponse } from "@/src/api/combos";
 import { MoveData } from "@/src/api/moves";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useState } from "react";
-import { ActivityIndicator, Button, Image, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Button, StyleSheet, View } from "react-native";
 
 export default function NewMoveScreen() {
     const { comboId, comboData } = useLocalSearchParams<{comboId: string, comboData: string}>()
@@ -87,16 +87,9 @@ export default function NewMoveScreen() {
                             />
                         </View>
                         <Spacer />
-                        <View style={styles.imageContainer}>
-                            <Image source={{ uri: currentMove.imageUrl}} 
-                                style={styles.image}
-                                />
-                        </View>
-                        <Spacer />
-                        <View style={styles.moveHeader}>
-                            <ThemedText type="title">{currentMove.displayName}</ThemedText>
-                        </View>
-                    </>
+                        
+                        <MoveCard move={currentMove}/>
+                        </>
                     ) : null }
             </View>
         </Body>
