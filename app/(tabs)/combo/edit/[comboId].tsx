@@ -1,6 +1,5 @@
 import { DraggableMoveCard, MoveItem } from '@/components/DraggableMoveCard';
 import { Body } from '@/components/grid/Body';
-import { Header } from '@/components/grid/Header';
 import { PlusButton } from '@/components/PlusButton';
 import { Spacer } from '@/components/Spacer';
 import { ThemedView } from '@/components/ThemedView';
@@ -10,8 +9,9 @@ import { useComboUpdateMutation } from '@/frontend/hooks/useComboUpdateMutation'
 import { ComboQueryResponse, MoveFromComboQueryResponse } from '@/src/api/combos';
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Button, StyleSheet } from 'react-native';
+import { ActivityIndicator, Button, StyleSheet, useColorScheme } from 'react-native';
 import DraggableFlatList from "react-native-draggable-flatlist";
+import { TextInput } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 
 
@@ -50,11 +50,18 @@ export default function EditCombo() {
   };
 
   const { mutate: editCombo } = useComboUpdateMutation(handleSuccess);
-
   const [moves, setMoves] = useState<MoveItem[]>([]);
   const [updatedCombo, setUpdatedCombo] = useState<ComboQueryResponse | undefined>(
     comboData ? JSON.parse(comboData) : undefined
   );
+  const [comboName, setComboName] = useState<string>(initialComboData?.name || updatedCombo?.name || '');
+
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === 'dark';
+  const comboNameStyle = isDarkMode ? styles.comboName : {
+      ...styles.comboName,
+      color: "rgb(152, 152, 186)",
+  };
 
   useEffect(() => {
     if (comboData) {
@@ -71,6 +78,26 @@ export default function EditCombo() {
     }
   }, [comboData, initialComboData]);
 
+  useEffect(() => {
+    setUpdatedCombo(prev => {
+      if (!prev) {
+        return {
+          name: comboName,
+          movesInCombo: [],
+        };
+      }
+
+      if (prev.name === comboName) {
+        return prev; // avoid unnecessary update
+      }
+
+      return {
+        ...prev,
+        name: comboName,
+      };
+    });
+  }, [comboName]);
+  
   const isDataReady = !isInitialComboLoading || updatedCombo !== undefined || initialComboData !== undefined;
 
   const handleDelete = (item: MoveItem) => {
@@ -117,11 +144,22 @@ export default function EditCombo() {
   return (
     <Body>
       <ThemedView style={styles.titleContainer}>
-        <Header>{initialComboData?.name || updatedCombo?.name}</Header>
+        <TextInput
+            style={comboNameStyle}
+            value={comboName}
+            onChangeText={setComboName}
+            placeholder={"Nom du combo".toUpperCase()}
+            placeholderTextColor={isDarkMode ? "#FFFFFF" : "rgb(152, 152, 186)"}
+            autoFocus
+        />
         { moves.length ? (
           <>
             <ThemedView>
-              <Button title="Valider" onPress={handleSave} disabled={!isDataReady || updatedCombo === initialComboData} />
+              <Button title="Valider" onPress={handleSave} disabled={
+                !isDataReady
+                || updatedCombo === initialComboData
+                || !updatedCombo?.name
+                } />
             </ThemedView>
             <DraggableFlatList
               data={moves}
@@ -173,5 +211,14 @@ const styles = StyleSheet.create({
   },
   noMovesInComboText: {
     textAlign: "center"
-  }
+  },
+  comboName: {
+      color: "#FFFFFF",
+      fontSize: 24,
+      lineHeight: 32,
+      fontFamily: "NunitoSansExtraBold",
+      textAlign: "center",
+      textAlignVertical: "center",
+      width: "100%",
+  },
 });

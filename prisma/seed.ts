@@ -11,7 +11,7 @@ async function seedUser() {
     // Create user via Supabase Admin API
   const { data, error } = await supabase.auth.admin.createUser({
     email: USER_EMAIL,
-    password: 'Password123!',
+    password: process.env.USER_PASSWORD,
     email_confirm: true,
   })
 
@@ -44,12 +44,17 @@ async function seedMoves() {
             continue
         }
 
+        // Create Move
+        const level = moveData.posaTechValue < 0.3 ? 'BEGINNER' :
+            moveData.posaTechValue < 0.6 ? 'INTERMEDIATE' : "ADVANCED";
+
         const move = await prisma.move.create({
             data: {
                 posaCode: moveData.posaCode,
                 imageUrl: moveData.imageUrl,
                 posaTechValue: moveData.posaTechValue,
-                styles: ['STATIC', 'STATICSPIN']
+                styles: ['STATIC', 'STATICSPIN'],
+                level: level,
             }
         })
 
@@ -82,12 +87,17 @@ async function seedMoves() {
             continue
         }
 
+        // Create Move
+        const level = moveData.posaTechValue < 0.3 ? 'BEGINNER' :
+            moveData.posaTechValue < 0.6 ? 'INTERMEDIATE' : "ADVANCED";
+
         const move = await prisma.move.create({
             data: {
                 posaCode: moveData.posaCode,
                 imageUrl: moveData.imageUrl,
                 posaTechValue: moveData.posaTechValue,
-                styles: ['STRENGTH', 'STATIC', 'SPIN']
+                styles: ['STRENGTH', 'STATIC', 'SPIN'],
+                level: level,
             }
         })
 
@@ -114,9 +124,24 @@ async function seedCombos() {
     })
     await prisma.combo.createMany({
         data: [
-            { createdByUserId: user?.id, name: "Static spin - Beginner class" },
-            { createdByUserId: user?.id, name: "Spinning - Inter class" },
-            { createdByUserId: user?.id, name: "Choregraphy - IPSF" },
+            {
+                createdByUserId: user?.id!,
+                name: "Static spin",
+                level: "BEGINNER",
+                styles: ["STATIC"]
+            },
+            {
+                createdByUserId: user?.id!,
+                name: "Spinning combo",
+                level: "INTERMEDIATE",
+                styles: ["SPIN"]
+            },
+            {
+                createdByUserId: user?.id!,
+                name: "Choreography - IPSF",
+                level: "ADVANCED",
+                styles: ["STATIC", "SPIN", "STRENGTH"],
+            },
         ]
     })
 

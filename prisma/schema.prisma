@@ -36,6 +36,13 @@ enum MoveStyle {
     STATICSPIN
 }
 
+enum Level {
+    BEGINNER
+    INTERMEDIATE
+    ADVANCED
+}
+
+
 model Move {
   id              Int         @id @default(autoincrement())
   names           MoveName[]
@@ -45,10 +52,13 @@ model Move {
   ipsfTechValue   Float?
   posaTechValue   Float?
   styles          MoveStyle[]
+  level           Level
   combos          ComboMove[]
 
   createdByUser   User?   @relation(fields: [createdByUserId], references: [id])
   createdByUserId String? @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model MoveName {
@@ -64,9 +74,13 @@ model Combo {
   id           Int         @id @default(autoincrement())
   name         String
   movesInCombo ComboMove[]
+  level        Level
+  styles          MoveStyle[]
 
   createdByUser   User    @relation(fields: [createdByUserId], references: [id])
   createdByUserId String  @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model ComboMove {

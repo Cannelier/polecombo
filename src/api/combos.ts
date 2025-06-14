@@ -23,8 +23,10 @@ export interface MoveFromComboQueryResponse {
 }
 
 export interface ComboQueryResponse {
-    comboId: number,
+    comboId?: number,
     name: string,
+    level: string,
+    styles: string[],
     movesInCombo: MoveFromComboQueryResponse[]
 }
 
@@ -95,6 +97,7 @@ combos.put("/:comboId", async (c) => {
           rank: index,
         }
     ));
+    const updatedComboName = updatedCombo.name.toUpperCase().trim();
 
     const combo = await prisma.$transaction(async (transaction) => {
         // Delete existing moves for combo
@@ -107,7 +110,14 @@ combos.put("/:comboId", async (c) => {
             data: newMovesInCombo
         })
 
-        return transaction.combo.findUnique({
+        await transaction.combo.update({
+            where: { id: comboId },
+            data: {
+                name: updatedComboName,
+            }
+        })
+
+        return await transaction.combo.findUnique({
             where: { id: comboId },
             include: {
                 movesInCombo: {
@@ -169,7 +179,12 @@ combos.get("/user/:userId", async (c) => {
         where: {
             createdByUserId: userId
         },
-        include: {
+        select: {
+            id: true,
+            name: true,
+            level: true,
+            styles: true,
+            createdAt: true,
             movesInCombo: { include: {
                 move: { select: {
                     id: true,
@@ -177,11 +192,15 @@ combos.get("/user/:userId", async (c) => {
                     names: { select: {
                         name: true
                     }},
-                }},
+                    }},
                 },
-                orderBy: { rank: "asc" }}
-        }
+                orderBy: { rank: "asc" }
+            }
+        },
+        orderBy: {
+            createdAt: "desc"}
     })
+    
     // Get signed image URL
     const combosWithSignedUrl: ComboForCombosScreen[] = await Promise.all(
         data.map(async (combo) => getComboWithSignedUrls(combo))
@@ -191,6 +210,7 @@ combos.get("/user/:userId", async (c) => {
         combosWithSignedUrl.map((comboWithSignedUrl) => 
             toComboWithMoves(comboWithSignedUrl))
     )
+    console.log("Combos with signed URLs:", JSON.stringify(combosWithMovesAndSignedUrl[0], null, 2))
     return c.json(combosWithMovesAndSignedUrl)
 })
 

@@ -1,10 +1,15 @@
 import * as z from "zod"
+import { Level, MoveStyle } from "@prisma/client"
 import { CompleteComboMove, RelatedComboMoveModel, CompleteUser, RelatedUserModel } from "./index"
 
 export const ComboModel = z.object({
   id: z.number().int(),
   name: z.string(),
+  level: z.nativeEnum(Level),
+  styles: z.nativeEnum(MoveStyle).array(),
   createdByUserId: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
 })
 
 export interface CompleteCombo extends z.infer<typeof ComboModel> {

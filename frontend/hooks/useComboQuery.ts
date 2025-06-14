@@ -12,6 +12,7 @@ export function useComboQuery(comboId: number) {
                 throw new Error(`Could not fetch combo ID ${comboId}`)
             }
             return response.json()
-        }
+        },
+        enabled: !!comboId,
     })
 }

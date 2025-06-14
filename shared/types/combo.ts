@@ -9,6 +9,8 @@ export type CombosData = z.infer<typeof CombosSchema>
 export interface ComboForCombosScreen {
     name: string;
     id: number;
+    level: number;
+    styles: string[];
     movesInCombo: ({
         move: MoveForCombosScreen;
     } & {

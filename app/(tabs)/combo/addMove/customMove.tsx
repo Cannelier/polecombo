@@ -14,7 +14,7 @@ import { ActivityIndicator, Button, StyleSheet, TextInput, useColorScheme } from
 
 export default function CustomMoveScreen() {
     const { customMoveName } = useLocalSearchParams<{ customMoveName?: string }>();
-    console.log("customMoveName", customMoveName);
+
     const colorScheme = useColorScheme();
     const isDarkMode = colorScheme === 'dark';
     const { comboId, comboData } = useLocalSearchParams<{ comboId: string; comboData: string }>();

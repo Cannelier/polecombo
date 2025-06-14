@@ -28,6 +28,8 @@ export async function toComboWithMoves(combo: ComboForCombosScreen): Promise<Com
         return { 
             comboId: combo.id,
             name: combo.name,
+            level: combo.level,
+            styles: combo.styles,
             movesInCombo: await Promise.all(combo.movesInCombo.map(async (mic) => {
                 return {
                     moveId: mic.moveId,

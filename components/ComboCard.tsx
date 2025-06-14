@@ -1,4 +1,7 @@
 
+import { LevelBadge } from '@/components/LevelBadge';
+import { MoveStyleBadge } from '@/components/MoveStyleBadge';
+import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/typography/ThemedText';
 import { ComboQueryResponse } from '@/src/api/combos';
 import { router } from 'expo-router';
@@ -32,6 +35,14 @@ export function ComboCard({combo}: {combo: ComboQueryResponse}) {
                   )
                   })}
                 </View>
+                <ThemedView style={styles.badgesContainer}>
+                      <LevelBadge level={combo.level}/>
+                  {
+                      combo.styles.map((comboStyle, index) => (
+                      <MoveStyleBadge moveStyle={comboStyle} key={index}/>
+                  ))
+                  }
+                </ThemedView>
             </View>
         </TouchableOpacity>
     )
@@ -39,14 +50,14 @@ export function ComboCard({combo}: {combo: ComboQueryResponse}) {
 
 const styles = StyleSheet.create({
   card: {
-    height: 125,
+    height: 150,
     justifyContent: "center",
     flexDirection: "column",
     gap: 8,
     alignItems: "center",
     backgroundColor: "rgba(38, 31, 39, 0.5)",
     borderRadius: 6,
-    paddingTop: 5,
+    paddingVertical: 5,
   },
   cardImageContainer: {
     flexDirection: "row",
@@ -61,4 +72,11 @@ const styles = StyleSheet.create({
   cardContent: {
     justifyContent: "center"
   },
+  badgesContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 5,
+  }
 });
